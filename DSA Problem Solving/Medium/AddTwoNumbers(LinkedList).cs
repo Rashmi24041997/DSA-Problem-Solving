@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace DSA_Problem_Solving.Medium
 {
-
     public class ListNode
     {
         public int val;
@@ -20,32 +19,37 @@ namespace DSA_Problem_Solving.Medium
 
     internal class AddTwoNumbers_LinkedList
     {
-
-        public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
+        public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
-            bool nul1 = l1 == null;
-            bool nul2 = l2 == null;
-            if (nul1 && nul2)
+            ListNode l3;
+            if (l1 != null || l2 != null)
+                l3 = new();
+            else
                 return null;
-            ListNode l3 = new();
-            ChngLst(l1, l2, l3);
+            ChngLst(l1, l2, l3,0);
             return l3;
         }
 
-        private void ChngLst(ListNode l1, ListNode l2, ListNode l3)
+        private static void ChngLst(ListNode l1, ListNode l2, ListNode l3, int car)
         {
-            if (l1 != null || l2 != null)
+            int n1 = 0, n2 = 0;
+            if (l1 != null)
+                n1 = l1.val;
+            if (l2 != null)
+                n2 = l2.val;
+            int n3 = (n1 + n2) + car;
+            l3.val = n3 % 10 ;
+            car = n3 / 10 != 0 ? n3 / 10 : 0;
+            l1 = l1?.next??null;
+            l2 = l2?.next??null;
+            if ((l1 != null || l2 != null) )
             {
-                int n1 = 0, n2 = 0;
-                if (l1 != null)
-                    n1 = l1.val;
-                if (l2 != null)
-                    n2 = l2.val;
-                int n3 = n1 + n2;
-                n3 = Int16.Parse(n3.ToString().Last().ToString());
-                l3.val = n3;
-                l3.next = new ListNode(0);
-                ChngLst(l1.next??null, l2.next?null, l3.next?.null);
+                l3.next = new();
+                ChngLst(l1, l2, l3.next, car);
+            }
+            else if(car != 0)
+            {
+                l3.next = new(car);
             }
         }
     }

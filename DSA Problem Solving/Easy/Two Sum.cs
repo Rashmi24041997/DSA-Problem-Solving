@@ -28,8 +28,8 @@ public class TwoSum
         //        return arr;
         //        return new int[] { arr[0], arr[1] };
         //    }
-
         //}
+
         List<int> lst = nums.ToList<int>();
 
         for (int i = 0; i < nums.Length; i++)
@@ -47,3 +47,4 @@ public class TwoSum
 
     }
 }
+
