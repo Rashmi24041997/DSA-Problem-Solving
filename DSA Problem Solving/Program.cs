@@ -6,11 +6,12 @@ public class Solution
 {
     public static void Main()
     {
-        Call_Roman_to_Integer();
-        Call_Two_Sum();
-        Call_AddTwoNumbers();
-        Call_Longest_Substring_Without_Repeating_Characters();
-
+        //Call_Roman_to_Integer();
+        //Call_Two_Sum();
+        //Call_AddTwoNumbers();
+        //Call_Longest_Substring_Without_Repeating_Characters();
+        //Call_MinStoneSum();
+        int i = Reverse_integer.Solution(-2147483648);
     }
     public static void Call_Roman_to_Integer()
     {
@@ -45,5 +46,10 @@ public class Solution
           int ans =  Longest_Substring_Without_Repeating_Characters.Solution("dvdf");
         }
         catch (Exception ex) { }
+    }
+
+    public static void Call_MinStoneSum()
+    {
+       int r = MinStoneSum.Solution(new int[] { 1391, 5916 },2);
     }
 }
