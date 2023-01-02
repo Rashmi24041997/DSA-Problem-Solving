@@ -11,7 +11,8 @@ public class Solution
         //Call_AddTwoNumbers();
         //Call_Longest_Substring_Without_Repeating_Characters();
         //Call_MinStoneSum();
-        int i = Reverse_integer.Solution(-2147483648);
+        //Call_Reverse_integer();
+        Call_Divide_Two_Integers();
     }
     public static void Call_Roman_to_Integer()
     {
@@ -51,5 +52,14 @@ public class Solution
     public static void Call_MinStoneSum()
     {
        int r = MinStoneSum.Solution(new int[] { 1391, 5916 },2);
+    }
+    public static void Call_Reverse_integer()
+    { 
+        int i = Reverse_integer.Solution(-100);    
+    }
+
+    public static void Call_Divide_Two_Integers()
+    {
+        int i = Divide_Two_Integers.Solution(-2147483648, 2);
     }
 }
