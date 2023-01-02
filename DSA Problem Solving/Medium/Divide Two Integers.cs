@@ -10,6 +10,7 @@ internal class Divide_Two_Integers
 {
     public static int Solution(int y, int x)
     {
+        //not best, taking 1611 ms, beats only 21% solution
         if (x == 1) return y;
         if (x == -1) return (0 - y) == y ? (0 - (y + 1)) : (0 - y);
         if (y == 0) return 0;

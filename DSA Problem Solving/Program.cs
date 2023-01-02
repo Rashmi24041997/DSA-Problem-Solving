@@ -2,6 +2,8 @@
 
 using DSA_Problem_Solving.Easy;
 using DSA_Problem_Solving.Medium;
+using DSA_Problem_Solving.Medium.LinkedList;
+
 public class Solution
 {
     public static void Main()
