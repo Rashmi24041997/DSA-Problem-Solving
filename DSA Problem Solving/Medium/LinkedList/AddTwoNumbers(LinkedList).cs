@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DSA_Problem_Solving.Medium
+namespace DSA_Problem_Solving.Medium.LinkedList
 {
     public class ListNode
     {
@@ -26,7 +26,7 @@ namespace DSA_Problem_Solving.Medium
                 l3 = new();
             else
                 return null;
-            ChngLst(l1, l2, l3,0);
+            ChngLst(l1, l2, l3, 0);
             return l3;
         }
 
@@ -37,17 +37,17 @@ namespace DSA_Problem_Solving.Medium
                 n1 = l1.val;
             if (l2 != null)
                 n2 = l2.val;
-            int n3 = (n1 + n2) + car;
-            l3.val = n3 % 10 ;
+            int n3 = n1 + n2 + car;
+            l3.val = n3 % 10;
             car = n3 / 10 != 0 ? n3 / 10 : 0;
-            l1 = l1?.next??null;
-            l2 = l2?.next??null;
-            if ((l1 != null || l2 != null) )
+            l1 = l1?.next ?? null;
+            l2 = l2?.next ?? null;
+            if (l1 != null || l2 != null)
             {
                 l3.next = new();
                 ChngLst(l1, l2, l3.next, car);
             }
-            else if(car != 0)
+            else if (car != 0)
             {
                 l3.next = new(car);
             }
