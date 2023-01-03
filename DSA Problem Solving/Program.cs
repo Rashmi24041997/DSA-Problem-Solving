@@ -14,7 +14,8 @@ public class Solution
         //Call_Longest_Substring_Without_Repeating_Characters();
         //Call_MinStoneSum();
         //Call_Reverse_integer();
-        Call_Divide_Two_Integers();
+        //Call_Divide_Two_Integers();
+        Call_Linked_List_Mid();
     }
     public static void Call_Roman_to_Integer()
     {
@@ -64,4 +65,18 @@ public class Solution
     {
         int i = Divide_Two_Integers.Solution(-2147483648, 2);
     }
+
+    public static void Call_Linked_List_Mid()
+    {
+        try
+        {
+            ListNode l1 = new(1, new(2, new(3, new(4, new(5, new(6))))));
+            ListNode l2 = new(1, new(2, new(3)));
+            ListNode l3 = new(1, new(2));
+            ListNode l4 = new(1, new(2, new(3, new(3))));
+            ListNode l5 = Linked_List_Mid.Solution(l1);
+        }
+        catch (Exception ex) { }
+    }
+
 }
