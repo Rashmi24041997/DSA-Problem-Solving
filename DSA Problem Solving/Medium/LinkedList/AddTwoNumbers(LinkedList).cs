@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DSA_Problem_Solving.Medium.LinkedList
-{ 
+{
 
     internal class AddTwoNumbers_LinkedList
     {

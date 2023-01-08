@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using DSA_Problem_Solving;
 using DSA_Problem_Solving.Easy;
+using DSA_Problem_Solving.Easy.LinkedList;
 using DSA_Problem_Solving.Medium;
 using DSA_Problem_Solving.Medium.LinkedList;
 
