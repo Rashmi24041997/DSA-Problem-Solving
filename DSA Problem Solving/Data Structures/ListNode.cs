@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DSA_Problem_Solving.Medium.LinkedList
+namespace DSA_Problem_Solving
 {
     public class ListNode
     {
