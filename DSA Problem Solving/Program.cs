@@ -2,9 +2,12 @@
 
 using DSA_Problem_Solving;
 using DSA_Problem_Solving.Easy;
+using DSA_Problem_Solving.Easy.Binary_Tree;
 using DSA_Problem_Solving.Easy.LinkedList;
 using DSA_Problem_Solving.Medium;
 using DSA_Problem_Solving.Medium.LinkedList;
+using System.Collections;
+using System.Xml.Linq;
 
 public class Solution
 {
@@ -17,7 +20,8 @@ public class Solution
         //Call_MinStoneSum();
         //Call_Reverse_integer();
         //Call_Divide_Two_Integers();
-        Call_Linked_List_Mid();
+        //Call_Linked_List_Mid();
+        Call_Binary_Tree_Level_Order_Traversal();
     }
     public static void Call_Roman_to_Integer()
     {
@@ -77,6 +81,27 @@ public class Solution
             ListNode l3 = new(1, new(2));
             ListNode l4 = new(1, new(2, new(3, new(3))));
             ListNode l5 = Linked_List_Mid.Solution(l1);
+        }
+        catch (Exception ex) { }
+    }
+    public static void Call_Binary_Tree_Level_Order_Traversal()
+    {
+        try
+        {
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(2);
+            root.right = new TreeNode(3);
+            root.left.left = new TreeNode(4);
+            root.left.right = new TreeNode(5);
+            root.left.right.left = new TreeNode(8);
+            root.right.left = new TreeNode(6);
+            root.right.right = new TreeNode(7);
+            root.right.right.left = new TreeNode(9);
+            root.right.right.right = new TreeNode(10);
+
+            List<List<int>> inOrder;
+            inOrder = (List<List<int>>)Binary_Tree_Level_Order_Traversal.Solution(root);
+
         }
         catch (Exception ex) { }
     }
