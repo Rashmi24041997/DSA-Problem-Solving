@@ -28,10 +28,8 @@ namespace DSA_Problem_Solving.Easy.Binary_Tree
                 else {
                     temp = st.Peek();
                     if (temp != null)
-                    {
                         rslt.Add(temp.val);
 
-                    }
                     //if stack is empty means all parent nodes are popped out and enlisted
                     if (st.Count == 0)
                         break;
