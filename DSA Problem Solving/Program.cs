@@ -100,7 +100,7 @@ public class Solution
             root.right.right.right = new TreeNode(10);
 
             List<List<int>> inOrder;
-            inOrder = (List<List<int>>)Binary_Tree_Level_Order_Traversal.Solution(root);
+            inOrder = (List<List<int>>)Binary_Tree_Level_Order_Traversal.LevelOrder(root);
 
         }
         catch (Exception ex) { }
