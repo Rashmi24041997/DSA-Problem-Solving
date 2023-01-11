@@ -22,6 +22,7 @@ public class Solution
         //Call_Divide_Two_Integers();
         //Call_Linked_List_Mid();
         Call_Binary_Tree_Level_Order_Traversal();
+        Call_TopView();
     }
     public static void Call_Roman_to_Integer()
     {
@@ -101,6 +102,27 @@ public class Solution
 
             List<List<int>> inOrder;
             inOrder = (List<List<int>>)Binary_Tree_Level_Order_Traversal.LevelOrder(root);
+
+        }
+        catch (Exception ex) { }
+    } 
+    public static void Call_TopView()
+    {
+        try
+        {
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(2);
+            root.right = new TreeNode(3);
+            root.left.left = new TreeNode(4);
+            root.left.right = new TreeNode(5);
+            root.left.right.left = new TreeNode(8);
+            root.right.left = new TreeNode(6);
+            root.right.right = new TreeNode(7);
+            root.right.right.left = new TreeNode(9);
+            root.right.right.right = new TreeNode(10);
+
+            List<int> inOrder;
+            inOrder = (List<int>)Top_View_of_Binary_Tree.TopView(root);
 
         }
         catch (Exception ex) { }
