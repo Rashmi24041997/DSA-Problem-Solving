@@ -12,17 +12,17 @@ namespace DSA_Problem_Solving.Easy.Binary_Tree
         {
 
             List<int> rslt = new List<int>();
-            LeftSideVu(root, 1, rslt);
+            //LeftSideVu(root, 1, rslt);
             return rslt;
         }
         private static void LeftSideVu(TreeNode nod, int lev, IList<int> lst)
         {
             if (nod == null)
                 return;
-            if (lev > lst.Count)
-                lst.Add(nod.val);
-            LeftSideVu(nod.left, lev + 1, lst);
-            LeftSideVu(nod.right, lev + 1, lst);
+            //if (lev > lst.Count)
+            //    lst.Add(nod.val);
+            //LeftSideVu(nod.left, lev + 1, lst);
+            //LeftSideVu(nod.right, lev + 1, lst);
         }
     }
 }

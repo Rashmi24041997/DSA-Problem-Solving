@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using DSA_Problem_Solving;
+using DSA_Problem_Solving.Basic_Maths.Easy;
 using DSA_Problem_Solving.Easy;
 using DSA_Problem_Solving.Easy.Binary_Tree;
 using DSA_Problem_Solving.Easy.LinkedList;
@@ -21,8 +22,10 @@ public class Solution
         //Call_Reverse_integer();
         //Call_Divide_Two_Integers();
         //Call_Linked_List_Mid();
-        Call_Binary_Tree_Level_Order_Traversal();
-        Call_TopView();
+        //Call_Binary_Tree_Level_Order_Traversal();
+        //Call_TopView();
+        //Console.WriteLine(Count_the_Digits_That_Divide_a_Number.CountDigits(121));
+        Console.WriteLine(ReverseBits.Sol(-1534236469));
     }
     public static void Call_Roman_to_Integer()
     {
@@ -35,16 +38,17 @@ public class Solution
     {
         try
         {
-            Console.WriteLine(TwoSum.Sol( new int[] { 2,7,11,12}, 13));
+            Console.WriteLine(TwoSum.Sol(new int[] { 2, 7, 11, 12 }, 13));
         }
         catch (Exception ex) { }
     }
 
-    public static void Call_AddTwoNumbers() {
-        try 
+    public static void Call_AddTwoNumbers()
+    {
+        try
         {
-            ListNode l1 = new(1, new (2, new (3)));
-            ListNode l2 = new(3, new (8, new (8)));
+            ListNode l1 = new(1, new(2, new(3)));
+            ListNode l2 = new(3, new(8, new(8)));
             ListNode l3 = AddTwoNumbers_LinkedList.AddTwoNumbers(l1, l2);
         }
         catch (Exception ex) { }
@@ -54,18 +58,18 @@ public class Solution
     {
         try
         {
-          int ans =  Longest_Substring_Without_Repeating_Characters.Solution("dvdf");
+            int ans = Longest_Substring_Without_Repeating_Characters.Solution("dvdf");
         }
         catch (Exception ex) { }
     }
 
     public static void Call_MinStoneSum()
     {
-       int r = MinStoneSum.Solution(new int[] { 1391, 5916 },2);
+        int r = MinStoneSum.Solution(new int[] { 1391, 5916 }, 2);
     }
     public static void Call_Reverse_integer()
-    { 
-        int i = Reverse_integer.Solution(-100);    
+    {
+        int i = Reverse_integer.Solution(-100);
     }
 
     public static void Call_Divide_Two_Integers()
@@ -101,11 +105,11 @@ public class Solution
             root.right.right.right = new TreeNode(10);
 
             List<List<int>> inOrder;
-            inOrder = (List<List<int>>)Binary_Tree_Level_Order_Traversal.LevelOrder(root);
+            //inOrder = (List<List<int>>)Binary_Tree_Level_Order_Traversal.LevelOrder(root);
 
         }
         catch (Exception ex) { }
-    } 
+    }
     public static void Call_TopView()
     {
         try
@@ -122,7 +126,7 @@ public class Solution
             root.right.right.right = new TreeNode(10);
 
             List<int> inOrder;
-            inOrder = (List<int>)Top_View_of_Binary_Tree.TopView(root);
+            //inOrder = (List<int>)Top_View_of_Binary_Tree.TopView(root);
 
         }
         catch (Exception ex) { }
