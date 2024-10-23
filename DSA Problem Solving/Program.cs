@@ -2,11 +2,13 @@
 
 using DSA_Problem_Solving;
 using DSA_Problem_Solving.Basic_Maths.Easy;
+using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
 using DSA_Problem_Solving.Easy;
 using DSA_Problem_Solving.Easy.Binary_Tree;
 using DSA_Problem_Solving.Easy.LinkedList;
 using DSA_Problem_Solving.Medium;
 using DSA_Problem_Solving.Medium.LinkedList;
+using System;
 using System.Collections;
 using System.Xml.Linq;
 
@@ -25,7 +27,24 @@ public class Solution
         //Call_Binary_Tree_Level_Order_Traversal();
         //Call_TopView();
         //Console.WriteLine(Count_the_Digits_That_Divide_a_Number.CountDigits(121));
-        Console.WriteLine(ReverseBits.Sol(-1534236469));
+        //Console.WriteLine(ReverseBits.Sol(-1534236469));
+        //Console.WriteLine(CheckPalindrome.Sol(121));
+        //Console.WriteLine(IsArmstrong.Sol(371));
+        //Console.WriteLine(ArrayMedium.SetMatrixZeroes(new int[][]
+        //{
+        //    new int[] { 1, 1, 1 },
+        //    new int[] { 1, 0, 1 },
+        //    new int[] { 1, 1, 1 }
+        //}));
+        int[] arr = new int[] { 2, 0, 2, 1, 1, 0 };
+        Console.Clear();
+        arr.ToList().ForEach(i => Console.Write($"\t{i}"));
+        Console.WriteLine();
+        Console.WriteLine();
+        ArrayMedium.SortColorsBtr(arr).ToList().ForEach(i => Console.Write($"\t{i}"));
+        Console.WriteLine();
+        Console.WriteLine();
+        ArrayMedium.SortColorsOpt(new int[] { 2, 0, 2, 1, 1, 0 }).ToList().ForEach(i => Console.Write($"\t{i}"));
     }
     public static void Call_Roman_to_Integer()
     {

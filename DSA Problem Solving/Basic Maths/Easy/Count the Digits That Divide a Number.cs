@@ -41,15 +41,14 @@ Explanation: 7 divides itself, hence the answer is 1.*/
         }
     }
 
-    public static class ReverseBits
+    public static class CheckPalindrome
     {
-        public static int Sol(int div)
+        public static bool Sol(int div)
         {
-            if (div >= -9 && div <= 9) return div;
+            if (div < 0) return false;
+            if (div >= 0 && div <= 9) return true;
             int revNum = 0;
-            int n =div;
-            int mx = Int32.MaxValue;
-            int mn = Int32.MinValue;
+            int n = div;
             // Start a while loop to reverse the
             // digits of the input integer.
             while (n != 0)
@@ -57,21 +56,45 @@ Explanation: 7 divides itself, hence the answer is 1.*/
                 // Extract the last digit of
                 // 'n' and store it in 'ld'.
                 int ld = n % 10;
-                // Multiply the current reverse number
-                // by 10 and add the last digit.
-                if (revNum > 0 && (revNum > (mx / 10) || (revNum == mx / 10 && ld > 7)))
-                {
-                    return 0;
-                }
-                if (revNum < (mn / 10) || (revNum == mn / 10 && ld < -8))
-                {
-                    return 0;
-                }
                 revNum = (revNum * 10) + ld;
                 // Remove the last digit from 'n'.
                 n = n / 10;
             }
-            return revNum ;
+            return revNum == div;
+        }
+    }
+
+    public static class FindGCD
+    {
+        public static long Sol(long n1, long n2)
+        {
+            while (n1 > 0 && n2 > 0)
+            {
+                if (n1 > n2)
+                    n1 = n1 % n2;
+                if (n2 > n1)
+                    n2 = n2 % n1;
+            }
+            if (n1 == 0) return n2;
+            return n1;
+        }
+    }
+    public static class IsArmstrong
+    {
+        public static bool Sol(int n)
+        {
+            int d = n; int cnt = 0;
+            int sum = 0;
+            List<int> digs = new();
+            while (d > 0)
+            {
+                int r = d % 10;
+                digs.Add(r);
+                cnt++;
+                d = d / 10;
+            }
+            digs.ForEach(i => sum += (int)Math.Pow(i, cnt));
+            return sum == n;
         }
     }
 }
