@@ -173,26 +173,52 @@ public static class ArrayMedium
         return nums;
     }
 
-    private static void Method()
-    { }
-
-}
-
-public static class ArrayEasy
-{
-    public static int MaxProfit(int[] prices)
+    public static int MaxSubArray(int[] nums)
     {
-        if (!(prices?.Length > 0)) return 0;
-        int max = 0, min = prices[0];
-        for (int i = 1; i < prices.Length; i++)
-        {
-            //try to find the min price to buy
-            min = Math.Min(min, prices[i]);
-            int diff = prices[i] - min;
+        int max = int.MinValue;
 
-            //find the max profit
-            max = Math.Max(max, diff);
+        int sum = 0;
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            sum += nums[i];
+
+            if (sum > max) { max = sum; }
+            if (sum < 0) { sum = 0; }
         }
         return max;
     }
+
+    public static IList<IList<int>> PascalTriangle(int numRows)
+    {
+
+        if (numRows < 0) return null;
+        IList<IList<int>> lst = new List<IList<int>>();
+        if (numRows >= 1)
+        {
+            lst.Add(new List<int>() { 1 });
+        }
+        if (numRows >= 2)
+        {
+            lst.Add(new List<int>() { 1, 1 });
+        }
+        if (numRows >= 3)
+        {
+            for (int i = 2; i < numRows; i++)
+            {
+                List<int> c = new();
+                List<int> p = (List<int>)lst.ElementAt(i - 1);
+                c.Add(1);
+
+                for (int j = 1; j <= p.Count - 1; j++)
+                {
+                    c.Add(p[j - 1] + p[j]);
+                }
+                c.Add(1);
+                lst.Add(c);
+            }
+        }
+        return lst;
+    }
+
 }

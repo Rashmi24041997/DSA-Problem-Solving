@@ -3,6 +3,7 @@
 using DSA_Problem_Solving;
 using DSA_Problem_Solving.Basic_Maths.Easy;
 using DSA_Problem_Solving.Data_Structures.Arrays;
+using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
 using DSA_Problem_Solving.Easy;
 using DSA_Problem_Solving.Easy.Binary_Tree;
 using DSA_Problem_Solving.Easy.LinkedList;
@@ -30,18 +31,18 @@ public class Solution
         //Console.WriteLine(ReverseBits.Sol(-1534236469));
         //Console.WriteLine(CheckPalindrome.Sol(121));
         //Console.WriteLine(IsArmstrong.Sol(371));
-        int[][] arr = new int[][]
-        {
-            new int[] { 0, 1, 2, 0 },
-            new int[] { 3, 4, 5, 2 },
-            new int[] { 1, 3, 1, 5 }
-        };
-        //Console.WriteLine(ArrayMedium.SetMatrixZeroes(arr));
-        Console.WriteLine(ArrayMedium.SetMatrixZeroesOpt(arr));
+        //int[][] arr = new int[][]
+        //{
+        //    new int[] { 0, 1, 2, 0 },
+        //    new int[] { 3, 4, 5, 2 },
+        //    new int[] { 1, 3, 1, 5 }
+        //};
+        ////Console.WriteLine(ArrayMedium.SetMatrixZeroes(arr));
+        //Console.WriteLine(ArrayMedium.SetMatrixZeroesOpt(arr));
 
-        int[][] a = new int[][] { new int[] { 0, 1 } };
-        Console.WriteLine(ArrayMedium.SetMatrixZeroes(a));
-        Console.WriteLine(ArrayMedium.SetMatrixZeroesOpt(a));
+        //int[][] a = new int[][] { new int[] { 0, 1 } };
+        //Console.WriteLine(ArrayMedium.SetMatrixZeroes(a));
+        //Console.WriteLine(ArrayMedium.SetMatrixZeroesOpt(a));
         //int[] arr = new int[] { 2, 0, 2, 1, 1, 0 };
         //Console.Clear();
         //arr.ToList().ForEach(i => Console.Write($"\t{i}"));
@@ -52,8 +53,15 @@ public class Solution
         //Console.WriteLine();
         //ArrayMedium.SortColorsOpt(new int[] { 2, 0, 2, 1, 1, 0 }).ToList().ForEach(i => Console.Write($"\t{i}"));
 
-        int[] arr1 = new int[] { 7, 1, 5, 3, 6, 4 };
-        Console.WriteLine(ArrayEasy.MaxProfit(arr1));
+        //int[] arr1 = new int[] { 7, 1, 5, 3, 6, 4 };
+        //Console.WriteLine(ArrayEasy.MaxProfit(arr1));
+        //int[] arr1 = new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+        //int[] arr2 = new int[] { 5, 4, -1, 7, 8 };
+        //Console.WriteLine(ArrayMedium.MaxSubArray(arr1));
+        //Console.WriteLine(ArrayMedium.MaxSubArray(arr2));
+
+        //Console.WriteLine(ArrayMedium.PascalTriangle(1).ForEach(lst => lst.ForEach(i => Console.Write($"\t{i}"))));
+        Console.WriteLine(ArrayMedium.PascalTriangle(1));
     }
     public static void Call_Roman_to_Integer()
     {
