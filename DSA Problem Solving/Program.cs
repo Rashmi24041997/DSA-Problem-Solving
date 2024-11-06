@@ -59,10 +59,19 @@ public class Solution
         //int[] arr2 = new int[] { 5, 4, -1, 7, 8 };
         //Console.WriteLine(ArrayMedium.MaxSubArray(arr1));
         //Console.WriteLine(ArrayMedium.MaxSubArray(arr2));
-
-        //Console.WriteLine(ArrayMedium.PascalTriangle(1).ForEach(lst => lst.ForEach(i => Console.Write($"\t{i}"))));
-        Console.WriteLine(ArrayMedium.PascalTriangle(1));
+        IList<IList<int>> cln = ArrayMedium.PascalTriangle(7);
+        Console.Clear();
+        foreach (var lst in cln)
+        {
+            foreach (var i in lst)
+            {
+                Console.Write($"\t{i}");
+            }
+            Console.WriteLine();
+        }
+        //Console.WriteLine(ArrayMedium.PascalTriangle(1));
     }
+
     public static void Call_Roman_to_Integer()
     {
         //Roman to integer
