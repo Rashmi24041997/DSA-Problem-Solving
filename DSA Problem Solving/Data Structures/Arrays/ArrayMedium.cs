@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -221,4 +222,65 @@ public static class ArrayMedium
         return lst;
     }
 
+    public static void RotateImg(int[][] a)
+    {
+        int[][] s = a;
+        a = s;
+        int n = a.Length, ni, nj;
+        try
+        {
+            if (a is null || a.Length <= 1) return;
+            for (int r = a.Length - 1; r > 0; r -= 2)
+            {
+                for (int k = ((n - r - 1) / 2); k <= r; k++)
+                {
+                    int i = r;
+                    int j = k;
+                    int temp = a[i][j], save = 0;
+
+                    for (int m = 1; m < 5; m++)
+                    {
+                        ni = j; nj = (n - 1) - i;
+                        save = a[ni][nj];
+                        a[ni][nj] = temp;
+                        temp = save;
+                        i = ni; j = nj; ni = j; nj = (n - 1) - i;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Message}\n{ex.StackTrace}");
+        }
+    }
+
+    public static int[][] RotateImgOpt(int[][] a)
+    {
+        int n = a.Length, n1 = n - 1;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i; j < n; j++)
+            {
+                int temp = a[i][j];
+                a[i][j] = a[j][i];
+                a[j][i] = temp;
+            }
+        }
+
+        for (int i = 0; i < n ; i++)
+        {
+            for (int j = 0; j < n/ 2; j++)
+            {
+                int temp = a[i][j];
+                a[i][j] = a[i][n1 - j];
+                a[i][n1 - j] = temp;
+            }
+        }
+        return a;
+    }
+    private static void Swap(int n, int i, int j, int ni, int nj, int[][] a)
+    {
+
+    }
 }
