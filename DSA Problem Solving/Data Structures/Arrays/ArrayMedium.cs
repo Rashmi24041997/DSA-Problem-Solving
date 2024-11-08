@@ -279,8 +279,4 @@ public static class ArrayMedium
         }
         return a;
     }
-    private static void Swap(int n, int i, int j, int ni, int nj, int[][] a)
-    {
-
-    }
 }
