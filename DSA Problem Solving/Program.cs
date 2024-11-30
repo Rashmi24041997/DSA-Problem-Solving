@@ -59,10 +59,30 @@ public class Solution
         //int[] arr2 = new int[] { 5, 4, -1, 7, 8 };
         //Console.WriteLine(ArrayMedium.MaxSubArray(arr1));
         //Console.WriteLine(ArrayMedium.MaxSubArray(arr2));
-
-        //Console.WriteLine(ArrayMedium.PascalTriangle(1).ForEach(lst => lst.ForEach(i => Console.Write($"\t{i}"))));
-        Console.WriteLine(ArrayMedium.PascalTriangle(1));
+        //IList<IList<int>> cln = ArrayMedium.PascalTriangle(7);
+        //Console.Clear();
+        //foreach (var lst in cln)
+        //{
+        //    foreach (var i in lst)
+        //    {
+        //        Console.Write($"\t{i}");
+        //    }
+        //    Console.WriteLine();
+        //}
+        int[][] cln = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } };
+        cln = new int[][] { new int[] { 5, 1, 9, 11 }, new int[] { 2, 4, 8, 10 }, new int[] { 13, 3, 6, 7 }, new int[] { 15, 14, 12, 16 } };
+        cln = ArrayMedium.RotateImgOpt(cln);
+        Console.Clear();
+        foreach (int[] lst in cln)
+        {
+            foreach (int i in lst)
+            {
+                Console.Write($"\t{i}");
+            }
+            Console.WriteLine();
+        }
     }
+
     public static void Call_Roman_to_Integer()
     {
         //Roman to integer
