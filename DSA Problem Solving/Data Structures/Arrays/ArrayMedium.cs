@@ -221,4 +221,41 @@ public static class ArrayMedium
         return lst;
     }
 
+    public static int[] TwoSumBtr(int[] lst, int t)
+    {
+        List<int> res = new List<int>();
+        HashSet<int> set = new HashSet<int>();
+
+        foreach (int i in lst)
+        {
+            int r = t - i;
+            if (set.Contains(r))
+            {
+                res.Add(i);
+                res.Add(r);
+                return res.ToArray();
+            }
+            set.Add(i);
+        }
+        return new int[] { -1, -1 };
+    }
+
+    public static int[] TwoSumOpt(int[] nums, int target)
+    {
+        int j = nums.Length - 1; int i = 0;
+        Array.Sort(nums);
+        while (i != j)
+        {
+            int l = nums[i];
+            int r = nums[j];
+            int sum = l + r;
+            if (sum == target)
+            {
+                return new int[] { i, j };
+            }
+            else if (sum >= target) { j--; }
+            else if (sum <= target) { i++; }
+        }
+        return new int[] { -1, -1 };
+    }
 }

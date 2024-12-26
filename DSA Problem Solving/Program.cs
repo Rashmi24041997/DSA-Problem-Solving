@@ -4,6 +4,7 @@ using DSA_Problem_Solving;
 using DSA_Problem_Solving.Basic_Maths.Easy;
 using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
+using DSA_Problem_Solving.Data_Structures.LinkedList;
 using DSA_Problem_Solving.Easy;
 using DSA_Problem_Solving.Easy.Binary_Tree;
 using DSA_Problem_Solving.Easy.LinkedList;
@@ -61,7 +62,30 @@ public class Solution
         //Console.WriteLine(ArrayMedium.MaxSubArray(arr2));
 
         //Console.WriteLine(ArrayMedium.PascalTriangle(1).ForEach(lst => lst.ForEach(i => Console.Write($"\t{i}"))));
-        Console.WriteLine(ArrayMedium.PascalTriangle(1));
+        //Console.WriteLine(ArrayMedium.PascalTriangle(1));
+
+        //List<int> list = ArrayMedium.TwoSumBtr(new List<int>() { 2, 6, 5, 8, 11 }, 14);
+        //int[] list = ArrayMedium.TwoSumOpt(new int[] { 3, 2, 4 }, 6);
+        //list.ToList().ForEach(l => Console.WriteLine(l));
+
+        int[] arr = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+
+        ListNode l1 = new(1) { next = new(2) { next = new(3) { next = new(4) { next = new(5) { next = new(6) } } } } };
+
+             //listNode = LinkedListEasy.ReverseList(new ListNode(1)
+        //{
+        //    next = new(2)
+        //});
+        //listNode = LinkedListEasy.ReverseListUsingStack(listNode);
+        //l1 = LinkedListEasy.FindMiddle(l1);
+        //l1 = LinkedListEasy.MergeTwoLists(l1,l2);
+        l1 = LinkedListEasy.RemoveNthFromEndOptimal(l1,3);
+        Console.WriteLine();
+        while (l1 != null)
+        {
+            Console.WriteLine(l1.val);
+            l1 = l1.next;
+        }
     }
     public static void Call_Roman_to_Integer()
     {
