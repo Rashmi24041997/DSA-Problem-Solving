@@ -68,18 +68,21 @@ public class Solution
         //int[] list = ArrayMedium.TwoSumOpt(new int[] { 3, 2, 4 }, 6);
         //list.ToList().ForEach(l => Console.WriteLine(l));
 
-        int[] arr = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+        //int[] arr = new int[] { 1, 2, 3, 4, 5, 6, 7 };
 
-        ListNode l1 = new(1) { next = new(2) { next = new(3) { next = new(4) { next = new(5) { next = new(6) } } } } };
+        ListNode l1 = new(0) { next = new(1) { next = new(2) { next = new(3) { next = new(4) { next = new(9) } } } } } ;
+        ListNode l2 = new(0) /*{ next = new(9) { next = new(9) { next = new(9) { next = new(5) { next = new(6) } } }  }}*/;
 
-             //listNode = LinkedListEasy.ReverseList(new ListNode(1)
+        //listNode = LinkedListEasy.ReverseList(new ListNode(1)
         //{
         //    next = new(2)
         //});
         //listNode = LinkedListEasy.ReverseListUsingStack(listNode);
         //l1 = LinkedListEasy.FindMiddle(l1);
         //l1 = LinkedListEasy.MergeTwoLists(l1,l2);
-        l1 = LinkedListEasy.RemoveNthFromEndOptimal(l1,3);
+        //l1 = LinkedListMedium.RemoveNthFromEndOptimal(l1,3);
+        //l1 = LinkedListMedium.AddTwoNumbers(l1, l2);
+        LinkedListMedium.DeleteNode(l1.next.next);
         Console.WriteLine();
         while (l1 != null)
         {
