@@ -34,6 +34,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return hd.next;
         }
 
+
         public static ListNode RemoveNthFromEnd(ListNode head, int N)
         {
             if (head == null)
@@ -80,6 +81,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return head;
         }
 
+
         public static ListNode RemoveNthFromEndOptimal(ListNode head, int N)
         {
             // Create two pointers, fastp and slowp
@@ -107,6 +109,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             delNode = null;
             return head;
         }
+
 
         //public static ListNode MergeTwoLists(ListNode l1, ListNode l2)
         //{
@@ -144,7 +147,6 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
         //    }
         //    return hd;
         //}
-
         public static void DeleteNode(ListNode given)
         {
             if (given is null) return;
@@ -160,6 +162,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             given.next = nxt2;
             nxt1 = null;
         }
+
 
         public static ListNode GetIntersectionNodeBruteForce(ListNode headA, ListNode headB)
         {
@@ -178,10 +181,11 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return null;
         }
 
+
         /// <summary>
         /// travel both of the head nodes by d1, d2 till they're equal
-        // keep pointing them to their opposite list's head when they are null
-        //this way at 3rd iteration, they will start at same length n will reach to same node either common or null  
+        /// keep pointing them to their opposite list's head when they are null
+        /// this way at 3rd iteration, they will start at same length n will reach to same node either common or null  
         /// </summary>
         public static ListNode GetIntersectionNodeOptiml(ListNode headA, ListNode headB)
         {
@@ -193,6 +197,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             }
             return l1;
         }
+
 
         public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
@@ -222,6 +227,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return temp;
         }
 
+
         public static bool HasCycle(ListNode head)
         {
             HashSet<ListNode> nodes = new();
@@ -234,13 +240,13 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return false;
         }
 
+
         /// <summary>
         /// Apply slow and fast pointer approach.
         /// move the pointer by 2 nodes.
         /// </summary>
         public static bool HasCycleOpt(ListNode head)
         {
-
             ListNode slow = head, fast = head;
             while (fast != null && fast.next != null)
             {
@@ -253,7 +259,137 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                     return true;
             }
             return false;
+        }
 
+
+        public static bool IsPalindrome(ListNode head)
+        {
+            if (head is null || head.next is null) return true;
+
+            bool isTru = true;
+            ListNode copy = head;
+            List<int> num = new();
+            int cnt = 0;
+            while (copy is not null)
+            {
+                num.Add(copy.val);
+                copy = copy.next;
+            }
+            for (int i = 0; i < num.Count / 2; i++)
+            {
+                if (num[i] != num[num.Count - i - 1])
+                {
+                    isTru = false;
+                    break;
+                }
+            }
+            return isTru;
+            // Additional logic to check if the number is a palindrome
+        }
+
+
+        //Function to reverse a linked list
+        // using the recursive approach
+        public static ListNode reverseLinkedList(ListNode head)
+        {
+            // Check if the list is empty or has only one node
+            if (head == null || head.next == null)
+            {
+
+                // No change is needed;
+                // return the current head
+                return head;
+            }
+
+            // Recursive step: Reverse the remaining
+            // part of the list and get the new head
+            ListNode newHead = reverseLinkedList(head.next);
+
+            // Store the next node in 'front'
+            // to reverse the link
+            ListNode front = head.next;
+
+            // Update the 'next' pointer of 'front' to
+            // point to the current head, effectively
+            // reversing the link direction
+            front.next = head;
+
+            // Set the 'next' pointer of the
+            // current head to 'null' to
+            // break the original link
+            head.next = null;
+
+            // Return the new head obtained
+            // from the recursion
+            return newHead;
+        }
+
+        public static bool isPalindrome(ListNode head)
+        {
+            // Check if the linked list is
+            // empty or has only one node
+            if (head == null || head.next == null)
+            {
+                // It's a palindrome by definition
+                return true;
+            }
+
+            // Initialize two pointers, slow and fast,
+            // to find the middle of the linked list
+            ListNode slow = head;
+            ListNode fast = head;
+
+            // Traverse the linked list to find the
+            // middle using slow and fast pointers
+            while (fast.next != null && fast.next.next != null)
+            {
+                // Move slow pointer one step at a time
+                slow = slow.next;
+
+                // Move fast pointer two steps at a time
+                fast = fast.next.next;
+            }
+
+            // Reverse the second half of the 
+            // linked list starting from the middle
+            ListNode newHead = reverseLinkedList(slow.next);
+
+            // Pointer to the first half
+            ListNode first = head;
+
+            // Pointer to the reversed second half
+            ListNode second = newHead;
+            while (second != null)
+            {
+                // Compare data values of
+                // nodes from both halves
+
+                // If values do not match, the
+                // list is not a palindrome
+                if (first.val != second.val)
+                {
+
+                    // Reverse the second half back
+                    // to its original state
+                    reverseLinkedList(newHead);
+
+                    // Not a palindrome
+                    return false;
+                }
+
+                // Move the first pointer
+                first = first.next;
+
+                // Move the second pointer
+                second = second.next;
+            }
+
+            // Reverse the second half back
+            // to its original state
+            reverseLinkedList(newHead);
+
+            // The linked list is a palindrome
+            return true;
         }
     }
 }
