@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data Structures\Arrays\Easy\" />
+    <Compile Remove="Data Structures\Arrays\Easy\**" />
+    <EmbeddedResource Remove="Data Structures\Arrays\Easy\**" />
+    <None Remove="Data Structures\Arrays\Easy\**" />
   </ItemGroup>
 
 </Project>
