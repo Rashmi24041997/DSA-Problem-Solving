@@ -258,4 +258,39 @@ public static class ArrayMedium
         }
         return new int[] { -1, -1 };
     }
+
+    public static int LongestConsecutive(int[] nums)
+    {
+        if (nums is null || nums.Length == 0) return 0;
+
+        int longestSeqLen = 1, crntSeqLen = 0, min = int.MinValue;
+
+        HashSet<int> set = new();
+
+        // put all the array elements into set
+        foreach (int i in nums)
+            if (!set.Contains(i))
+                set.Add(i);
+
+        // Find the longest sequence
+        foreach (int item in set)
+        {
+            // if 'item' is a starting number
+            if (!set.Contains(item - 1))
+            {
+                // find consecutive numbers
+                crntSeqLen = 1;
+                int x = item;
+                while (set.Contains(x + 1))
+                {
+                    //keep increment the number
+                    x++; 
+                    //keep increment the sequence length
+                    crntSeqLen++;
+                }
+            }
+            longestSeqLen = Math.Max(longestSeqLen, crntSeqLen);
+        }
+        return longestSeqLen;
+    }
 }
