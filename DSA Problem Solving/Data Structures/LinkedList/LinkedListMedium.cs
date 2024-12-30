@@ -289,7 +289,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
 
 
         //Function to reverse a linked list
-        // using the recursive approach
+        // using the recursive approach;
         public static ListNode reverseLinkedList(ListNode head)
         {
             // Check if the list is empty or has only one node
