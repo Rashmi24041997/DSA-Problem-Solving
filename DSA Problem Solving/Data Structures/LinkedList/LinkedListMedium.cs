@@ -391,5 +391,51 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             // The linked list is a palindrome
             return true;
         }
+
+
+        public static ListNode RotateRight(ListNode head, int k)
+        {
+            //calculating length
+            ListNode temp = head;
+            int length = 1;
+            while (temp.next != null)
+            {
+                ++length;
+                temp = temp.next;
+            }
+            //link last node to first node
+            temp.next = head;
+            k = k % length; //when k is more than length of list
+            int end = length - k; //to get end of the list
+            while (end-- != 0) temp = temp.next;
+            //breaking last node link and pointing to NULL
+            head = temp.next;
+            temp.next = null;
+
+            return head;
+
+        }
+        public static ListNode RotateRightMine(ListNode head, int k)
+        {
+            if (head == null) return null;
+            int len = 1, lstNodIndx = 0;
+            ListNode last = head, lstNod = head, newHead = null;
+            while (last.next != null)
+            {
+                last = last.next;
+                len++;
+            }
+            k = k % len;
+            lstNodIndx = len - k - 1;
+            if (k == 0) return head;
+            while (lstNodIndx-- > 0)
+            {
+                lstNod = lstNod.next;
+            }
+            last.next = head;
+            newHead = lstNod.next;
+            lstNod.next = null;
+            return newHead;
+        }
     }
 }

@@ -66,10 +66,10 @@ public class Solution
         //int[] list = ArrayMedium.TwoSumOpt(new int[] { 3, 2, 4 }, 6);
         //list.ToList().ForEach(l => Console.WriteLine(l));
 
-        int[] arr = new int[] { 0 };
-        int cnt = ArrayMedium.LongestConsecutive(arr);
-        Console.WriteLine(cnt);
-        //ListNode l1 = new(0) { next = new(1) { next = new(2) { next = new(3) { next = new(4) { next = new(9) } } } } } ;
+        //int[] arr = new int[] { 0 };
+        //int cnt = ArrayMedium.LongestConsecutive(arr);
+        //Console.WriteLine(cnt);
+        ListNode l1 = new(0) { next = new(1) { next = new(2) { next = new(3) { next = new(4) { next = new(9) } } } } };
         //ListNode l2 = new(0) /*{ next = new(9) { next = new(9) { next = new(9) { next = new(5) { next = new(6) } } }  }}*/;
 
         //listNode = LinkedListEasy.ReverseList(new ListNode(1)
@@ -81,13 +81,13 @@ public class Solution
         //l1 = LinkedListEasy.MergeTwoLists(l1,l2);
         //l1 = LinkedListMedium.RemoveNthFromEndOptimal(l1,3);
         //l1 = LinkedListMedium.AddTwoNumbers(l1, l2);
-        //LinkedListMedium.DeleteNode(l1.next.next);
-        //Console.WriteLine();
-        //while (l1 != null)
-        //{
-        //    Console.WriteLine(l1.val);
-        //    l1 = l1.next;
-        //}
+        LinkedListMedium.RotateRight(l1, 2);
+        Console.WriteLine();
+        while (l1 != null)
+        {
+            Console.WriteLine(l1.val);
+            l1 = l1.next;
+        }
     }
 
     public static void Call_Roman_to_Integer()
