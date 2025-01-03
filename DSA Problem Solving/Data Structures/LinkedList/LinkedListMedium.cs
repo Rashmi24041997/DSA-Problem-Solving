@@ -183,7 +183,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
 
 
         /// <summary>
-        /// travel both of the head nodes by d1, d2 till they're equal
+        /// travel both of the head nodes by l1, l2 till they're equal
         /// keep pointing them to their opposite list's head when they are null
         /// this way at 3rd iteration, they will start at same length n will reach to same node either common or null  
         /// </summary>
@@ -390,6 +390,57 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
 
             // The linked list is a palindrome
             return true;
+        }
+
+        /// <summary>
+        /// Rotate the ll by k places from right end
+        /// ex 
+        /// ll: 1 2 3 4, k : 2
+        /// result : 3 4 1 2
+        /// </summary>
+        public static ListNode RotateRight(ListNode head, int k)
+        {
+            //calculating length
+            ListNode temp = head;
+            int length = 1;
+            while (temp.next != null)
+            {
+                ++length;
+                temp = temp.next;
+            }
+            //link last node to first node
+            temp.next = head;
+            k = k % length; //when k is more than length of list
+            int end = length - k; //to get end of the list
+            while (end-- != 0) temp = temp.next;
+            //breaking last node link and pointing to NULL
+            head = temp.next;
+            temp.next = null;
+
+            return head;
+
+        }
+        public static ListNode RotateRightMine(ListNode head, int k)
+        {
+            if (head == null) return null;
+            int len = 1, lstNodIndx = 0;
+            ListNode last = head, lstNod = head, newHead = null;
+            while (last.next != null)
+            {
+                last = last.next;
+                len++;
+            }
+            k = k % len;
+            lstNodIndx = len - k - 1;
+            if (k == 0) return head;
+            while (lstNodIndx-- > 0)
+            {
+                lstNod = lstNod.next;
+            }
+            last.next = head;
+            newHead = lstNod.next;
+            lstNod.next = null;
+            return newHead;
         }
     }
 }
