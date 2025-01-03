@@ -183,7 +183,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
 
 
         /// <summary>
-        /// travel both of the head nodes by d1, d2 till they're equal
+        /// travel both of the head nodes by l1, l2 till they're equal
         /// keep pointing them to their opposite list's head when they are null
         /// this way at 3rd iteration, they will start at same length n will reach to same node either common or null  
         /// </summary>
@@ -392,7 +392,12 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return true;
         }
 
-
+        /// <summary>
+        /// Rotate the ll by k places from right end
+        /// ex 
+        /// ll: 1 2 3 4, k : 2
+        /// result : 3 4 1 2
+        /// </summary>
         public static ListNode RotateRight(ListNode head, int k)
         {
             //calculating length
