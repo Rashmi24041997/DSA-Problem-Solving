@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace DSA_Problem_Solving.Algorithms
 {
@@ -18,14 +19,6 @@ namespace DSA_Problem_Solving.Algorithms
             return subsetSums;
         }
 
-        /// <summary>
-        /// return the array of all possible subset sums by picking or not picking the element
-        /// </summary>
-        /// <param name="ind"></param>
-        /// <param name="sum"></param>
-        /// <param name="len"></param>
-        /// <param name="arr"></param>
-        /// <param name="subsetSums"></param>
         public static void SubsetSumsHelper(int ind, int sum, int len, int[] arr, List<int> subsetSums)
         {
             if (ind == len)
@@ -33,11 +26,85 @@ namespace DSA_Problem_Solving.Algorithms
                 subsetSums.Add(sum);
                 return;
             }
-            // pick the element 
             SubsetSumsHelper(ind + 1, sum + arr[ind], len, arr, subsetSums);
-
-            // Do-not pick the element
             SubsetSumsHelper(ind + 1, sum, len, arr, subsetSums);
+        }
+
+        public static IList<IList<int>> SubsetsWithDup(int[] nums)
+        {
+            if (nums is null)
+                return null;
+
+            if (nums.Length < 1)
+                return new List<IList<int>>();
+
+            Array.Sort(nums);
+
+            int i = 0;
+            for (int j = 1; j < nums.Length; j++)
+            {
+                if (nums[i] != nums[j])
+                {
+                    i++;
+                    nums[i] = nums[j];
+                }
+            }
+            i++;
+            IList<IList<int>> ansList = new List<IList<int>>();
+            FindSubsets(0, nums, i, new List<int>(), ansList);
+            return ansList;
+        }
+
+        private static void FindSubsets(int ind, int[] nums, int len, List<int> subset, IList<IList<int>> subsetList)
+        {
+            subsetList.Add(new List<int>(subset));
+
+            for (int i = ind; i < len; i++)
+            {
+                subset.Add(nums[i]);
+                FindSubsets(i + 1, nums, len, subset, subsetList);
+                subset.RemoveAt(subset.Count - 1);
+            }
+        }
+
+        public static void findSubsets(int ind, int[] nums, List<int> ds, IList<IList<int>> ansList)
+        {
+            ansList.Add(new List<int>(ds));
+            for (int i = ind; i < nums.Length; i++)
+            {
+                if (i != ind && nums[i] == nums[i - 1]) continue;
+                ds.Add(nums[i]);
+                findSubsets(i + 1, nums, ds, ansList);
+                ds.RemoveAt(ds.Count - 1);
+            }
+        }
+
+        public static IList<IList<int>> SubsetsWithDup2(int[] nums)
+        {
+            Array.Sort(nums);
+            IList<IList<int>> ansList = new List<IList<int>>();
+            findSubsets(0, nums, new List<int>(), ansList);
+            return ansList;
+        }
+
+        public static void findSubsets(int ind, int[] nums, List<int> ds, List<IList<int>> ansList)
+        {
+            ansList.Add(new List<int>(ds));
+            for (int i = ind; i < nums.Length; i++)
+            {
+                if (i != ind && nums[i] == nums[i - 1]) continue;
+                ds.Add(nums[i]);
+                findSubsets(i + 1, nums, ds, ansList);
+                ds.RemoveAt(ds.Count - 1);
+            }
+        }
+
+        public static IList<IList<int>> subsetsWithDup(int[] nums)
+        {
+            Array.Sort(nums);
+            List<IList<int>> ansList = new List<IList<int>>();
+            findSubsets(0, nums, new List<int>(), ansList);
+            return ansList;
         }
     }
 }

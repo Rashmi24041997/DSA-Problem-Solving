@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using DSA_Problem_Solving;
+using DSA_Problem_Solving.Algorithms;
 using DSA_Problem_Solving.Basic_Maths.Easy;
 using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
@@ -71,6 +72,8 @@ public class Solution
         //Console.WriteLine(cnt);
 
         ArrayMedium.SearchMatrix(new int[][] { new int[] { 1, 3, 5, 7 }, new int[] { 10, 11, 16, 20 }, new int[] { 23, 30, 34, 60 } }, 3);
+        //IList<IList<int>> SubsetsWithDup =RecursionMedium.SubsetsWithDup(new int[] { 1, 2, 2 });
+        IList<IList<int>> SubsetsWithDup2 =RecursionMedium.SubsetsWithDup2(new int[] { 1, 2, 2 });
         //ListNode l1 = new(0) { next = new(1) { next = new(2) { next = new(3) { next = new(4) { next = new(9) } } } } };
         //ListNode l2 = new(0) /*{ next = new(9) { next = new(9) { next = new(9) { next = new(5) { next = new(6) } } }  }}*/;
 
