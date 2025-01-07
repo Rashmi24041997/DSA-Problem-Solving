@@ -284,7 +284,7 @@ public static class ArrayMedium
                 while (set.Contains(x + 1))
                 {
                     //keep increment the number
-                    x++; 
+                    x++;
                     //keep increment the sequence length
                     crntSeqLen++;
                 }
@@ -292,5 +292,27 @@ public static class ArrayMedium
             longestSeqLen = Math.Max(longestSeqLen, crntSeqLen);
         }
         return longestSeqLen;
+    }
+
+    public static bool SearchMatrix(int[][] matrix, int target)
+    {
+        int n = matrix.Length, m = matrix[0].Length;
+        int low = 0, high = n * m - 1;
+        //apply binary search:
+        while (low <= high)
+        {
+            int mid = (low + high) / 2;
+            int row = mid / m, col = mid % m;
+            int itm = matrix[row][col];
+            if (itm == target)
+            {
+                return true;
+            }
+            if (target < itm)
+                high = mid - 1;
+            else
+                low = mid + 1;
+        }
+        return false;
     }
 }
