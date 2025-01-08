@@ -127,6 +127,7 @@ public class BitManipulation
 
                 i++;
                 max /= 2;
+
             }
             return cnt;
         }
