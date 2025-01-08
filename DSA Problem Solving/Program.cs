@@ -69,11 +69,11 @@ public class Solution
 
         //int[] arr = new int[] { 0 };
         //int cnt = ArrayMedium.LongestConsecutive(arr);
-        //Console.WriteLine(cnt);
+        ////Console.WriteLine(cnt);
 
-        ArrayMedium.SearchMatrix(new int[][] { new int[] { 1, 3, 5, 7 }, new int[] { 10, 11, 16, 20 }, new int[] { 23, 30, 34, 60 } }, 3);
-        //IList<IList<int>> SubsetsWithDup =RecursionMedium.SubsetsWithDup(new int[] { 1, 2, 2 });
-        IList<IList<int>> SubsetsWithDup2 =RecursionMedium.SubsetsWithDup2(new int[] { 1, 2, 2 });
+        //ArrayMedium.SearchMatrix(new int[][] { new int[] { 1, 3, 5, 7 }, new int[] { 10, 11, 16, 20 }, new int[] { 23, 30, 34, 60 } }, 3);
+        ////IList<IList<int>> SubsetsWithDup =RecursionMedium.SubsetsWithDup(new int[] { 1, 2, 2 });
+        //IList<IList<int>> SubsetsWithDup2 =RecursionMedium.SubsetsWithDup2(new int[] { 1, 2, 2 });
         //ListNode l1 = new(0) { next = new(1) { next = new(2) { next = new(3) { next = new(4) { next = new(9) } } } } };
         //ListNode l2 = new(0) /*{ next = new(9) { next = new(9) { next = new(9) { next = new(5) { next = new(6) } } }  }}*/;
 
@@ -93,6 +93,10 @@ public class Solution
         //    Console.WriteLine(l1.val);
         //    l1 = l1.next;
         //}
+
+        //BitManipulation.Easy.countSetBits(6);
+        //BitManipulation.Medium.Subsets(new int[] { 1, 2, 3 });
+        BitManipulation.Medium.MinBitFlips(3, 4);
     }
 
     public static void Call_Roman_to_Integer()
