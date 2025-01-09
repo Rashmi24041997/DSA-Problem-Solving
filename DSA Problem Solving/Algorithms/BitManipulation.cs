@@ -108,28 +108,65 @@ public class BitManipulation
             //return 0 if both are equal
             if (start == goal) return 0;
 
-            //get max no. of bits to cover by choosing max of both. Multiply the max by 2 to cover the last bit too.
+            //get max no. of bits to cover by choosing max of both. Multiply the max by 2 to cover the leftmost bit too.
             int max = Math.Max(start, goal) * 2;
 
             //cnt is the count of flips, i is the index of the bit we are covering
             int cnt = 0, i = 0;
 
-            //cover till last bit
+            //start from rightmost, cover till leftmost bit
             while (max != 1)
             {
                 //left shifting 1 by ith index will cover each index. '&' gives us the bit at index i
                 //i.e 0 & 1 = 1, 1 & 1 = 1, 110 & 1 = 110
                 //then perform xor to check if bit should be flipped,
-                //i. e., 1^0 = 1 !=0 =>flip, 1^1 or 0^0 == 0 ==0=> not flip
+                //i. e., 1^0 = 1 !=0 =>flip, 1^1 or 0^0 == 0 => not flip
                 //this way will check that ith bit of start needs to be flipped or not to reach the goal
                 if (((start & (1 << i)) ^ (goal & (1 << i))) != 0)
                     cnt++;
 
                 i++;
                 max /= 2;
-
             }
             return cnt;
         }
+
+
+        public static int Divide(int dividend, int divisor)
+        {
+            if (dividend == divisor) return 1; // Special case: if dividend equals divisor, return 1
+
+            // Determine the sign of the result
+            bool sign = (dividend >= 0) == (divisor >= 0);
+
+            // Convert to long to handle overflow and use absolute values
+            long n = Math.Abs((long)dividend);
+            long d = Math.Abs((long)divisor);
+
+            long quotient = 0; // Initialize quotient
+
+            while (n >= d)
+            {
+                int cnt = 0; // Count the number of left shifts
+
+                // Find the largest power of 2 of divisor that fits in dividend
+                while (n >= (d << (cnt + 1)))
+                {
+                    cnt++;
+                }
+
+                quotient += (1L << cnt); // Add the calculated power of 2 to the quotient
+                n -= (d << cnt); // Subtract the calculated value from dividend
+            }
+
+            // Handle overflow cases
+            if (quotient > int.MaxValue)
+            {
+                return sign ? int.MaxValue : int.MinValue;
+            }
+
+            return sign ? (int)quotient : (int)-quotient; // Apply the correct sign and return
+        }
+
     }
 }
