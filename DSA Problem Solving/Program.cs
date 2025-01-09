@@ -96,7 +96,8 @@ public class Solution
 
         //BitManipulation.Easy.countSetBits(6);
         //BitManipulation.Medium.Subsets(new int[] { 1, 2, 3 });
-        BitManipulation.Medium.MinBitFlips(3, 4);
+        //BitManipulation.Medium.MinBitFlips(3, 4);
+        BitManipulation.Medium.Divide(-2147483648, -1);
     }
 
     public static void Call_Roman_to_Integer()
