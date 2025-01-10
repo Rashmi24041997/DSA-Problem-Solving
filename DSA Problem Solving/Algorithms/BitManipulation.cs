@@ -167,6 +167,41 @@ public class BitManipulation
 
             return sign ? (int)quotient : (int)-quotient; // Apply the correct sign and return
         }
+        public static int Divide(string dividend, int divisor)
+        {
+            if (dividend == divisor) return 1; // Special case: if dividend equals divisor, return 1
+
+            // Determine the sign of the result
+            bool sign = (dividend >= 0) == (divisor >= 0);
+
+            // Convert to long to handle overflow and use absolute values
+            long n = Math.Abs((long)dividend);
+            long d = Math.Abs((long)divisor);
+
+            long quotient = 0; // Initialize quotient
+
+            while (n >= d)
+            {
+                int cnt = 0; // Count the number of left shifts
+
+                // Find the largest power of 2 of divisor that fits in dividend
+                while (n >= (d << (cnt + 1)))
+                {
+                    cnt++;
+                }
+
+                quotient += (1L << cnt); // Add the calculated power of 2 to the quotient
+                n -= (d << cnt); // Subtract the calculated value from dividend
+            }
+
+            // Handle overflow cases
+            if (quotient > int.MaxValue)
+            {
+                return sign ? int.MaxValue : int.MinValue;
+            }
+
+            return sign ? (int)quotient : (int)-quotient; // Apply the correct sign and return
+        }
 
     }
 }
