@@ -10,11 +10,13 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
 {
     public class LinkedListMedium
     {
+        // Merges two sorted linked lists into one sorted linked list
+        // Time Complexity: O(n + m), where n and m are the lengths of the two lists
+        // Space Complexity: O(1)
         public static ListNode MergeTwoLists(ListNode n1, ListNode n2)
         {
-
             ListNode temp, hd;
-            hd = new(-1);
+            hd = new(-1); // Dummy node to simplify edge cases
             temp = hd;
             while (n1 != null && n2 != null)
             {
@@ -30,11 +32,13 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                 }
                 temp = temp.next;
             }
-            temp.next = n1 ?? n2;
-            return hd.next;
+            temp.next = n1 ?? n2; // Append the remaining nodes
+            return hd.next; // Return the merged list, skipping the dummy node
         }
 
-
+        // Removes the Nth node from the end of the list
+        // Time Complexity: O(L), where L is the length of the list
+        // Space Complexity: O(1)
         public static ListNode RemoveNthFromEnd(ListNode head, int N)
         {
             if (head == null)
@@ -81,10 +85,11 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return head;
         }
 
-
+        // Removes the Nth node from the end of the list using two pointers
+        // Time Complexity: O(L), where L is the length of the list
+        // Space Complexity: O(1)
         public static ListNode RemoveNthFromEndOptimal(ListNode head, int N)
         {
-            // Create two pointers, fastp and slowp
             ListNode fastp = head;
             ListNode slowp = head;
 
@@ -110,43 +115,9 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return head;
         }
 
-
-        //public static ListNode MergeTwoLists(ListNode l1, ListNode l2)
-        //{
-        //    if (l1 is null) return l1;
-        //    if (l2 is null) return l2;
-
-        //    ListNode nod, nxt, temp, hd;
-        //    nod = l1.val < l2.val ? l1 : l2;
-        //    temp = l1.val < l2.val ? l2 : l1;
-        //    hd = nod;
-        //    nxt = nod.next;
-        //    while (temp != null && nxt != null)
-        //    {
-        //        //ListNode low = ;
-        //        if (temp.val <= nxt.val)
-        //        {
-        //            nod.next = temp;
-        //            temp = nxt;
-        //            nxt = temp.next;
-        //        }
-        //        else
-        //        {
-        //            nod.next = nxt;
-        //            nxt = nxt.next;
-        //        }
-        //        nod = nod.next;
-        //    }
-        //    if (temp != null)
-        //    {
-        //        nod.next = temp;
-        //    }
-        //    else if (nxt != null)
-        //    {
-        //        nod.next = nxt;
-        //    }
-        //    return hd;
-        //}
+        // Deletes a given node (except the tail) from the linked list
+        // Time Complexity: O(1)
+        // Space Complexity: O(1)
         public static void DeleteNode(ListNode given)
         {
             if (given is null) return;
@@ -157,13 +128,14 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             nxt1 = given.next;
             nxt2 = nxt1.next;
 
-            given.val = nxt1.val;
-
-            given.next = nxt2;
-            nxt1 = null;
+            given.val = nxt1.val; // Copy the value of the next node to the current node
+            given.next = nxt2; // Bypass the next node
+            nxt1 = null; // Delete the next node
         }
 
-
+        // Finds the intersection node of two linked lists using brute force
+        // Time Complexity: O(n * m), where n and m are the lengths of the two lists
+        // Space Complexity: O(1)
         public static ListNode GetIntersectionNodeBruteForce(ListNode headA, ListNode headB)
         {
             ListNode l1 = headA; ListNode l2 = headB;
@@ -181,12 +153,9 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return null;
         }
 
-
-        /// <summary>
-        /// travel both of the head nodes by l1, l2 till they're equal
-        /// keep pointing them to their opposite list's head when they are null
-        /// this way at 3rd iteration, they will start at same length n will reach to same node either common or null  
-        /// </summary>
+        // Finds the intersection node of two linked lists using two pointers
+        // Time Complexity: O(n + m), where n and m are the lengths of the two lists
+        // Space Complexity: O(1)
         public static ListNode GetIntersectionNodeOptiml(ListNode headA, ListNode headB)
         {
             ListNode l1 = headA; ListNode l2 = headB;
@@ -198,7 +167,9 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return l1;
         }
 
-
+        // Adds two numbers represented by linked lists
+        // Time Complexity: O(max(n, m)), where n and m are the lengths of the two lists
+        // Space Complexity: O(max(n, m)), for the result list
         public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
             ListNode n1 = l1, n2 = l2;
@@ -227,7 +198,9 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return temp;
         }
 
-
+        // Detects if a cycle exists in the linked list using a hash set
+        // Time Complexity: O(n), where n is the length of the list
+        // Space Complexity: O(n), for the hash set
         public static bool HasCycle(ListNode head)
         {
             HashSet<ListNode> nodes = new();
@@ -240,11 +213,9 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return false;
         }
 
-
-        /// <summary>
-        /// Apply slow and fast pointer approach.
-        /// move the pointer by 2 nodes.
-        /// </summary>
+        // Detects if a cycle exists in the linked list using slow and fast pointers
+        // Time Complexity: O(n), where n is the length of the list
+        // Space Complexity: O(1)
         public static bool HasCycleOpt(ListNode head)
         {
             ListNode slow = head, fast = head;
@@ -261,7 +232,9 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             return false;
         }
 
-
+        // Checks if a linked list is a palindrome
+        // Time Complexity: O(n), where n is the length of the list
+        // Space Complexity: O(n), for the list of values
         public static bool IsPalindrome(ListNode head)
         {
             if (head is null || head.next is null) return true;
@@ -284,123 +257,69 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                 }
             }
             return isTru;
-            // Additional logic to check if the number is a palindrome
         }
 
-
-        //Function to reverse a linked list
-        // using the recursive approach;
+        // Reverses a linked list using recursion
+        // Time Complexity: O(n), where n is the length of the list
+        // Space Complexity: O(n), for the recursion stack
         public static ListNode reverseLinkedList(ListNode head)
         {
-            // Check if the list is empty or has only one node
             if (head == null || head.next == null)
             {
-
-                // No change is needed;
-                // return the current head
                 return head;
             }
 
-            // Recursive step: Reverse the remaining
-            // part of the list and get the new head
             ListNode newHead = reverseLinkedList(head.next);
-
-            // Store the next node in 'front'
-            // to reverse the link
             ListNode front = head.next;
-
-            // Update the 'next' pointer of 'front' to
-            // point to the current head, effectively
-            // reversing the link direction
             front.next = head;
-
-            // Set the 'next' pointer of the
-            // current head to 'null' to
-            // break the original link
             head.next = null;
-
-            // Return the new head obtained
-            // from the recursion
             return newHead;
         }
 
+        // Checks if a linked list is a palindrome using two pointers and reversing the second half
+        // Time Complexity: O(n), where n is the length of the list
+        // Space Complexity: O(1)
         public static bool isPalindrome(ListNode head)
         {
-            // Check if the linked list is
-            // empty or has only one node
             if (head == null || head.next == null)
             {
-                // It's a palindrome by definition
                 return true;
             }
 
-            // Initialize two pointers, slow and fast,
-            // to find the middle of the linked list
             ListNode slow = head;
             ListNode fast = head;
 
-            // Traverse the linked list to find the
-            // middle using slow and fast pointers
             while (fast.next != null && fast.next.next != null)
             {
-                // Move slow pointer one step at a time
                 slow = slow.next;
-
-                // Move fast pointer two steps at a time
                 fast = fast.next.next;
             }
 
-            // Reverse the second half of the 
-            // linked list starting from the middle
             ListNode newHead = reverseLinkedList(slow.next);
-
-            // Pointer to the first half
             ListNode first = head;
-
-            // Pointer to the reversed second half
             ListNode second = newHead;
             while (second != null)
             {
-                // Compare data values of
-                // nodes from both halves
-
-                // If values do not match, the
-                // list is not a palindrome
                 if (first.val != second.val)
                 {
-
-                    // Reverse the second half back
-                    // to its original state
                     reverseLinkedList(newHead);
-
-                    // Not a palindrome
                     return false;
                 }
-
-                // Move the first pointer
                 first = first.next;
-
-                // Move the second pointer
                 second = second.next;
             }
 
-            // Reverse the second half back
-            // to its original state
             reverseLinkedList(newHead);
-
-            // The linked list is a palindrome
             return true;
         }
 
-        /// <summary>
-        /// Rotate the ll by k places from right end
-        /// ex 
-        /// ll: 1 2 3 4, k : 2
-        /// result : 3 4 1 2
-        /// </summary>
+        // Rotates the linked list to the right by k places
+        // Time Complexity: O(n), where n is the length of the list
+        // Space Complexity: O(1)
         public static ListNode RotateRight(ListNode head, int k)
         {
-            //calculating length
+            if (head == null) return null;
+
             ListNode temp = head;
             int length = 1;
             while (temp.next != null)
@@ -408,21 +327,25 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                 ++length;
                 temp = temp.next;
             }
-            //link last node to first node
+
             temp.next = head;
-            k = k % length; //when k is more than length of list
-            int end = length - k; //to get end of the list
+            k = k % length;
+            int end = length - k;
             while (end-- != 0) temp = temp.next;
-            //breaking last node link and pointing to NULL
+
             head = temp.next;
             temp.next = null;
 
             return head;
-
         }
+
+        // Rotates the linked list to the right by k places (alternative implementation)
+        // Time Complexity: O(n), where n is the length of the list
+        // Space Complexity: O(1)
         public static ListNode RotateRightMine(ListNode head, int k)
         {
             if (head == null) return null;
+
             int len = 1, lstNodIndx = 0;
             ListNode last = head, lstNod = head, newHead = null;
             while (last.next != null)
@@ -430,13 +353,16 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                 last = last.next;
                 len++;
             }
+
             k = k % len;
             lstNodIndx = len - k - 1;
             if (k == 0) return head;
+
             while (lstNodIndx-- > 0)
             {
                 lstNod = lstNod.next;
             }
+
             last.next = head;
             newHead = lstNod.next;
             lstNod.next = null;
