@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DSA_Problem_Solving.Algorithms
 {
-    internal class BinarySearch
+    public class BinarySearch
     {
-        class Easy
+        public class Easy
         {
             // Method to find the nth root of m using binary search
             // Time Complexity: O(log(m))
@@ -38,10 +38,10 @@ namespace DSA_Problem_Solving.Algorithms
                     // If mid^n is equal to m, return mid
                     if (res == 1)
                         return mid;
-                    // If mid^n is greater than m, adjust high
+                    // If mid^n is greater than m, search in left part, adjust high
                     if (res == 2)
                         high = mid - 1;
-                    // If mid^n is less than m, adjust low
+                    // If mid^n is less than m, search in right part, adjust low
                     else if (res == -1)
                         low = mid + 1;
                 }
@@ -67,6 +67,58 @@ namespace DSA_Problem_Solving.Algorithms
                 // If x^n is less than m, return -1
                 // If x^n is equal to m, return 1
                 return x > m ? 2 : x < m ? -1 : 1;
+            }
+        }
+
+        public class Medium
+        {
+            /*
+                You are given a sorted array consisting of only integers where every element appears exactly twice,
+                except for one element which appears exactly once.
+                Return the single element that appears only once. Your solution must run in O(log n) time and O(1) space.
+            */
+            public static int SingleNonDuplicate(int[] nums)
+            {
+                if (nums is null)
+                    return 0;
+                if (nums.Length == 0) return 0;
+                if (nums.Length == 1) return nums[0];
+                int i = 0;
+                while (i < nums.Length)
+                {
+                    if (i + 1 < nums.Length)
+                    {
+                        if (nums[i] != nums[i + 1])
+                            return nums[i];
+                        i += 2;
+                    }
+                    else return nums[i];
+                }
+                return -1;
+            }
+            public static int SingleNonDuplicateLogN(int[] nums)
+            {
+                if (nums is null)
+                    return 0;
+                int n = nums.Length;
+                if (n == 0) return 0;
+                if (n == 1) return nums[0];
+                int low = 0, high = n - 1;
+
+                while (low <= high) { 
+                    int mid = (low+high)/2;
+                    //if mid is even, mid ^ 1 gives next odd index
+                    //else it gives previous even index
+                    //so if condition fulfils, we are in left part of the answer 
+                    if (nums[mid] == nums[mid ^ 1])
+                    {
+                        low = mid + 1; //search in right part
+                    }
+                    //else we are in right part of the answer
+                    else
+                        high = mid - 1;//search in left part
+                }
+                return nums[low];
             }
         }
     }

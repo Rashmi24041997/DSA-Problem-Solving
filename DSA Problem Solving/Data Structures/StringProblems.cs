@@ -184,9 +184,63 @@ namespace DSA_Problem_Solving.Data_Structures
             }
             //public static string LongestPalindrome(string s)
             //{
-            //    int high = s.Length-1, low = 0 ;
-            //    while 
+            //    string result = s;
+            //    int high = s.Length - 1, low = 0;
+            //    while (high != low)
+            //    {
+            //        if (s[low] == s[high])
+            //        {
+            //            low--;
+            //            high--;
+            //        }
+            //        else
+            //        {
+            //            low++;
+            //        }
+            //    }
             //}
+
+            public static string LongestPalindromeHelper(string s, int low, int high)
+            {
+                if (string.IsNullOrEmpty(s) || s.Length < 1) return "";
+
+                int start = 0, end = 0;
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    // Check for odd-length palindrome (centered at a single character)
+                    int len1 = ExpandAroundCenter(s, i, i);
+
+                    // Check for even-length palindrome (centered between two characters)
+                    int len2 = ExpandAroundCenter(s, i, i + 1);
+
+                    // Take the longer of the two lengths
+                    int len = Math.Max(len1, len2);
+
+                    // Update the start and end indices if a longer palindrome is found
+                    if (len > end - start)
+                    {
+                        start = i - (len - 1) / 2;
+                        end = i + len / 2;
+                    }
+                }
+
+                // Extract the longest palindromic substring using start and end indices
+                return s.Substring(start, end - start + 1);
+            }
+
+            private static int ExpandAroundCenter(string s, int left, int right)
+            {
+                while (left >= 0 && right < s.Length && s[left] == s[right])
+                {
+                    left--;
+                    right++;
+                }
+
+                // Length of the palindrome is (right - left - 1)
+                return right - left - 1;
+            }
+
 
             public static int MyAtoi(string s)
             {
