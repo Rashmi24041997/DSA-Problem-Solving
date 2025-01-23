@@ -44,7 +44,87 @@ namespace DSA_Problem_Solving.Data_Structures
                 }
                 return res; // Return the result
             }
+
+            public static int RomanToInt(string s)
+            {
+                if (s == null || s.Length == 0) return 0; // Check for null input
+                Dictionary<string, int> symbols = new()
+                {
+                    { "I", 1 },
+                    { "V", 5 },
+                    { "X", 10 },
+                    { "L", 50 },
+                    { "C", 100 },
+                    { "D", 500 },
+                    { "M", 1000 },
+                    { "IV", 4 },
+                    { "IX", 9 },
+                    { "XL", 40 },
+                    { "XC", 90 },
+                    { "CD", 400 },
+                    { "CM", 900}
+                };
+
+                int result = 0;
+
+                for (int i = s.Length - 1; i >= 0; i--)
+                {
+                    string symbol = s[i].ToString();
+                    if (i > 0)
+                    {
+                        symbol = s[i - 1].ToString() + symbol;
+                    }
+                    if (symbols.TryGetValue(symbol, out int j))
+                    {
+                        result += j;
+                        i--;
+                    }
+                    else
+                    {
+                        symbol = s[i].ToString();
+                        if (symbols.TryGetValue(symbol, out int k))
+                        {
+                            result += k;
+                        }
+                    }
+                }
+
+                return result;
+            }
+
+            public static string LongestCommonPrefix(string[] strs)
+            {
+                if (strs == null || strs.Length == 0) return ""; // Check for null input
+                string prefix = strs[0];
+                for (int i = 1; i < strs.Length; i++)
+                {
+                    string word = strs[i];
+                    //string newPrefix = "";
+                    for (int j = 0; j < prefix.Length; j++)
+                    {
+                        if (j >= word.Length)
+                        {
+                            prefix = prefix.Remove(j);
+                            break;
+                        }
+                        //string chr1 = prefix[j].ToString();
+                        //string chr2 = word[j].ToString();
+                        //if (chr1 == chr2)
+                        //    newPrefix += chr1;
+                        if (prefix[j] == word[j])
+                        {
+                            if (j == 0)
+                                return "";
+                            else
+                                prefix = prefix.Remove(j);
+                            break;
+                        }
+                    }
+                }
+                return prefix;
+            }
         }
+
         internal static class Medium
         {
             /// <summary>
@@ -79,6 +159,83 @@ namespace DSA_Problem_Solving.Data_Structures
                     if (add) result.Add(wordCopy); // Add the word to the result if the flag is true
                 }
                 return result; // Return the result
+            }
+
+
+            public static bool RotateString(string s, string goal)
+            {
+                string result = "";
+                string og = s;
+                List<KeyValuePair<char, bool>> chars = new();
+                foreach (char item in s)
+                {
+                    chars.Add(new KeyValuePair<char, bool>(item, false));
+                }
+                for (int i = 0; i <= s.Length; i++)
+                {
+                    result = s.Remove(0, 1) + s[0];
+                    if (result == goal)
+                    {
+                        return true;
+                    }
+                    s = s.Remove(0, 1) + s[0];
+                }
+                return false;
+            }
+            //public static string LongestPalindrome(string s)
+            //{
+            //    int high = s.Length-1, low = 0 ;
+            //    while 
+            //}
+
+            public static int MyAtoi(string s)
+            {
+                HashSet<char> digits = new HashSet<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+                bool signDecided = false;
+                int sign = 1;
+                string t = "";
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    char c = s[i];
+
+                    if (c == '+')
+                    {
+                        if (t != "") break;
+                        if (!signDecided)
+                            signDecided = true;
+                        else break;
+                        continue;
+                    }
+
+                    if (c == '-')
+                    {
+                        if (t != "") break;
+                        if (!signDecided)
+                        {
+                            sign = -1;
+                            signDecided = true;
+                            continue;
+                        }
+                        else break;
+                    }
+
+                    if (c == ' ')
+                        if (t != "")
+                            break;
+                        else
+                            continue;
+
+                    if (!digits.Contains(c))
+                        //if(t != "")
+                        break;
+                    t += c;
+                    long temp = Convert.ToInt64(t == "" ? 0 : t) * sign;
+                    if (temp <= int.MinValue) return int.MinValue;
+                    if (temp >= int.MaxValue) return int.MaxValue;
+                }
+                if (t is null || t == "") return 0;
+                return Convert.ToInt32(t) * sign;
             }
         }
         class Hard
