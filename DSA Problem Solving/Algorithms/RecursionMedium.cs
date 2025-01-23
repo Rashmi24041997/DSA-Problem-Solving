@@ -9,6 +9,9 @@ namespace DSA_Problem_Solving.Algorithms
 {
     public class RecursionMedium
     {
+        // Method to calculate all subset sums of an array
+        // Time Complexity: O(2^n)
+        // Space Complexity: O(2^n)
         public static List<int> SubsetSums(int[] arr)
         {
             if (arr == null || arr.Length == 0)
@@ -19,6 +22,9 @@ namespace DSA_Problem_Solving.Algorithms
             return subsetSums;
         }
 
+        // Helper method to recursively calculate subset sums
+        // Time Complexity: O(2^n)
+        // Space Complexity: O(2^n)
         public static void SubsetSumsHelper(int ind, int sum, int len, int[] arr, List<int> subsetSums)
         {
             if (ind == len)
@@ -30,6 +36,9 @@ namespace DSA_Problem_Solving.Algorithms
             SubsetSumsHelper(ind + 1, sum, len, arr, subsetSums);
         }
 
+        // Method to find all unique subsets of an array with duplicates
+        // Time Complexity: O(2^n)
+        // Space Complexity: O(2^n)
         public static IList<IList<int>> SubsetsWithDup(int[] nums)
         {
             if (nums is null)
@@ -55,6 +64,9 @@ namespace DSA_Problem_Solving.Algorithms
             return ansList;
         }
 
+        // Helper method to recursively find subsets
+        // Time Complexity: O(2^n)
+        // Space Complexity: O(2^n)
         private static void FindSubsets(int ind, int[] nums, int len, List<int> subset, IList<IList<int>> subsetList)
         {
             subsetList.Add(new List<int>(subset));
@@ -67,6 +79,9 @@ namespace DSA_Problem_Solving.Algorithms
             }
         }
 
+        // Method to find all unique subsets of an array with duplicates
+        // Time Complexity: O(2^n)
+        // Space Complexity: O(2^n)
         public static void findSubsets(int ind, int[] nums, List<int> ds, IList<IList<int>> ansList)
         {
             ansList.Add(new List<int>(ds));
@@ -79,6 +94,9 @@ namespace DSA_Problem_Solving.Algorithms
             }
         }
 
+        // Method to find all unique subsets of an array with duplicates
+        // Time Complexity: O(2^n)
+        // Space Complexity: O(2^n)
         public static IList<IList<int>> SubsetsWithDup2(int[] nums)
         {
             Array.Sort(nums);
@@ -87,6 +105,9 @@ namespace DSA_Problem_Solving.Algorithms
             return ansList;
         }
 
+        // Helper method to recursively find subsets
+        // Time Complexity: O(2^n)
+        // Space Complexity: O(2^n)
         public static void findSubsets(int ind, int[] nums, List<int> ds, List<IList<int>> ansList)
         {
             ansList.Add(new List<int>(ds));
@@ -99,6 +120,9 @@ namespace DSA_Problem_Solving.Algorithms
             }
         }
 
+        // Method to find all unique subsets of an array with duplicates
+        // Time Complexity: O(2^n)
+        // Space Complexity: O(2^n)
         public static IList<IList<int>> subsetsWithDup(int[] nums)
         {
             Array.Sort(nums);

@@ -8,12 +8,16 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays;
 
 public static class ArrayMedium
 {
+    // Brute force approach to set matrix zeroes
+    // Time Complexity: O(m*n)
+    // Space Complexity: O(m+n)
     public static int[][]? SetMatrixZeroes(int[][] matrix)
     {
         int[][] mat = matrix;
         List<List<int>> list = new List<List<int>>();
         if (mat.Length == 0) return null;
 
+        // Find all zeroes in the matrix
         for (int i = 0, a = 0; i < mat.Length; i++, a++)
         {
             for (int j = 0; j < mat[0].Length; j++)
@@ -24,6 +28,8 @@ public static class ArrayMedium
                 }
             }
         }
+
+        // Set rows and columns to zero based on the found zeroes
         foreach (List<int> cos in list)
         {
             int r = cos[0];
@@ -46,10 +52,14 @@ public static class ArrayMedium
         return mat;
     }
 
+    // Optimized approach to set matrix zeroes
+    // Time Complexity: O(m*n)
+    // Space Complexity: O(1)
     public static int[][]? SetMatrixZeroesOpt(int[][] matrix)
     {
         int col0 = 1;
         int n = matrix.Length, m = matrix[0].Length;
+
         // Step 1: Traverse the matrix and mark the 1st row & column accordingly
         for (int i = 0; i < n; i++)
         {
@@ -105,12 +115,16 @@ public static class ArrayMedium
         return matrix;
     }
 
+    // Brute force approach to sort colors
+    // Time Complexity: O(n)
+    // Space Complexity: O(1)
     public static int[] SortColorsBtr(int[] nums)
     {
         int[] save = nums;
         if (nums is null || nums.Length < 2) return nums;
         int i = 0, os = 0, ts = 0, zs = 0;
 
+        // Count the number of 0s, 1s, and 2s
         for (int j = 0; j < nums.Length; j++)
         {
             if (nums[j] == 0)
@@ -126,6 +140,8 @@ public static class ArrayMedium
                 ts++;
             }
         }
+
+        // Overwrite the array with the counted numbers
         for (int j = 0; zs > 0 && j < nums.Length; j++)
         {
             nums[j] = 0;
@@ -144,6 +160,9 @@ public static class ArrayMedium
         return nums;
     }
 
+    // Optimized approach to sort colors
+    // Time Complexity: O(n)
+    // Space Complexity: O(1)
     public static int[] SortColorsOpt(int[] nums)
     {
         int low = 0, mid = 0, high = nums.Length - 1;
@@ -173,12 +192,15 @@ public static class ArrayMedium
         return nums;
     }
 
+    // Kadane's algorithm to find the maximum subarray sum
+    // Time Complexity: O(n)
+    // Space Complexity: O(1)
     public static int MaxSubArray(int[] nums)
     {
         int max = int.MinValue;
-
         int sum = 0;
 
+        // Traverse the array and calculate the maximum subarray sum
         for (int i = 0; i < nums.Length; i++)
         {
             sum += nums[i];
@@ -189,9 +211,11 @@ public static class ArrayMedium
         return max;
     }
 
+    // Generate Pascal's Triangle
+    // Time Complexity: O(numRows^2)
+    // Space Complexity: O(numRows^2)
     public static IList<IList<int>> PascalTriangle(int numRows)
     {
-
         if (numRows < 0) return null;
         IList<IList<int>> lst = new List<IList<int>>();
         if (numRows >= 1)
@@ -221,11 +245,15 @@ public static class ArrayMedium
         return lst;
     }
 
+    // Brute force approach to find two sum
+    // Time Complexity: O(n)
+    // Space Complexity: O(n)
     public static int[] TwoSumBtr(int[] lst, int t)
     {
         List<int> res = new List<int>();
         HashSet<int> set = new HashSet<int>();
 
+        // Traverse the array and find the two numbers that add up to the target
         foreach (int i in lst)
         {
             int r = t - i;
@@ -240,10 +268,15 @@ public static class ArrayMedium
         return new int[] { -1, -1 };
     }
 
+    // Optimized approach to find two sum
+    // Time Complexity: O(n log n)
+    // Space Complexity: O(1)
     public static int[] TwoSumOpt(int[] nums, int target)
     {
         int j = nums.Length - 1; int i = 0;
         Array.Sort(nums);
+
+        // Use two pointers to find the two numbers that add up to the target
         while (i != j)
         {
             int l = nums[i];
@@ -259,15 +292,17 @@ public static class ArrayMedium
         return new int[] { -1, -1 };
     }
 
+    // Find the longest consecutive sequence
+    // Time Complexity: O(n)
+    // Space Complexity: O(n)
     public static int LongestConsecutive(int[] nums)
     {
         if (nums is null || nums.Length == 0) return 0;
 
         int longestSeqLen = 1, crntSeqLen = 0, min = int.MinValue;
-
         HashSet<int> set = new();
 
-        // put all the array elements into set
+        // Put all the array elements into set
         foreach (int i in nums)
             if (!set.Contains(i))
                 set.Add(i);
@@ -275,17 +310,17 @@ public static class ArrayMedium
         // Find the longest sequence
         foreach (int item in set)
         {
-            // if 'item' is a starting number
+            // If 'item' is a starting number
             if (!set.Contains(item - 1))
             {
-                // find consecutive numbers
+                // Find consecutive numbers
                 crntSeqLen = 1;
                 int x = item;
                 while (set.Contains(x + 1))
                 {
-                    //keep increment the number
+                    // Keep incrementing the number
                     x++;
-                    //keep increment the sequence length
+                    // Keep incrementing the sequence length
                     crntSeqLen++;
                 }
             }
@@ -294,11 +329,15 @@ public static class ArrayMedium
         return longestSeqLen;
     }
 
+    // Search in a 2D matrix
+    // Time Complexity: O(log(m*n))
+    // Space Complexity: O(1)
     public static bool SearchMatrix(int[][] matrix, int target)
     {
         int n = matrix.Length, m = matrix[0].Length;
         int low = 0, high = n * m - 1;
-        //apply binary search:
+
+        // Apply binary search
         while (low <= high)
         {
             int mid = (low + high) / 2;

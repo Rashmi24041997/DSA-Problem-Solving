@@ -3,6 +3,7 @@
 using DSA_Problem_Solving;
 using DSA_Problem_Solving.Algorithms;
 using DSA_Problem_Solving.Basic_Maths.Easy;
+using DSA_Problem_Solving.Data_Structures;
 using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
 using DSA_Problem_Solving.Data_Structures.LinkedList;
@@ -97,7 +98,13 @@ public class Solution
         //BitManipulation.Easy.countSetBits(6);
         //BitManipulation.Medium.Subsets(new int[] { 1, 2, 3 });
         //BitManipulation.Medium.MinBitFlips(3, 4);
-        BitManipulation.Medium.Divide(-2147483648, -1);
+        //BitManipulation.Medium.Divide(-2147483648, -1);
+        //StringProblems.Medium.WordSubsets(new string[] { "amazon", "apple", "facebook", "google", "leetcode" }, new string[] { "le", "lo" });
+        //StringProblems.Easy.ReverseWords("  world hello  ");
+        //StringProblems.Easy.RomanToInt("MCMXCIV");
+        //StringProblems.Medium.MyAtoi("2147483648898989875758755");
+        StringProblems.Medium.RotateString("abcde", "abcde");
+    
     }
 
     public static void Call_Roman_to_Integer()
