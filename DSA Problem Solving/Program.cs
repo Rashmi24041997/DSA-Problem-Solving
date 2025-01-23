@@ -103,8 +103,10 @@ public class Solution
         //StringProblems.Easy.ReverseWords("  world hello  ");
         //StringProblems.Easy.RomanToInt("MCMXCIV");
         //StringProblems.Medium.MyAtoi("2147483648898989875758755");
-        StringProblems.Medium.RotateString("abcde", "abcde");
-    
+        //StringProblems.Medium.RotateString("abcde", "abcde");
+
+        BinarySearch.Medium.SingleNonDuplicate(new int[] { 1, 1, 2 });
+
     }
 
     public static void Call_Roman_to_Integer()
