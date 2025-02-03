@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DSA_Problem_Solving.Data_Structures
 {
-    internal class StringProblems
+    public class StringProblems
     {
-        internal static class Easy
+        public static class Easy
         {
             /// <summary>
             /// Reverses the words in a given string.
@@ -123,9 +123,36 @@ namespace DSA_Problem_Solving.Data_Structures
                 }
                 return prefix;
             }
+
+            public static int[] AbsDifference(String s)
+            {
+                if (string.IsNullOrWhiteSpace(s)) return null;
+
+                int[] result = new int[s.Length];
+
+                int cSum = 0, vSum = 0, sum = 0;
+
+                char[] vowels = new char[5] { 'a', 'e', 'i', 'o', 'u' };
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    char c = s[i];
+                    if (vowels.Contains(c))
+                    {
+                        vSum += 1;
+                    }
+                    else
+                    {
+                        cSum += -1;
+                    }
+                    sum = vSum + cSum;
+                    result[i] = Math.Abs(sum);
+                }
+                return result;
+            }
         }
 
-        internal static class Medium
+        public static class Medium
         {
             /// <summary>
             /// Finds all words in words1 that are universal to words2.

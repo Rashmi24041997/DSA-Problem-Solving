@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DSA_Problem_Solving.Data_Structures
 {
-    class Queue
+    public class Queue
     {
         private int[] arr;
         private int start, end, currSize, maxSize;
@@ -17,6 +17,7 @@ namespace DSA_Problem_Solving.Data_Structures
             start = -1;
             end = -1;
             currSize = 0;
+            maxSize = 32;
         }
 
         public Queue(int maxSize)
@@ -27,6 +28,7 @@ namespace DSA_Problem_Solving.Data_Structures
             end = -1;
             currSize = 0;
         }
+
         public void push(int newElement)
         {
             if (currSize == maxSize)
@@ -43,11 +45,12 @@ namespace DSA_Problem_Solving.Data_Structures
             arr[end] = newElement;
             currSize++;
         }
+
         public int pop()
         {
             if (start == -1)
             {
-                throw new Exception ("Queue Empty\nExiting...");
+                throw new Exception("Queue Empty\nExiting...");
             }
             int popped = arr[start];
             if (currSize == 1)
@@ -60,6 +63,7 @@ namespace DSA_Problem_Solving.Data_Structures
             currSize--;
             return popped;
         }
+
         public int top()
         {
             if (start == -1)
@@ -68,10 +72,10 @@ namespace DSA_Problem_Solving.Data_Structures
             }
             return arr[start];
         }
+
         public int size()
         {
             return currSize;
         }
-
     }
 }
