@@ -354,4 +354,103 @@ public static class ArrayMedium
         }
         return false;
     }
+
+    public static int FindDuplicate(int[] nums)
+    {
+        int slow = nums[0], fast = nums[0];
+
+        while (slow != fast)
+        {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+        slow = nums[0];
+        while (slow != fast)
+        {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
+    }
+
+    /*
+      Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+    */
+    public static int[][] MergeBF(int[][] arr)
+    {
+        int n = arr.Length;
+        // Sort the intervals based on the start time
+        Array.Sort(arr, (a, b) => a[0].CompareTo(b[0]));
+
+        List<int[]> ans = new List<int[]>();
+
+        for (int i = 0; i < n; i++)
+        {
+            int start = arr[i][0];
+            int end = arr[i][1];
+
+            // Skip merged intervals
+            if (ans.Count > 0 && end <= ans[^1][1])
+            {
+                continue;
+            }
+
+            // Merge overlapping intervals
+            for (int j = i + 1; j < n; j++)
+            {
+                if (arr[j][0] <= end)
+                {
+                    end = Math.Max(end, arr[j][1]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            ans.Add(new int[] { start, end });
+        }
+
+        return ans.ToArray();
+    }
+
+    public static int[][] MergeOptimal(int[][] arr)
+    {
+        Array.Sort(arr, (a, b) => a[0].CompareTo(b[0]));
+
+        List<int[]> ans = new();
+
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (ans.Count == 0 || arr[i][0] > ans[ans.Count - 1][1])
+                ans.Add(arr[i]);
+            else
+                ans[^1][1] = Math.Max(ans[^1][1], arr[i][1]);
+        }
+        return ans.ToArray();
+    }
+
+    /*You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+
+Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+
+The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.*/
+    public static void Merge(int[] nums1, int m, int[] nums2, int n)
+    {
+        int p1 = 0, p2 = 0, p = 0;
+
+        while (p1 < m && p2 < n)
+        {
+            if (nums1[p1]<=nums2[p2])
+            {
+                p1++;
+                p = nums2[p2];
+            }
+            else
+            {
+                p2++;
+                p = nums1[p1];
+            }
+        }
+    }
 }

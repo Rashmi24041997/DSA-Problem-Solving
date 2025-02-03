@@ -105,7 +105,21 @@ public class Solution
         //StringProblems.Medium.MyAtoi("2147483648898989875758755");
         //StringProblems.Medium.RotateString("abcde", "abcde");
 
-        BinarySearch.Medium.SingleNonDuplicate(new int[] { 1, 1, 2 });
+        //BinarySearch.Medium.SingleNonDuplicate(new int[] { 1, 1, 2 });
+
+        //StackProblems.Easy.NextGreaterElementBF(new int[] { 4, 2 }, new int[] { 1, 2, 3, 4 });
+        //StackProblems.Easy.PrevSmaller(new List<int> { 34, 35, 27, 42, 5, 28, 39, 20, 28 });
+        //StringProblems.Easy.AbsDifference("abcde");
+        int[][] mergeIntervals = ArrayMedium.Merge(new int[][] {
+          new int[] { 1, 3 },
+          new int[] { 2, 6 },
+          new int[] { 8, 9 },
+          new int[] { 9, 11 },
+          new int[] { 8, 10 },
+          new int[] { 2, 4 },
+          new int[] { 15, 18 },
+          new int[] { 16, 17 }
+      });
 
     }
 
