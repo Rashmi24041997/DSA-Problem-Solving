@@ -110,17 +110,10 @@ public class Solution
         //StackProblems.Easy.NextGreaterElementBF(new int[] { 4, 2 }, new int[] { 1, 2, 3, 4 });
         //StackProblems.Easy.PrevSmaller(new List<int> { 34, 35, 27, 42, 5, 28, 39, 20, 28 });
         //StringProblems.Easy.AbsDifference("abcde");
-        int[][] mergeIntervals = ArrayMedium.Merge(new int[][] {
-          new int[] { 1, 3 },
-          new int[] { 2, 6 },
-          new int[] { 8, 9 },
-          new int[] { 9, 11 },
-          new int[] { 8, 10 },
-          new int[] { 2, 4 },
-          new int[] { 15, 18 },
-          new int[] { 16, 17 }
-      });
-
+        //int[] nums1 = new int[] {  };
+        //int[] nums2 = new int[] { 2, 5, 6 };
+        //ArrayMedium.MergeSortedArraysOptimal(nums1, 0, nums2, nums2.Length);
+        ArrayMedium.TopKFrequentBF(new int[] { 1, 2, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2 }, 3);
     }
 
     public static void Call_Roman_to_Integer()
