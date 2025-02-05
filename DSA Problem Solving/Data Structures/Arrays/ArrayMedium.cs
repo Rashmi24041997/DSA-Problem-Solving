@@ -501,12 +501,95 @@ public static class ArrayMedium
                 frequencyDict[num] = 1;
             }
         }
-        frequencyDict= frequencyDict.OrderByDescending(x=>x.Value).ToDictionary(x=>x.Key, x=>x.Value);
+        frequencyDict = frequencyDict.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         int[] result = new int[k];
         for (int i = 0; i < k; i++)
         {
             result[i] = frequencyDict.ElementAt(i).Key;
         }
         return result;
+    }
+
+    // Brute force approach to calculate power
+    // Time Complexity: O(n)
+    // Space Complexity: O(1)
+    public static double MyPowBF(double x, int n)
+    {
+        // If the exponent is 0, return 1
+        if (n == 0) return 1.0;
+
+        // If the base is 0 and exponent is positive, return 0
+        if (x == 0.0 && n > 0) return 0.0;
+
+        // If the base is 1, return 1
+        if (x == 1.0) return x;
+
+        // If the base is -1, return -1 or 1 based on the parity of the exponent
+        if (x == -1.0) return (n % 2) == 0 ? x * -1 : x;
+
+        // If the exponent is the minimum value of int, return 0
+        if (n == int.MinValue) return 0.0;
+
+        double res = x;
+        long pow = Math.Abs((long)n);
+
+        // Multiply the base 'x' 'pow' times
+        for (long i = 1; i < pow; i++)
+        {
+            res *= x;
+        }
+
+        // If the exponent is positive, return the result
+        // If the exponent is negative, return the reciprocal of the result
+        return n > 0 ? res : 1 / res;
+    }
+
+    // Optimized approach to calculate power
+    // Time Complexity: O(log n)
+    // Space Complexity: O(1)
+    /*
+     4^6 = (4^2)^3 = 16^3, res = 1, x = 16, pow = 3
+     16^3 = 16*(16^2), res = 16, x = 16, pow = 2
+     16^2 = (16*16)^1 = 256^1, res = 16, x = 256, pow = 1
+     256^1 = 256*256^0 , res = 256, x = 256, pow = 0
+     */
+    public static double MyPowOptimal(double x, int n)
+    {
+        // If the exponent is 0, return 1
+        if (n == 0) return 1.0;
+
+        // If the base is 0 or 1, return the base
+        if (x == 0.0 || x == 1.0) return x;
+
+        // If the base is -1, return -1 or 1 based on the parity of the exponent
+        if (x == -1.0) return (n % 2) == 0 ? x * -1 : x;
+
+        // If the exponent is the minimum value of int, return 0
+        if (n == int.MinValue) return 0.0;
+
+        double res = 1.0;
+        long pow = Math.Abs((long)n);
+
+        // Use exponentiation by squaring to calculate the power
+        while (pow > 0)
+        {
+            // If the exponent is even, square the base and halve the exponent
+            if (pow % 2 == 0)
+            {
+                x *= x;
+                pow /= 2;
+            }
+            // If the exponent is odd, multiply the result by the base and decrement the exponent
+            else
+            {
+                res = res * x;
+                pow--;
+            }
+        }
+
+        // If the exponent is positive, return the result
+        // If the exponent is negative, return the reciprocal of the result
+        return n > 0 ? res : 1 / res;
+
     }
 }

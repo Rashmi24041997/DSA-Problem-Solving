@@ -113,7 +113,9 @@ public class Solution
         //int[] nums1 = new int[] {  };
         //int[] nums2 = new int[] { 2, 5, 6 };
         //ArrayMedium.MergeSortedArraysOptimal(nums1, 0, nums2, nums2.Length);
-        ArrayMedium.TopKFrequentBF(new int[] { 1, 2, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2 }, 3);
+        //ArrayMedium.TopKFrequentBF(new int[] { 1, 2, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2 }, 3);
+        //double res = ArrayMedium.MyPowBF(-1.0000, -2147483648);
+        double res = ArrayMedium.MyPowOptimal(2.000, -2);
     }
 
     public static void Call_Roman_to_Integer()
