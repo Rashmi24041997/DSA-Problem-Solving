@@ -376,7 +376,7 @@ public static class ArrayMedium
     /*
       Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
     */
-    public static int[][] MergeBF(int[][] arr)
+    public static int[][] MergeIntervalsBF(int[][] arr)
     {
         int n = arr.Length;
         // Sort the intervals based on the start time
@@ -414,7 +414,7 @@ public static class ArrayMedium
         return ans.ToArray();
     }
 
-    public static int[][] MergeOptimal(int[][] arr)
+    public static int[][] MergeIntervalsOptimal(int[][] arr)
     {
         Array.Sort(arr, (a, b) => a[0].CompareTo(b[0]));
 
@@ -430,27 +430,166 @@ public static class ArrayMedium
         return ans.ToArray();
     }
 
-    /*You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+    /*
+     You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
 
-Merge nums1 and nums2 into a single array sorted in non-decreasing order.
-
-The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.*/
-    public static void Merge(int[] nums1, int m, int[] nums2, int n)
+     Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+    
+     The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+    */
+    public static void MergeSortedArraysBF(int[] arr1, int m, int[] arr2, int n)
     {
-        int p1 = 0, p2 = 0, p = 0;
-
-        while (p1 < m && p2 < n)
+        if (n == 0) return;
+        if (m == 0)
         {
-            if (nums1[p1]<=nums2[p2])
+            Array.Resize(ref arr1, n);
+            for (int i = 0; i < n; i++)
             {
-                p1++;
-                p = nums2[p2];
+                arr1[i] = arr2[i];
+            }
+            return;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            arr1[m + i] = arr2[i];
+        }
+        Array.Sort(arr1);
+    }
+
+    public static void MergeSortedArraysOptimal(int[] nums1, int m, int[] nums2, int n)
+    {
+        int a = m - 1;
+        int b = n - 1;
+        int c = m + n - 1;
+
+        while (b >= 0)
+        {
+            if (a >= 0 && nums1[a] > nums2[b])
+            {
+                nums1[c] = nums1[a];
+                a--;
             }
             else
             {
-                p2++;
-                p = nums1[p1];
+                nums1[c] = nums2[b];
+                b--;
+            }
+            c--;
+        }
+    }
+
+    /*
+     Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+    */
+    public static int[] TopKFrequentBF(int[] nums, int k)
+    {
+        if (nums.Length == 0) return Array.Empty<int>();
+        if (nums.Length == 1) return new int[1] { nums[0] };
+        if (k == 0) return Array.Empty<int>();
+
+        Dictionary<int, int> frequencyDict = new Dictionary<int, int>();
+
+        // Count the frequency of each element
+        foreach (int num in nums)
+        {
+            if (frequencyDict.ContainsKey(num))
+            {
+                frequencyDict[num]++;
+            }
+            else
+            {
+                frequencyDict[num] = 1;
             }
         }
+        frequencyDict = frequencyDict.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        int[] result = new int[k];
+        for (int i = 0; i < k; i++)
+        {
+            result[i] = frequencyDict.ElementAt(i).Key;
+        }
+        return result;
+    }
+
+    // Brute force approach to calculate power
+    // Time Complexity: O(n)
+    // Space Complexity: O(1)
+    public static double MyPowBF(double x, int n)
+    {
+        // If the exponent is 0, return 1
+        if (n == 0) return 1.0;
+
+        // If the base is 0 and exponent is positive, return 0
+        if (x == 0.0 && n > 0) return 0.0;
+
+        // If the base is 1, return 1
+        if (x == 1.0) return x;
+
+        // If the base is -1, return -1 or 1 based on the parity of the exponent
+        if (x == -1.0) return (n % 2) == 0 ? x * -1 : x;
+
+        // If the exponent is the minimum value of int, return 0
+        if (n == int.MinValue) return 0.0;
+
+        double res = x;
+        long pow = Math.Abs((long)n);
+
+        // Multiply the base 'x' 'pow' times
+        for (long i = 1; i < pow; i++)
+        {
+            res *= x;
+        }
+
+        // If the exponent is positive, return the result
+        // If the exponent is negative, return the reciprocal of the result
+        return n > 0 ? res : 1 / res;
+    }
+
+    // Optimized approach to calculate power
+    // Time Complexity: O(log n)
+    // Space Complexity: O(1)
+    /*
+     4^6 = (4^2)^3 = 16^3, res = 1, x = 16, pow = 3
+     16^3 = 16*(16^2), res = 16, x = 16, pow = 2
+     16^2 = (16*16)^1 = 256^1, res = 16, x = 256, pow = 1
+     256^1 = 256*256^0 , res = 256, x = 256, pow = 0
+     */
+    public static double MyPowOptimal(double x, int n)
+    {
+        // If the exponent is 0, return 1
+        if (n == 0) return 1.0;
+
+        // If the base is 0 or 1, return the base
+        if (x == 0.0 || x == 1.0) return x;
+
+        // If the base is -1, return -1 or 1 based on the parity of the exponent
+        if (x == -1.0) return (n % 2) == 0 ? x * -1 : x;
+
+        // If the exponent is the minimum value of int, return 0
+        if (n == int.MinValue) return 0.0;
+
+        double res = 1.0;
+        long pow = Math.Abs((long)n);
+
+        // Use exponentiation by squaring to calculate the power
+        while (pow > 0)
+        {
+            // If the exponent is even, square the base and halve the exponent
+            if (pow % 2 == 0)
+            {
+                x *= x;
+                pow /= 2;
+            }
+            // If the exponent is odd, multiply the result by the base and decrement the exponent
+            else
+            {
+                res = res * x;
+                pow--;
+            }
+        }
+
+        // If the exponent is positive, return the result
+        // If the exponent is negative, return the reciprocal of the result
+        return n > 0 ? res : 1 / res;
+
     }
 }
