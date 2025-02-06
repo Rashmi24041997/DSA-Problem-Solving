@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -590,6 +591,276 @@ public static class ArrayMedium
         // If the exponent is positive, return the result
         // If the exponent is negative, return the reciprocal of the result
         return n > 0 ? res : 1 / res;
+    }
 
+    /*
+     Given an array nums of size n, return the majority element.
+    The majority element is the element that appears more than ⌊n / 2⌋ times.
+    You may assume that the majority element always exists in the array.
+    Follow-up: Could you solve the problem in linear time and in O(1) space?
+     */
+    /// <summary>
+    /// Keep track of the frequency of each item and return the item as soon as its frequency crosses n/2 
+    /// Time Complexity: O(n)
+    /// Space Complexity: O(n)
+    /// </summary>
+    public static int MajorityElementBFHashTbl(int[] nums)
+    {
+        if (nums == null || nums.Length == 0) return -1;
+        if (nums.Length == 1) return nums[0];
+
+        int res = -1;
+        Dictionary<int, int> freqTbl = new();
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            int itm = nums[i];
+            if (freqTbl.ContainsKey(itm))
+            {
+                freqTbl[itm]++;
+                int freq = freqTbl[itm];
+                if (freq > nums.Length / 2)
+                {
+                    res = itm;
+                    break;
+                }
+            }
+            else
+                freqTbl[itm] = 1;
+        }
+        return res;
+    }
+
+
+    /// <summary>
+    /// Keep track of the frequency of each item and return the item as soon as its frequency crosses n/2 
+    /// Time Complexity: O(n*logn)+O(n)
+    /// Space Complexity: O(n)
+    /// </summary>
+    public static int MajorityElementSort(int[] nums)
+    {
+        if (nums == null || nums.Length == 0) return -1;
+        if (nums.Length == 1) return nums[0];
+
+        int res = -1;
+        Array.Sort(nums);
+        int cnt = 1;
+        for (int i = 1; i < nums.Length; i++)
+        {
+            if (nums[i] == nums[i - 1])
+            {
+                cnt++;
+                if (cnt > nums.Length / 2)
+                {
+                    res = nums[i];
+                    break;
+                }
+            }
+            else
+            {
+                cnt = 1;
+            }
+        }
+        return res;
+    }
+
+    public static int MajorityElementSortBtr(int[] nums)
+    {
+        if (nums.Length == 1) return nums[0];
+        int half = nums.Length / 2;
+        Array.Sort(nums);
+        int mid = (nums.Length - 1) / 2, cnt = 1;
+        int left = mid - 1, right = mid + 1;
+        while (left > -1)
+        {
+            if (nums[mid] == nums[left])
+            {
+                if (++cnt > half)
+                    return nums[mid];
+                left--;
+            }
+            else
+                left = -1;
+        }
+        while (right < nums.Length)
+        {
+            if (nums[mid] == nums[right])
+            {
+                if (++cnt > half)
+                    return nums[mid];
+                right++;
+            }
+            else
+                right = nums.Length;
+        }
+
+        return -1;
+    }
+
+    public static int MajorityElementOpt(int[] nums)
+    {
+        if (nums.Length == 1) return nums[0];
+
+        int cnt = 0, ele = 0;
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (cnt > 0)
+            {
+                if (ele == nums[i])
+                    cnt++;
+                else
+                    cnt--;
+            }
+            else
+            {
+                ele = nums[i];
+                cnt++;
+            }
+        }
+        if (cnt > 0) return ele;
+        return -1;
+    }
+
+    /*
+     Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+     */
+    public static IList<int> MajorityElementN3SortBF(int[] nums)
+    {
+        if (nums.Length == 1) return new List<int>() { nums[0] };
+
+        IList<int> res = new List<int>();
+        Array.Sort(nums);
+        int cnt = 0, indx = 0;
+        if (nums.Length == 2)
+        {
+            for (int i = 0; i < nums.Length; i++)
+            {
+                cnt++;
+                if (cnt > nums.Length / 3)
+                {
+                    if (!res.Contains(nums[i]))
+                        res.Add(nums[i]);
+                    indx++;
+                    if (indx > 1) break;
+                }
+            }
+            return res;
+        }
+        cnt = 1;
+        for (int i = 1; i < nums.Length; i++)
+        {
+            int itm = nums[i];
+            if (itm == nums[i - 1])
+            {
+                cnt++;
+                if (cnt > nums.Length / 3)
+                {
+                    if (!res.Contains(itm))
+                    {
+                        res.Add(itm);
+                        indx++;
+                        if (indx > 1) break;
+                    }
+                    //cnt = 0;
+                }
+            }
+            else
+                cnt = 1;
+        }
+        return res;
+    }
+
+    public static IList<int> MajorityElementN3(int[] nums)
+    {
+        IList<int> res = new List<int>();
+        int cnt1 = 0, cnt2 = 0, e1 = int.MinValue, e2 = int.MinValue;
+        int n = nums.Length;
+
+        // applying the Extended Boyer Moore's Voting Algorithm:
+        for (int i = 0; i < n; i++)
+        {
+            int val = nums[i];
+            if (cnt1 == 0 && val != e2)
+            {
+                cnt1++;
+                e1 = val;
+            }
+            else if (cnt2 == 0 && val != e1)
+            {
+                cnt2++;
+                e2 = val;
+            }
+            else if (val == e1)
+            {
+                cnt1++;
+            }
+            else if (val == e2)
+                cnt2++;
+            else
+            {
+                cnt1--;
+                cnt2--;
+            }
+        }
+
+        // Manually check if the stored elements in
+        // el1 and el2 are the majority elements:
+        cnt1 = 0; cnt2 = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            int val = nums[i];
+            if (val == e1) cnt1++;
+            if (val == e2) cnt2++;
+        }
+        if (cnt1 > n / 3)
+            res.Add(e1);
+        if (cnt2 > n / 3)
+            res.Add(e2);
+        return res;
+    }
+
+    public static int UniquePaths(int m, int n)
+    {
+        BigInteger m1 = Factorial(m - 1);
+        BigInteger n1 = Factorial(n - 1);
+        BigInteger mn1 = Factorial(m + n - 2);
+
+        var res = mn1/(m1 * n1);
+
+        return (int)res;
+    }
+
+    static BigInteger Factorial(int n)
+    {
+        BigInteger result = 1;
+        for (int i = 2; i <= n; i++)
+        {
+            result *= i;
+        }
+        return result;
+    }
+
+    /*
+     There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.
+
+        Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
+        
+        The test cases are generated so that the answer will be less than or equal to 2 * 109.
+     */
+    public static int UniquePathsOpt(int right, int down)
+    {
+        int n = right + down - 2;
+        int r = right - 1;
+        if (r == 0 || r == n) return 1;
+
+        double res = 1;
+
+        for (int i = 1; i <= r; i++)
+        {
+            res = res * (n - r + i) / (i);
+        }
+        return (int)res;
     }
 }
