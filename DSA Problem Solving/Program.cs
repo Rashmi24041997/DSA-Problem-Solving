@@ -1,18 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using DSA_Problem_Solving;
-using DSA_Problem_Solving.Algorithms;
-using DSA_Problem_Solving.Basic_Maths.Easy;
-using DSA_Problem_Solving.Data_Structures;
 using DSA_Problem_Solving.Data_Structures.Arrays;
-using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
 using DSA_Problem_Solving.Data_Structures.LinkedList;
 using DSA_Problem_Solving.Easy;
-using DSA_Problem_Solving.Easy.Binary_Tree;
 using DSA_Problem_Solving.Medium;
-using System;
-using System.Collections;
-using System.Xml.Linq;
 
 public class Solution
 {
@@ -115,7 +107,12 @@ public class Solution
         //ArrayMedium.MergeSortedArraysOptimal(nums1, 0, nums2, nums2.Length);
         //ArrayMedium.TopKFrequentBF(new int[] { 1, 2, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2 }, 3);
         //double res = ArrayMedium.MyPowBF(-1.0000, -2147483648);
-        double res = ArrayMedium.MyPowOptimal(2.000, -2);
+        //double res = ArrayMedium.MyPowOptimal(2.000, -2);
+        //double res = ArrayMedium.MajorityElementOpt(new int[] { 2, 2, 1, 1, 1, 2, 2 });
+        var res = ArrayMedium.MajorityElementN3(new int[] { 1, 1, 1, 1, 2, 2, 2, 2, 5, 5, 5, 5, 5 });
+
+        var ans = ArrayMedium.UniquePaths(2, 100);
+
     }
 
     public static void Call_Roman_to_Integer()
