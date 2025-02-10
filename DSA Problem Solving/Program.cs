@@ -127,6 +127,8 @@ public class Solution
         ListNode l3 = new(1) { next = l2.next };
         l2.next.next.next.next = l3;
 
-        LinkedListMedium.FirstNode(l2);
+        //LinkedListMedium.FirstNode(l2);
+
+        var res = ArrayMedium.SearchOpt(new int[] { 1, 2, 3, 4, 5, 6 }, 4);
     }
 }
