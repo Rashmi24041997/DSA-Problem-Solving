@@ -1,6 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using DSA_Problem_Solving;
+using DSA_Problem_Solving.Algorithms;
+using DSA_Problem_Solving.Basic_Maths;
+using DSA_Problem_Solving.Data_Structures;
 using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.LinkedList;
 using DSA_Problem_Solving.Easy;
@@ -109,115 +112,21 @@ public class Solution
         //double res = ArrayMedium.MyPowBF(-1.0000, -2147483648);
         //double res = ArrayMedium.MyPowOptimal(2.000, -2);
         //double res = ArrayMedium.MajorityElementOpt(new int[] { 2, 2, 1, 1, 1, 2, 2 });
-        var res = ArrayMedium.MajorityElementN3(new int[] { 1, 1, 1, 1, 2, 2, 2, 2, 5, 5, 5, 5, 5 });
+        //var res = ArrayMedium.MajorityElementN3(new int[] { 1, 1, 1, 1, 2, 2, 2, 2, 5, 5, 5, 5, 5 });
 
-        var ans = ArrayMedium.UniquePaths(2, 100);
+        //var ans = ArrayMedium.UniquePaths(2, 100);
+        //StringProblems.Medium.LengthOfLongestSubstringBtr("aababcabcdabcde");
+        //MathProblems.Easy.CountPrimes(10);
+        //StringProblems.Medium.LengthOfLongestSubstringOpt("aababcabcdabcde");
+        //Sorting.Medium.MergeSort(new int[] { 4, 1, 3, 9, 7 }, 0, 4);
+        //ArrayMedium.RemoveDuplicates(new int[] { 1, 1, 2, 3, 4 });
+        //ArrayMedium.RemoveDuplicatesBtr(new int[] { 1, 1, 2, 3, 4 });
+        ArrayMedium.ThreeSumOpt(new int[] { -1, 0, 1, 2, -1, -4 });
+        //var res = ArrayMedium.FourSum(new int[] { 1000000000, 1000000000, 1000000000, 1000000000 }, -294967296);
+        ListNode l2 = new(0) { next = new(9) { next = new(8) { next = new(7) } } };
+        ListNode l3 = new(1) { next = l2.next };
+        l2.next.next.next.next = l3;
 
+        LinkedListMedium.FirstNode(l2);
     }
-
-    public static void Call_Roman_to_Integer()
-    {
-        //Roman to integer
-        Roman_to_Integer obj = new Roman_to_Integer();
-        string str = Console.ReadLine();
-        Console.WriteLine(obj.Cnvrt_Roman_to_Integer(str));
-    }
-    public static void Call_Two_Sum()
-    {
-        try
-        {
-            Console.WriteLine(TwoSum.Sol(new int[] { 2, 7, 11, 12 }, 13));
-        }
-        catch (Exception ex) { }
-    }
-
-    public static void Call_AddTwoNumbers()
-    {
-        try
-        {
-            ListNode l1 = new(1, new(2, new(3)));
-            ListNode l2 = new(3, new(8, new(8)));
-            ListNode l3 = LinkedListMedium.AddTwoNumbers(l1, l2);
-        }
-        catch (Exception ex) { }
-    }
-
-    public static void Call_Longest_Substring_Without_Repeating_Characters()
-    {
-        try
-        {
-            int ans = Longest_Substring_Without_Repeating_Characters.Solution("dvdf");
-        }
-        catch (Exception ex) { }
-    }
-
-    public static void Call_MinStoneSum()
-    {
-        int r = MinStoneSum.Solution(new int[] { 1391, 5916 }, 2);
-    }
-    public static void Call_Reverse_integer()
-    {
-        int i = Reverse_integer.Solution(-100);
-    }
-
-    public static void Call_Divide_Two_Integers()
-    {
-        int i = Divide_Two_Integers.Solution(-2147483648, 2);
-    }
-
-    public static void Call_Linked_List_Mid()
-    {
-        try
-        {
-            ListNode l1 = new(1, new(2, new(3, new(4, new(5, new(6))))));
-            ListNode l2 = new(1, new(2, new(3)));
-            ListNode l3 = new(1, new(2));
-            ListNode l4 = new(1, new(2, new(3, new(3))));
-            ListNode l5 = LinkedListEasy.FindMiddle(l1);
-        }
-        catch (Exception ex) { }
-    }
-    public static void Call_Binary_Tree_Level_Order_Traversal()
-    {
-        try
-        {
-            TreeNode root = new TreeNode(1);
-            root.left = new TreeNode(2);
-            root.right = new TreeNode(3);
-            root.left.left = new TreeNode(4);
-            root.left.right = new TreeNode(5);
-            root.left.right.left = new TreeNode(8);
-            root.right.left = new TreeNode(6);
-            root.right.right = new TreeNode(7);
-            root.right.right.left = new TreeNode(9);
-            root.right.right.right = new TreeNode(10);
-
-            List<List<int>> inOrder;
-            //inOrder = (List<List<int>>)Binary_Tree_Level_Order_Traversal.LevelOrder(root);
-
-        }
-        catch (Exception ex) { }
-    }
-    public static void Call_TopView()
-    {
-        try
-        {
-            TreeNode root = new TreeNode(1);
-            root.left = new TreeNode(2);
-            root.right = new TreeNode(3);
-            root.left.left = new TreeNode(4);
-            root.left.right = new TreeNode(5);
-            root.left.right.left = new TreeNode(8);
-            root.right.left = new TreeNode(6);
-            root.right.right = new TreeNode(7);
-            root.right.right.left = new TreeNode(9);
-            root.right.right.right = new TreeNode(10);
-
-            List<int> inOrder;
-            //inOrder = (List<int>)Top_View_of_Binary_Tree.TopView(root);
-
-        }
-        catch (Exception ex) { }
-    }
-
 }

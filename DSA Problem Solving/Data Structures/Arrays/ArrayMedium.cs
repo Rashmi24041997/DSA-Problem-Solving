@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -631,7 +632,6 @@ public static class ArrayMedium
         return res;
     }
 
-
     /// <summary>
     /// Keep track of the frequency of each item and return the item as soon as its frequency crosses n/2 
     /// Time Complexity: O(n*logn)+O(n)
@@ -827,7 +827,7 @@ public static class ArrayMedium
         BigInteger n1 = Factorial(n - 1);
         BigInteger mn1 = Factorial(m + n - 2);
 
-        var res = mn1/(m1 * n1);
+        var res = mn1 / (m1 * n1);
 
         return (int)res;
     }
@@ -862,5 +862,240 @@ public static class ArrayMedium
             res = res * (n - r + i) / (i);
         }
         return (int)res;
+    }
+
+    public static int RemoveDuplicates(int[] nums)
+    {
+        int cnt = 1, n = nums.Length;
+        int prev = nums[0];
+        for (int i = 1; i < n; i++)
+        {
+            int num = nums[i];
+            if (num != prev)
+            {
+                cnt++;
+                nums[cnt - 1] = num;
+            }
+
+            if (cnt - 1 != i)
+                nums[i] = -101;
+            prev = num;
+        }
+        //for (int i = cnt; i < n; i++)
+        //{
+        //    nums[i] = -101;
+        //}
+        return cnt;
+    }
+
+    public static int RemoveDuplicatesBtr(int[] nums)
+    {
+        int i = 0;
+        for (int j = 1; j < nums.Length; j++)
+        {
+            if (nums[i] != nums[j])
+            {
+                i++;
+                nums[i] = nums[j];
+            }
+        }
+        return i;
+    }
+
+    /*
+     Given an integer array nums, 
+     return all the triplets [nums[i], nums[j], nums[k]] 
+    such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+    Solution set must not contain duplicate triplets.
+     */
+    //public static IList<IList<int>> ThreeSum(int[] nums)
+    //{
+    //    int i1, i2, i3;
+    //    int n = nums.Length;
+    //    Dictionary<int, int> set = new();
+    //    IList<IList<int>> res = new List<IList<int>>();
+    //    for (int i = 0; i < n; i++)
+    //    {
+    //        int num = nums[i];
+    //        if (!set.Contains(num))
+    //            set.Add(num);
+    //    }
+    //    for (int i = 0; i < n - 2; i++)
+    //    {
+    //        i1 = nums[i];
+    //        for (int j = 1; j < n; j++)
+    //        {
+    //            i2 = nums[j];
+    //            i3 = 0 - (i1 + i2);
+
+    //            if (set.Contains(i3))
+    //            {
+    //                List<int> lst = new() { i1, i2, i3 };
+    //                if (!res.Contains(lst))
+    //                    res.Add(lst);
+    //            }
+    //        }
+    //    }
+    //    return res;
+    //}
+
+    public static IList<IList<int>> ThreeSum(int[] nums)
+    {
+        int i1, i2, i3;
+        int n = nums.Length;
+        Array.Sort(nums);
+        var res = new Dictionary<string, IList<int>>();
+
+        for (int i = 0; i < n - 2; i++)
+        {
+            //first no.
+            i1 = nums[i];
+            for (int j = i + 1; j < n; j++)
+            {
+                //consider next element to nums[i] as second 
+                i2 = nums[j];
+                //Calculate the 3rd element:
+                i3 = 0 - (i1 + i2);
+
+                //Find the element in the array:
+                if (BinarySearch(nums, j + 1, n - 1, i3) != -1)
+                {
+                    //if found, store the triplet uniquely so that it cannot be repeated 
+                    List<int> lst = new() { i1, i2, i3 };
+                    lst.Sort();
+                    string key = string.Join("", lst);
+                    if (!res.ContainsKey(key))
+                        res.Add(key, lst);
+                }
+            }
+        }
+        return res.Values.ToList();
+    }
+
+    private static int BinarySearch(int[] arr, int low, int high, int target)
+    {
+        int mid = (low + high) / 2;
+        while (low <= high)
+        {
+            if (arr[mid] == target)
+            {
+                return mid;
+            }
+            else if (arr[mid] > target)
+            {
+                high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+            mid = (low + high) / 2;
+        }
+        return -1;
+    }
+
+    /*
+     Given an array of N integers, your task is to find unique triplets that add up to give a sum of zero. In short, you need to return an array of all the unique triplets [arr[a], arr[b], arr[c]] such that i!=j, j!=k, k!=i, and their sum is equal to zero.
+    */
+    // Time Complexity: O(NlogN)+O(N2), where N = size of the array.
+    //Space Complexity: O(no. of triplets),
+    public static IList<IList<int>> ThreeSumOpt(int[] nums)
+    {
+        //First, we will sort the entire array.
+        Array.Sort(nums);
+        int n = nums.Length;
+        IList<IList<int>> res = new List<IList<int>>();
+
+        // i will represent the fixed pointer.
+        for (int i = 0; i < n - 2; i++)
+        {
+            int i1 = nums[i];
+
+            //check if the current and the previous element is the same and if it is we will do nothing and continue to the next value of i.
+            if (i != 0 && i1 == nums[i - 1]) continue;
+
+            int left = i + 1; int right = n - 1;
+            while (left < right)
+            {
+                int i2 = nums[left];
+                int i3 = nums[right];
+                int sum = i1 + i2 + i3;
+                //If the sum is equal to the target, we will simply insert the triplet i.e. arr[i], arr[left], arr[right], into our answer and move the pointers left and right skipping the duplicate elements.
+                if (sum == 0)
+                {
+                    res.Add(new List<int> { i1, nums[left], nums[right] });
+                    left++;
+                    right--;
+
+                    while (left < right && nums[left - 1] == nums[left])
+                        left++;
+                    while (left < right && nums[right] == nums[right - 1])
+                        right--;
+                }
+                else if (sum < 0)//If the sum is lesser than the target, we need a bigger value and so we will increase the value of j (i.e. left++). 
+                    left++;
+                else //If the sum is greater, then we need lesser elements and so we will decrease the value of k(i.e. right--). 
+                    right--;
+            }
+        }
+        return res;
+    }
+
+    /*
+     Given an array of N integers, your task is to find unique triplets that add up to give a sum of zero. In short, you need to return an array of all the unique triplets [arr[a], arr[b], arr[c]] such that i!=j, j!=k, k!=i, and their sum is equal to zero.
+    */
+    // Time Complexity: O(NlogN)+O(N3), where N = size of the array.
+    //Space Complexity: O(no. of quadruplets),
+    public static IList<IList<int>> FourSum(int[] nums, int target)
+    {
+        IList<IList<int>> res = new List<IList<int>>();
+        if (nums.Length < 4) return res;
+        Array.Sort(nums);
+        int n = nums.Length;
+
+        for (int i = 0; i < n - 3; i++)
+        {
+            long i1 = nums[i];
+
+            // avoid the duplicates while moving i:
+            if (i > 0 && i1 == nums[i - 1])
+                continue;
+
+            for (int j = i + 1; j < n - 2; j++)
+            {
+                long i2 = nums[j];
+
+                // avoid the duplicates while moving j:
+                if (j > i + 1 && i2 == nums[j - 1])
+                    continue;
+
+                // 2 pointers:
+                int left = j + 1, right = n - 1;
+
+                while (left < right)
+                {
+                    long i3 = nums[left];
+                    long i4 = nums[right];
+                    long sum = i1 + i2 + i3 + i4;
+
+                    if (sum == target)
+                    {
+                        res.Add(new List<int>() { nums[i], nums[j], nums[left], nums[right] });
+                        left++;
+                        right--;
+                        // skip the duplicates:
+                        while (left < right && nums[left - 1] == nums[left])
+                            left++;
+                        while (left < right && nums[right] == nums[right + 1])
+                            right--;
+                    }
+                    else if (sum > target)
+                        right--;
+                    else
+                        left++;
+                }
+            }
+        }
+        return res;
     }
 }

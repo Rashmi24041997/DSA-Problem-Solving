@@ -4,51 +4,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DSA_Problem_Solving.Data_Structures
-{
-    public class StringProblems
-    {
-        public static class Easy
-        {
-            /// <summary>
-            /// Reverses the words in a given string.
-            /// Time Complexity: O(n) where n is the length of the string.
-            /// Space Complexity: O(n) for storing words and the result.
-            /// </summary>
-            /// <param name="s">The input string.</param>
-            /// <returns>The string with words in reverse order.</returns>
-            public static string ReverseWords(string s)
-            {
-                if (s == null) return null; // Check for null input
-                List<string> words = new List<string>(); // List to store words
-                string res = ""; // Result string
-                string word = ""; // Temporary word storage
-                for (int i = 0; i < s.Length; i++) // Iterate through each character in the string
-                {
-                    string chr = s[i].ToString();
-                    if (chr != " ")
-                        word += chr; // Build the current word
-                    else
-                    {
-                        if (word != "") words.Add(word); // Add the word to the list if it's not empty
-                        word = ""; // Reset the word
-                    }
-                }
-                if (word != "") words.Add(word); // Add the last word if it's not empty
-                for (int i = words.Count - 1; i >= 0; i--) // Iterate through the list of words in reverse order
-                {
-                    if (i != 0)
-                        res += words[i] + " "; // Append the word and a space
-                    else
-                        res += words[i]; // Append the last word without a trailing space
-                }
-                return res; // Return the result
-            }
+namespace DSA_Problem_Solving.Data_Structures;
 
-            public static int RomanToInt(string s)
+public class StringProblems
+{
+    public static class Easy
+    {
+        /// <summary>
+        /// Reverses the words in a given string.
+        /// Time Complexity: O(n) where n is the length of the string.
+        /// Space Complexity: O(n) for storing words and the result.
+        /// </summary>
+        /// <param name="s">The input string.</param>
+        /// <returns>The string with words in reverse order.</returns>
+        public static string ReverseWords(string s)
+        {
+            if (s == null) return null; // Check for null input
+            List<string> words = new List<string>(); // List to store words
+            string res = ""; // Result string
+            string word = ""; // Temporary word storage
+            for (int i = 0; i < s.Length; i++) // Iterate through each character in the string
             {
-                if (s == null || s.Length == 0) return 0; // Check for null input
-                Dictionary<string, int> symbols = new()
+                string chr = s[i].ToString();
+                if (chr != " ")
+                    word += chr; // Build the current word
+                else
+                {
+                    if (word != "") words.Add(word); // Add the word to the list if it's not empty
+                    word = ""; // Reset the word
+                }
+            }
+            if (word != "") words.Add(word); // Add the last word if it's not empty
+            for (int i = words.Count - 1; i >= 0; i--) // Iterate through the list of words in reverse order
+            {
+                if (i != 0)
+                    res += words[i] + " "; // Append the word and a space
+                else
+                    res += words[i]; // Append the last word without a trailing space
+            }
+            return res; // Return the result
+        }
+
+        public static int RomanToInt(string s)
+        {
+            if (s == null || s.Length == 0) return 0; // Check for null input
+            Dictionary<string, int> symbols = new()
                 {
                     { "I", 1 },
                     { "V", 5 },
@@ -65,260 +65,331 @@ namespace DSA_Problem_Solving.Data_Structures
                     { "CM", 900}
                 };
 
-                int result = 0;
+            int result = 0;
 
-                for (int i = s.Length - 1; i >= 0; i--)
-                {
-                    string symbol = s[i].ToString();
-                    if (i > 0)
-                    {
-                        symbol = s[i - 1].ToString() + symbol;
-                    }
-                    if (symbols.TryGetValue(symbol, out int j))
-                    {
-                        result += j;
-                        i--;
-                    }
-                    else
-                    {
-                        symbol = s[i].ToString();
-                        if (symbols.TryGetValue(symbol, out int k))
-                        {
-                            result += k;
-                        }
-                    }
-                }
-
-                return result;
-            }
-
-            public static string LongestCommonPrefix(string[] strs)
+            for (int i = s.Length - 1; i >= 0; i--)
             {
-                if (strs == null || strs.Length == 0) return ""; // Check for null input
-                string prefix = strs[0];
-                for (int i = 1; i < strs.Length; i++)
+                string symbol = s[i].ToString();
+                if (i > 0)
                 {
-                    string word = strs[i];
-                    //string newPrefix = "";
-                    for (int j = 0; j < prefix.Length; j++)
+                    symbol = s[i - 1].ToString() + symbol;
+                }
+                if (symbols.TryGetValue(symbol, out int j))
+                {
+                    result += j;
+                    i--;
+                }
+                else
+                {
+                    symbol = s[i].ToString();
+                    if (symbols.TryGetValue(symbol, out int k))
                     {
-                        if (j >= word.Length)
-                        {
-                            prefix = prefix.Remove(j);
-                            break;
-                        }
-                        //string chr1 = prefix[j].ToString();
-                        //string chr2 = word[j].ToString();
-                        //if (chr1 == chr2)
-                        //    newPrefix += chr1;
-                        if (prefix[j] == word[j])
-                        {
-                            if (j == 0)
-                                return "";
-                            else
-                                prefix = prefix.Remove(j);
-                            break;
-                        }
+                        result += k;
                     }
                 }
-                return prefix;
             }
 
-            public static int[] AbsDifference(String s)
-            {
-                if (string.IsNullOrWhiteSpace(s)) return null;
-
-                int[] result = new int[s.Length];
-
-                int cSum = 0, vSum = 0, sum = 0;
-
-                char[] vowels = new char[5] { 'a', 'e', 'i', 'o', 'u' };
-
-                for (int i = 0; i < s.Length; i++)
-                {
-                    char c = s[i];
-                    if (vowels.Contains(c))
-                    {
-                        vSum += 1;
-                    }
-                    else
-                    {
-                        cSum += -1;
-                    }
-                    sum = vSum + cSum;
-                    result[i] = Math.Abs(sum);
-                }
-                return result;
-            }
+            return result;
         }
 
-        public static class Medium
+        public static string LongestCommonPrefix(string[] strs)
         {
-            /// <summary>
-            /// Finds all words in words1 that are universal to words2.
-            /// Time Complexity: O(n * m) where n is the length of words1 and m is the length of words2.
-            /// Space Complexity: O(n) for storing the result.
-            /// </summary>
-            /// <param name="words1">The list of words to check.</param>
-            /// <param name="words2">The list of words to be universal to.</param>
-            /// <returns>A list of universal words.</returns>
-            public static IList<string> WordSubsets(string[] words1, string[] words2)
+            if (strs == null || strs.Length == 0) return ""; // Check for null input
+            string prefix = strs[0];
+            for (int i = 1; i < strs.Length; i++)
             {
-                if (words1 == null || words1.Length == 0) return null; // Check for null or empty input
-                if (words2 == null || words2.Length == 0) return null; // Check for null or empty input
-                IList<string> result = new List<string>(); // List to store the result
-                for (int i = 0; i < words1.Length; i++) // Iterate through each word in words1
+                string word = strs[i];
+                //string newPrefix = "";
+                for (int j = 0; j < prefix.Length; j++)
                 {
-                    string word = words1[i];
-                    string wordCopy = word; // Copy of the current word
-                    bool add = true; // Flag to determine if the word should be added to the result
-                    foreach (string subWord in words2) // Iterate through each word in words2
+                    if (j >= word.Length)
                     {
-                        foreach (char chr in subWord) // Iterate through each character in the subWord
+                        prefix = prefix.Remove(j);
+                        break;
+                    }
+                    //string chr1 = prefix[j].ToString();
+                    //string chr2 = word[j].ToString();
+                    //if (chr1 == chr2)
+                    //    newPrefix += chr1;
+                    if (prefix[j] == word[j])
+                    {
+                        if (j == 0)
+                            return "";
+                        else
+                            prefix = prefix.Remove(j);
+                        break;
+                    }
+                }
+            }
+            return prefix;
+        }
+
+        public static int[] AbsDifference(String s)
+        {
+            if (string.IsNullOrWhiteSpace(s)) return null;
+
+            int[] result = new int[s.Length];
+
+            int cSum = 0, vSum = 0, sum = 0;
+
+            char[] vowels = new char[5] { 'a', 'e', 'i', 'o', 'u' };
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                char c = s[i];
+                if (vowels.Contains(c))
+                {
+                    vSum += 1;
+                }
+                else
+                {
+                    cSum += -1;
+                }
+                sum = vSum + cSum;
+                result[i] = Math.Abs(sum);
+            }
+            return result;
+        }
+    }
+
+    public static class Medium
+    {
+        /// <summary>
+        /// Finds all words in words1 that are universal to words2.
+        /// Time Complexity: O(n * m) where n is the length of words1 and m is the length of words2.
+        /// Space Complexity: O(n) for storing the result.
+        /// </summary>
+        /// <param name="words1">The list of words to check.</param>
+        /// <param name="words2">The list of words to be universal to.</param>
+        /// <returns>A list of universal words.</returns>
+        public static IList<string> WordSubsets(string[] words1, string[] words2)
+        {
+            if (words1 == null || words1.Length == 0) return null; // Check for null or empty input
+            if (words2 == null || words2.Length == 0) return null; // Check for null or empty input
+            IList<string> result = new List<string>(); // List to store the result
+            for (int i = 0; i < words1.Length; i++) // Iterate through each word in words1
+            {
+                string word = words1[i];
+                string wordCopy = word; // Copy of the current word
+                bool add = true; // Flag to determine if the word should be added to the result
+                foreach (string subWord in words2) // Iterate through each word in words2
+                {
+                    foreach (char chr in subWord) // Iterate through each character in the subWord
+                    {
+                        if (!word.Contains(chr)) // Check if the character is not in the word
                         {
-                            if (!word.Contains(chr)) // Check if the character is not in the word
-                            {
-                                add = false; // Set the flag to false
-                                break; // Break the loop
-                            }
+                            add = false; // Set the flag to false
+                            break; // Break the loop
                         }
                     }
-                    if (add) result.Add(wordCopy); // Add the word to the result if the flag is true
                 }
-                return result; // Return the result
+                if (add) result.Add(wordCopy); // Add the word to the result if the flag is true
+            }
+            return result; // Return the result
+        }
+
+
+        public static bool RotateString(string s, string goal)
+        {
+            string result = "";
+            string og = s;
+            List<KeyValuePair<char, bool>> chars = new();
+            foreach (char item in s)
+            {
+                chars.Add(new KeyValuePair<char, bool>(item, false));
+            }
+            for (int i = 0; i <= s.Length; i++)
+            {
+                result = s.Remove(0, 1) + s[0];
+                if (result == goal)
+                {
+                    return true;
+                }
+                s = s.Remove(0, 1) + s[0];
+            }
+            return false;
+        }
+        //public static string LongestPalindrome(string s)
+        //{
+        //    string result = s;
+        //    int high = s.Length - 1, low = 0;
+        //    while (high != low)
+        //    {
+        //        if (s[low] == s[high])
+        //        {
+        //            low--;
+        //            high--;
+        //        }
+        //        else
+        //        {
+        //            low++;
+        //        }
+        //    }
+        //}
+
+        public static string LongestPalindromeHelper(string s, int low, int high)
+        {
+            if (string.IsNullOrEmpty(s) || s.Length < 1) return "";
+
+            int start = 0, end = 0;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                // Check for odd-length palindrome (centered at a single character)
+                int len1 = ExpandAroundCenter(s, i, i);
+
+                // Check for even-length palindrome (centered between two characters)
+                int len2 = ExpandAroundCenter(s, i, i + 1);
+
+                // Take the longer of the two lengths
+                int len = Math.Max(len1, len2);
+
+                // Update the start and end indices if a longer palindrome is found
+                if (len > end - start)
+                {
+                    start = i - (len - 1) / 2;
+                    end = i + len / 2;
+                }
             }
 
+            // Extract the longest palindromic substring using start and end indices
+            return s.Substring(start, end - start + 1);
+        }
 
-            public static bool RotateString(string s, string goal)
+        private static int ExpandAroundCenter(string s, int left, int right)
+        {
+            while (left >= 0 && right < s.Length && s[left] == s[right])
             {
-                string result = "";
-                string og = s;
-                List<KeyValuePair<char, bool>> chars = new();
-                foreach (char item in s)
+                left--;
+                right++;
+            }
+
+            // Length of the palindrome is (right - left - 1)
+            return right - left - 1;
+        }
+
+        public static int MyAtoi(string s)
+        {
+            HashSet<char> digits = new HashSet<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            bool signDecided = false;
+            int sign = 1;
+            string t = "";
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                char c = s[i];
+
+                if (c == '+')
                 {
-                    chars.Add(new KeyValuePair<char, bool>(item, false));
+                    if (t != "") break;
+                    if (!signDecided)
+                        signDecided = true;
+                    else break;
+                    continue;
                 }
-                for (int i = 0; i <= s.Length; i++)
+
+                if (c == '-')
                 {
-                    result = s.Remove(0, 1) + s[0];
-                    if (result == goal)
+                    if (t != "") break;
+                    if (!signDecided)
                     {
-                        return true;
-                    }
-                    s = s.Remove(0, 1) + s[0];
-                }
-                return false;
-            }
-            //public static string LongestPalindrome(string s)
-            //{
-            //    string result = s;
-            //    int high = s.Length - 1, low = 0;
-            //    while (high != low)
-            //    {
-            //        if (s[low] == s[high])
-            //        {
-            //            low--;
-            //            high--;
-            //        }
-            //        else
-            //        {
-            //            low++;
-            //        }
-            //    }
-            //}
-
-            public static string LongestPalindromeHelper(string s, int low, int high)
-            {
-                if (string.IsNullOrEmpty(s) || s.Length < 1) return "";
-
-                int start = 0, end = 0;
-
-                for (int i = 0; i < s.Length; i++)
-                {
-                    // Check for odd-length palindrome (centered at a single character)
-                    int len1 = ExpandAroundCenter(s, i, i);
-
-                    // Check for even-length palindrome (centered between two characters)
-                    int len2 = ExpandAroundCenter(s, i, i + 1);
-
-                    // Take the longer of the two lengths
-                    int len = Math.Max(len1, len2);
-
-                    // Update the start and end indices if a longer palindrome is found
-                    if (len > end - start)
-                    {
-                        start = i - (len - 1) / 2;
-                        end = i + len / 2;
-                    }
-                }
-
-                // Extract the longest palindromic substring using start and end indices
-                return s.Substring(start, end - start + 1);
-            }
-
-            private static int ExpandAroundCenter(string s, int left, int right)
-            {
-                while (left >= 0 && right < s.Length && s[left] == s[right])
-                {
-                    left--;
-                    right++;
-                }
-
-                // Length of the palindrome is (right - left - 1)
-                return right - left - 1;
-            }
-
-
-            public static int MyAtoi(string s)
-            {
-                HashSet<char> digits = new HashSet<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-                bool signDecided = false;
-                int sign = 1;
-                string t = "";
-
-                for (int i = 0; i < s.Length; i++)
-                {
-                    char c = s[i];
-
-                    if (c == '+')
-                    {
-                        if (t != "") break;
-                        if (!signDecided)
-                            signDecided = true;
-                        else break;
+                        sign = -1;
+                        signDecided = true;
                         continue;
                     }
-
-                    if (c == '-')
-                    {
-                        if (t != "") break;
-                        if (!signDecided)
-                        {
-                            sign = -1;
-                            signDecided = true;
-                            continue;
-                        }
-                        else break;
-                    }
-
-                    if (c == ' ')
-                        if (t != "")
-                            break;
-                        else
-                            continue;
-
-                    if (!digits.Contains(c))
-                        //if(t != "")
-                        break;
-                    t += c;
-                    long temp = Convert.ToInt64(t == "" ? 0 : t) * sign;
-                    if (temp <= int.MinValue) return int.MinValue;
-                    if (temp >= int.MaxValue) return int.MaxValue;
+                    else break;
                 }
-                if (t is null || t == "") return 0;
-                return Convert.ToInt32(t) * sign;
+
+                if (c == ' ')
+                    if (t != "")
+                        break;
+                    else
+                        continue;
+
+                if (!digits.Contains(c))
+                    //if(t != "")
+                    break;
+                t += c;
+                long temp = Convert.ToInt64(t == "" ? 0 : t) * sign;
+                if (temp <= int.MinValue) return int.MinValue;
+                if (temp >= int.MaxValue) return int.MaxValue;
             }
+            if (t is null || t == "") return 0;
+            return Convert.ToInt32(t) * sign;
         }
+
+        /*
+         Given a string s, find the length of the longest substring without repeating characters.
+         */
+        public static int LengthOfLongestSubstringBF(string s)
+        {
+            if (s.Length < 2) return s.Length;
+            int ans = 0;
+            int n = s.Length;
+            HashSet<char> set = new();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (ans >= s.Length - i) break;
+                char o = s[i];
+                set.Add(o);
+                for (int j = i + 1; j < s.Length; j++)
+                {
+                    char t = s[j];
+                    if (!set.Contains(t))
+                    {
+                        set.Add(t);
+                    }
+                    else break;
+                }
+                if (set.Count > ans)
+                    ans = set.Count;
+                set = new();
+            }
+            return ans;
+        }
+
+        public static int LengthOfLongestSubstringBtr(string s)
+        {
+            int maxLen = 0, currLen = 0, l = 0;
+            HashSet<char> set = new();
+
+            for (int r = 0; r < s.Length; r++)
+            {
+                char c = s[r];
+                while (l < r && set.Contains(c))
+                {
+                    set.Remove(c);
+                    l++;
+                }
+                set.Add(c);
+                currLen = r - l + 1;
+                maxLen = Math.Max(maxLen, currLen);
+            }
+            return maxLen;
+        }
+
+        public static int LengthOfLongestSubstringOpt(string s)
+        {
+            int left = 0, len = 0;
+
+            Dictionary<char, int> dict = new();
+
+            for (int right = 0; right < s.Length; right++)
+            {
+                char c = s[right];
+                if (dict.ContainsKey(c))
+                {
+                    left = Math.Max(left, dict[c] + 1);
+                    dict[c] = right;
+                }
+                else
+                    dict.Add(c, right);
+                len = Math.Max(len, right - left + 1);
+            }
+            return len;
+        }
+
         class Hard
         {
 
