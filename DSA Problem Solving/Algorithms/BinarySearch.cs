@@ -10,6 +10,27 @@ namespace DSA_Problem_Solving.Algorithms
     {
         public class Easy
         {
+            /*
+             Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums.
+              If target exists, then return its index. Otherwise, return -1.
+            You must write an algorithm with O(log n) runtime complexity.
+             */
+            public static int Search(int[] nums, int target)
+            {
+                int left = 0, right = nums.Length - 1, mid;
+                while (left <= right)
+                {
+                    mid = (left + right) / 2;
+                    int i = nums[mid];
+                    if (i == target)
+                        return mid;
+                    else if (i > target)
+                        left = mid + 1;
+                    else
+                        right = mid - 1;
+                }
+                return -1;
+            }
             // Method to find the nth root of m using binary search
             // Time Complexity: O(log(m))
             // Space Complexity: O(1)
@@ -105,8 +126,9 @@ namespace DSA_Problem_Solving.Algorithms
                 if (n == 1) return nums[0];
                 int low = 0, high = n - 1;
 
-                while (low <= high) { 
-                    int mid = (low+high)/2;
+                while (low <= high)
+                {
+                    int mid = (low + high) / 2;
                     //if mid is even, mid ^ 1 gives next odd index
                     //else it gives previous even index
                     //so if condition fulfils, we are in left part of the answer 
