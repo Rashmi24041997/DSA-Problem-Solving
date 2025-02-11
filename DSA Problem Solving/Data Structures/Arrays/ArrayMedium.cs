@@ -1098,4 +1098,59 @@ public static class ArrayMedium
         }
         return res;
     }
+
+    /*
+     * search an item in sorted array possibly rotated
+     */
+
+    //Calculate the ‘mid’
+    //
+    public static int SearchOpt(int[] nums, int target)
+    {
+    //Place the 2 pointers i.e. left and right  
+        int left = 0, right = nums.Length - 1;
+
+        while (left <= right)
+        {
+            int mid = (left + right) / 2;
+            int l = nums[left], r = nums[right], m = nums[mid];
+            //Check if arr[mid] == target:
+            if (m == target)
+            {
+                return mid;
+            }
+            // ensure that the left part is sorted
+            if (l <= m)
+            {
+                if (l == target)
+                {
+                    return left;
+                }
+                // the target is in this sorted half. So, we will eliminate the right half (right = mid-1).
+                if (l < target && target < m)
+                {
+                    right = mid - 1;
+                }
+            //the target does not exist in the sorted half. So, we will eliminate this left half by doing left = mid+1.
+                else
+                    left = mid + 1;
+            }
+            //Otherwise, if the right half is sorted
+            // the target is in this sorted right half. So, we will eliminate the left half (left = mid+1).
+            else if (m < target && target <= r)
+            {
+                if (r == target)
+                {
+                    return right;
+                }
+                //the target does not exist in this sorted half. So, we will eliminate this right half by doing right = mid-1.
+                else
+                    left = mid + 1;
+            }
+            else
+                right = mid - 1;
+
+        }
+        return -1;
+    }
 }
