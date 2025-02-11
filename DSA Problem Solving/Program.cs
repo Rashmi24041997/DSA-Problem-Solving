@@ -5,6 +5,7 @@ using DSA_Problem_Solving.Algorithms;
 using DSA_Problem_Solving.Basic_Maths;
 using DSA_Problem_Solving.Data_Structures;
 using DSA_Problem_Solving.Data_Structures.Arrays;
+using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
 using DSA_Problem_Solving.Data_Structures.LinkedList;
 using DSA_Problem_Solving.Easy;
 using DSA_Problem_Solving.Medium;
@@ -129,6 +130,8 @@ public class Solution
 
         //LinkedListMedium.FirstNode(l2);
 
-        var res = ArrayMedium.SearchOpt(new int[] { 1, 2, 3, 4, 5, 6 }, 4);
+        //var res = ArrayMedium.SearchOpt(new int[] { 1, 2, 3, 4, 5, 6 }, 4);
+        //var res = ArrayMedium.ReversePairsBF(new int[] { 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647 });
+        var res = ArrayEasy.FindMaxConsecutiveOnesBF(new int[] { 1, 1, 0, 1, 1, 1 });
     }
 }

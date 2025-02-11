@@ -1107,7 +1107,7 @@ public static class ArrayMedium
     //
     public static int SearchOpt(int[] nums, int target)
     {
-    //Place the 2 pointers i.e. left and right  
+        //Place the 2 pointers i.e. left and right  
         int left = 0, right = nums.Length - 1;
 
         while (left <= right)
@@ -1131,7 +1131,7 @@ public static class ArrayMedium
                 {
                     right = mid - 1;
                 }
-            //the target does not exist in the sorted half. So, we will eliminate this left half by doing left = mid+1.
+                //the target does not exist in the sorted half. So, we will eliminate this left half by doing left = mid+1.
                 else
                     left = mid + 1;
             }
