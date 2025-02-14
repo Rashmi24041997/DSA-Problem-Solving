@@ -150,6 +150,94 @@ public class StringProblems
             }
             return result;
         }
+
+        public static int StrStrBF(string haystack, string needle)
+        {
+            int n = haystack.Length, m = needle.Length;
+
+            for (int i = 0; i <= n - m; i++)
+            {
+                int j;
+                for (j = 0; j < m; j++)
+                {
+                    if (haystack[i + j] != needle[j])
+                        break;
+                }
+                if (j == m) return i; // Found match
+            }
+            return -1; // No match found
+        }
+        public static int StrStr(string haystack, string needle)
+        {
+            // Edge case: If needle is empty, return 0
+            if (needle.Length == 0) return 0;
+
+            // Compute the LPS (Longest Prefix Suffix) array
+            int[] lps = ComputeLPSArray(needle);
+            int i = 0; // Pointer for haystack
+            int j = 0; // Pointer for needle
+
+            // Loop through haystack to find the needle
+            while (i < haystack.Length)
+            {
+                if (haystack[i] == needle[j])
+                {
+                    // If characters match, move both pointers
+                    i++;
+                    j++;
+                }
+                if (j == needle.Length)
+                {
+                    // If we have matched the entire needle, return the start index
+                    return i - j;
+                }
+                else if (i < haystack.Length && haystack[i] != needle[j])
+                {
+                    // If mismatch occurs after some matches
+                    if (j != 0)
+                    {
+                        j = lps[j - 1]; // Use LPS array to skip unnecessary comparisons
+                    }
+                    else
+                    {
+                        i++; // Move forward in haystack if no previous match
+                    }
+                }
+            }
+            return -1; // No match found
+        }
+
+        private static int[] ComputeLPSArray(string pattern)
+        {
+            int m = pattern.Length;
+            int[] lps = new int[m];
+            int len = 0; // Length of the previous longest prefix suffix
+            int i = 1; // Start from the second character
+
+            while (i < m)
+            {
+                if (pattern[i] == pattern[len])
+                {
+                    len++;
+                    lps[i] = len; // Store the length of the longest prefix suffix
+                    i++;
+                }
+                else
+                {
+                    if (len != 0)
+                    {
+                        len = lps[len - 1]; // Reduce length using previously computed LPS
+                    }
+                    else
+                    {
+                        lps[i] = 0; // If no match, set LPS to 0 and move ahead
+                        i++;
+                    }
+                }
+            }
+            return lps;
+        }
+
     }
 
     public static class Medium

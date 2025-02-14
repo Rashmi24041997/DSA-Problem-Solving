@@ -122,7 +122,7 @@ public class Solution
         //Sorting.Medium.MergeSort(new int[] { 4, 1, 3, 9, 7 }, 0, 4);
         //ArrayMedium.RemoveDuplicates(new int[] { 1, 1, 2, 3, 4 });
         //ArrayMedium.RemoveDuplicatesBtr(new int[] { 1, 1, 2, 3, 4 });
-        ArrayMedium.ThreeSumOpt(new int[] { -1, 0, 1, 2, -1, -4 });
+        //ArrayMedium.ThreeSumOpt(new int[] { -1, 0, 1, 2, -1, -4 });
         //var res = ArrayMedium.FourSum(new int[] { 1000000000, 1000000000, 1000000000, 1000000000 }, -294967296);
         ListNode l2 = new(0) { next = new(9) { next = new(8) { next = new(7) } } };
         ListNode l3 = new(1) { next = l2.next };
@@ -132,6 +132,10 @@ public class Solution
 
         //var res = ArrayMedium.SearchOpt(new int[] { 1, 2, 3, 4, 5, 6 }, 4);
         //var res = ArrayMedium.ReversePairsBF(new int[] { 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647 });
-        var res = ArrayEasy.FindMaxConsecutiveOnesBF(new int[] { 1, 1, 0, 1, 1, 1 });
+        //var res = ArrayEasy.FindMaxConsecutiveOnesBF(new int[] { 1, 1, 0, 1, 1, 1 });
+
+        //var res = StackProblems.Easy.IsValidParenthesis("()[]{}");
+
+        int res = StringProblems.Easy.StrStrBF("leetcode", "de");
     }
 }

@@ -163,40 +163,54 @@ public static class ArrayMedium
     }
 
     // Optimized approach to sort colors
-    // Time Complexity: O(n)
+    // Time Complexity: O(n/2)
     // Space Complexity: O(1)
     public static int[] SortColorsOpt(int[] nums)
     {
+        // Initialize pointers for low, mid, and high
         int low = 0, mid = 0, high = nums.Length - 1;
+
+        // Iterate until mid pointer crosses high pointer
         while (mid <= high)
         {
+            // Use switch-case to handle the value at mid pointer
             switch (nums[mid])
             {
+                // If the value is 0, swap it with the value at low pointer
                 case 0:
                     {
                         (nums[mid], nums[low]) = (nums[low], nums[mid]);
-                        mid++; low++;
+                        // Increment both mid and low pointers
+                        mid++;
+                        low++;
                     }
                     break;
+
+                // If the value is 1, just move the mid pointer
                 case 1:
                     {
                         mid++;
                     }
                     break;
+
+                // If the value is 2, swap it with the value at high pointer
                 case 2:
                     {
                         (nums[mid], nums[high]) = (nums[high], nums[mid]);
+                        // Decrement the high pointer
                         high--;
                     }
                     break;
             }
         }
+        // Return the sorted array
         return nums;
     }
 
-    // Kadane's algorithm to find the maximum subarray sum
-    // Time Complexity: O(n)
-    // Space Complexity: O(1)
+    /// <summary>
+    /// Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+    /// topics:sliding window
+    /// </summary>
     public static int MaxSubArray(int[] nums)
     {
         int max = int.MinValue;
@@ -205,9 +219,13 @@ public static class ArrayMedium
         // Traverse the array and calculate the maximum subarray sum
         for (int i = 0; i < nums.Length; i++)
         {
+            // Add the current element to the sum
             sum += nums[i];
 
+            // Update the maximum sum if the current sum is greater than the maximum sum
             if (sum > max) { max = sum; }
+
+            // If the current sum is less than 0, reset the sum to 0
             if (sum < 0) { sum = 0; }
         }
         return max;
@@ -384,7 +402,7 @@ public static class ArrayMedium
         // Sort the intervals based on the start time
         Array.Sort(arr, (a, b) => a[0].CompareTo(b[0]));
 
-        List<int[]> ans = new List<int[]>();
+        List<int[]> ans = new();
 
         for (int i = 0; i < n; i++)
         {
