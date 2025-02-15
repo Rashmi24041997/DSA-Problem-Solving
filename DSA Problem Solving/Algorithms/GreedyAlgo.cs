@@ -192,9 +192,50 @@ namespace DSA_Problem_Solving.Algorithms
 
                 return finalValue; // Return the total value accumulated
             }
+            /*
+                Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie.
+                Each child i has a greed factor g[i], which is the minimum size of a cookie that the child will be content with; and each cookie j has a size s[j]. If s[j] >= g[i], we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximize the number of your content children and output the maximum number.
+
+                Example 1:                
+                Input: g = [1,2,3], s = [1,1]
+                Output: 1
+             */
+            public static int FindContentChildren(int[] g, int[] s)
+            {
+                // If there are no cookies, return 0 as no child can be content
+                if (s.Length == 0) return 0;
+
+                int cnt = 0; // Initialize the count of content children to 0
+
+                // Sort the greed factors of children in ascending order
+                Array.Sort(g);
+
+                // Sort the sizes of cookies in ascending order
+                Array.Sort(s);
+
+                // Initialize two pointers for children and cookies
+                for (int i = 0, j = 0; i < g.Length && j < s.Length;)
+                {
+                    int ch = g[i]; // Get the greed factor of the current child
+                    int co = s[j]; // Get the size of the current cookie
+
+                    // If the current cookie can satisfy the current child
+                    if (ch <= co)
+                    {
+                        cnt++; // Increment the count of content children
+                        i++;   // Move to the next child
+                    }
+                    j++; // Move to the next cookie
+                }
+
+                // Return the total number of content children
+                return cnt;
+            }
         }
+
         public static class Medium
         {
+
         }
         public static class Hard
         {
