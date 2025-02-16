@@ -1,14 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using DSA_Problem_Solving;
-using DSA_Problem_Solving.Algorithms;
-using DSA_Problem_Solving.Basic_Maths;
 using DSA_Problem_Solving.Data_Structures;
-using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
-using DSA_Problem_Solving.Data_Structures.LinkedList;
-using DSA_Problem_Solving.Easy;
-using DSA_Problem_Solving.Medium;
 
 public class Solution
 {
@@ -124,9 +117,9 @@ public class Solution
         //ArrayMedium.RemoveDuplicatesBtr(new int[] { 1, 1, 2, 3, 4 });
         //ArrayMedium.ThreeSumOpt(new int[] { -1, 0, 1, 2, -1, -4 });
         //var res = ArrayMedium.FourSum(new int[] { 1000000000, 1000000000, 1000000000, 1000000000 }, -294967296);
-        ListNode l2 = new(0) { next = new(9) { next = new(8) { next = new(7) } } };
-        ListNode l3 = new(1) { next = l2.next };
-        l2.next.next.next.next = l3;
+        //ListNode l2 = new(0) { next = new(9) { next = new(8) { next = new(7) } } };
+        //ListNode l3 = new(1) { next = l2.next };
+        //l2.next.next.next.next = l3;
 
         //LinkedListMedium.FirstNode(l2);
 
@@ -136,6 +129,12 @@ public class Solution
 
         //var res = StackProblems.Easy.IsValidParenthesis("()[]{}");
 
-        int res = StringProblems.Easy.StrStrBF("leetcode", "de");
+        //int res = StringProblems.Easy.StrStrBF("leetcode", "de");
+
+        //int res = ArrayHard.TrapRainWaterBF(new int[] { 4, 2, 0, 3, 2, 5 });
+        //int res = ArrayHard.TrapRainWaterBtr(new int[] { 4, 2, 0, 3, 2, 5 });
+        //int res = ArrayHard.TrapRainWaterOpt(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
+        double res = ArrayHard.FindMedianSortedArraysOpt(new int[] { 1, 2 }, new int[] { 3, 4 });
+
     }
 }
