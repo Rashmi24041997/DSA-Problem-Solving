@@ -82,39 +82,6 @@ namespace DSA_Problem_Solving.Data_Structures
             }
 
             /*
-             Problem: Given two arrays nums1 and nums2, find the next greater element for each element in nums1 in nums2.
-             If there is no greater element, return -1 for that position.
-             Time Complexity: O(n * m)
-             Space Complexity: O(n)
-             */
-            public static int[] NextGreaterElement(int[] nums1, int[] nums2)
-            {
-                int[] ans = new int[5];
-                Dictionary<int, int> tbl = new Dictionary<int, int>();
-                int[] result = new int[nums1.Length];
-                for (int i = 0; i < nums1.Length; i++)
-                {
-                    tbl.Add(nums1[i], i);
-                }
-
-                for (int i = 0; i < nums2.Length; i++)
-                {
-                    int val = nums2[i];
-                    if (tbl.ContainsKey(val))
-                    {
-                        tbl.TryGetValue(val, out int indx);
-                        if (i == nums2.Length - 1 || nums2[i + 1] <= val)
-                        {
-                            result[indx] = -1;
-                        }
-                        else
-                            result[indx] = nums2[i + 1];
-                    }
-                }
-                return result;
-            }
-
-            /*
              Problem: Given two arrays nums1 and nums2, find the next greater element for each element in nums1 in nums2 using brute force.
              If there is no greater element, return -1 for that position.
              Time Complexity: O(n * m)
@@ -227,6 +194,44 @@ namespace DSA_Problem_Solving.Data_Structures
 
         public class Medium
         {
+            /*
+             Problem: Given two arrays nums1 and nums2, find the next greater element for each element in nums1 in nums2.
+             If there is no greater element, return -1 for that position.
+             Time Complexity: O(n * m)
+             Space Complexity: O(n)
+             */
+            public static int[] NextGreaterElement(int[] nums1, int[] nums2)
+            {
+                int n1 = nums1.Length;
+                int n2 = nums2.Length;
+                //int[] bkup = new int[n2];
+                int[] ans = new int[n1];
+                Dictionary<int, int> tbl = new();
+                System.Collections.Generic.Stack<int> st = new();
+                //st.Push(-1);
+                for (int i = n2 - 1; i >= 0; i--)
+                {
+                    int val = nums2[i];
+                    while (st.Count != 0 && st.Peek() <= nums2[i])
+                    {
+                        st.Pop();
+                    }
+                    int nge = st.Count != 0 ? st.Peek() : -1;
+                    if (!tbl.ContainsKey(val))
+                        tbl.Add(val, nge);
+                    st.Push(val);
+                    //if(!tbl.ContainsKey(val))
+                    //    tbl.Add(val, bkup[i]);
+                }
+                for (int i = 0; i < n1; i++)
+                {
+                    int num = nums1[i];
+                    int val = tbl[num];
+                    ans[i] = val;
+                }
+                return ans;
+            }
+
             public class MinStack
             {
                 private int capacity, min, top;

@@ -241,7 +241,6 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays.Easy
             return cnt;
         }
 
-
         public static double FindMedianSortedArraysBF(int[] nums1, int[] nums2)
         {
             int[] arr = MergeArrays(nums1, nums2);
