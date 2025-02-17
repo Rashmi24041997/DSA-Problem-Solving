@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using DSA_Problem_Solving.Approaches;
 using DSA_Problem_Solving.Data_Structures;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
 
@@ -134,7 +135,10 @@ public class Solution
         //int res = ArrayHard.TrapRainWaterBF(new int[] { 4, 2, 0, 3, 2, 5 });
         //int res = ArrayHard.TrapRainWaterBtr(new int[] { 4, 2, 0, 3, 2, 5 });
         //int res = ArrayHard.TrapRainWaterOpt(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
-        double res = ArrayHard.FindMedianSortedArraysOpt(new int[] { 1, 2 }, new int[] { 3, 4 });
+        //double res = ArrayHard.FindMedianSortedArraysOpt(new int[] { 1, 2 }, new int[] { 3, 4 });
+        //int res = Sliding_Window_and_Two_pointers.Medium.LongestOnes(new int[] { 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 }, 0);
+        //int res = Sliding_Window_and_Two_pointers.Hard.SubarraysWithKDistinct(new int[] { 1, 2, 1, 3, 4 }, 3);
+        int[] res = StackProblems.Medium.NextGreaterElement(new int[] { 4, 1, 2 }, new int[] { 1, 3, 4, 2 });
 
     }
 }
