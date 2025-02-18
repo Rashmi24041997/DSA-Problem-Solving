@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DSA_Problem_Solving.Data_Structures
 {
-    public class Stack<T>
+    public class MyStack<T>
     {
         private int[] Arr;
         private int top;
 
-        public Stack()
+        public MyStack()
         {
             Arr = new int[10000];
             top = -1;
@@ -125,7 +125,7 @@ namespace DSA_Problem_Solving.Data_Structures
              Time Complexity: O(n log n)
              Space Complexity: O(n)
              */
-            public static void SortStack(Stack<int> stack)
+            public static void SortStack(MyStack<int> stack)
             {
                 int[] arr = new int[stack.Size()];
                 int i = 0;
@@ -232,46 +232,39 @@ namespace DSA_Problem_Solving.Data_Structures
                 return ans;
             }
 
-            public class MinStack
+
+            /*
+             Problem: Implement a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+             Time Complexity: O(1) for each operation
+             Space Complexity: O(n)
+             */
+            public class MinStackBF
             {
-                private int capacity, min, top;
-                private int[] Arr;
+                private Stack<(int, int)> st = new();
+                private int top;
                 public int Count => top + 1;
                 public bool IsEmpty => top == -1;
 
-                public MinStack()
+                public MinStackBF()
                 {
-                    capacity = 30000;
-                    Arr = new int[30000];
                     top = -1;
-                    min = int.MinValue;
                 }
 
-                /*
-                 Problem: Implement a stack that supports push, pop, top, and retrieving the minimum element in constant time.
-                 Time Complexity: O(1) for each operation
-                 Space Complexity: O(n)
-                 */
                 public void Push(int val)
                 {
                     top++;
-                    if (top > Arr.Length - 1)
-                    {
-                        Array.Resize(ref Arr, capacity * 2);
-                        capacity *= 2;
-                    }
-                    Arr[top] = val;
-                    min = Math.Min(min, val);
+                    if (st.Count == 0)
+                        st.Push((val, val));
+                    else
+                        st.Push((val, Math.Min(val, st.Peek().Item2)));
                 }
 
                 public void Pop()
                 {
                     if (top == -1)
                         throw new InvalidOperationException("Stack is empty.");
-
-                    Arr[top] = -1;
+                    st.Pop();
                     top--;
-                    min = Math.Min(min, Arr[top]);
                 }
 
                 public int Top()
@@ -279,12 +272,74 @@ namespace DSA_Problem_Solving.Data_Structures
                     if (top == -1)
                         throw new InvalidOperationException("Stack is empty.");
 
-                    return Arr[top];
+                    return st.Peek().Item1;
                 }
 
                 public int GetMin()
                 {
-                    return min;
+                    return st.Peek().Item2;
+                }
+            }
+
+            public class MinStack
+            {
+                // take a variable that stores the minimum number. So whenever a push operation comes in just take that number put it in the stack and update the variable to the number.
+                private long min;
+                private Stack<long> st;
+
+                public MinStack()
+                {
+                    st = new();
+                    min = long.MaxValue;
+                }
+
+                // check whether that number is less than the min number.
+                // If it is smaller than min we will push a modified value which is a push(2 * Val - min) into the stack
+                // and will update min to the value of the original number. If it’s not then we will just push it as it is.
+                public void Push(int val)
+                {
+                    long cval = val;
+                    if (st.Count == 0)
+                    {
+                        st.Push(cval);
+                        min = cval;
+                    }
+                    else if (cval < min)
+                    {
+                        long newVal = (2 * cval - min);
+                        min = cval;
+                        st.Push(newVal);
+                    }
+                    else
+                        st.Push(cval);
+                }
+
+                // check if the top value is lesser than min,
+                // If it is then we must update our min to its previous value.
+                // In order to do that min = (2 * min) - (modified value) and we will pop the element.
+                public void Pop()
+                {
+                    if (st.Count == 0)
+                        return;
+                    long val = st.Pop();
+                    if (val < min)
+                        min = 2 * min - val;
+                }
+
+                // check if the top value is lesser than min,
+                // If it is then it is modified and we will return the min as the top value.
+                public int Top()
+                {
+                    long val = st.Peek();
+                    if (val >= min)
+                        return (int)val;
+
+                    return (int)min;
+                }
+
+                public int GetMin()
+                {
+                    return (int)min;
                 }
             }
 
@@ -296,6 +351,7 @@ namespace DSA_Problem_Solving.Data_Structures
              * int param_3 = obj.Top();
              * int param_4 = obj.GetMin();
              */
+
         }
     }
 }

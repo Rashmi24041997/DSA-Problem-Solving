@@ -138,7 +138,8 @@ public class Solution
         //double res = ArrayHard.FindMedianSortedArraysOpt(new int[] { 1, 2 }, new int[] { 3, 4 });
         //int res = Sliding_Window_and_Two_pointers.Medium.LongestOnes(new int[] { 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 }, 0);
         //int res = Sliding_Window_and_Two_pointers.Hard.SubarraysWithKDistinct(new int[] { 1, 2, 1, 3, 4 }, 3);
-        int[] res = StackProblems.Medium.NextGreaterElement(new int[] { 4, 1, 2 }, new int[] { 1, 3, 4, 2 });
+        //int[] res = StackProblems.Medium.NextGreaterElement(new int[] { 4, 1, 2 }, new int[] { 1, 3, 4, 2 });
+
 
     }
 }
