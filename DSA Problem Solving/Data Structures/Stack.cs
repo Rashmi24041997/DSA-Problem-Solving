@@ -59,7 +59,7 @@ namespace DSA_Problem_Solving.Data_Structures
              Time Complexity: O(n^2)
              Space Complexity: O(n)
              */
-            public static List<int> PrevSmaller(List<int> A)
+            public static List<int> PrevSmallerBf(List<int> A)
             {
                 int n = A.Count;
                 List<int> ans = new(n) { -1 };
@@ -189,6 +189,23 @@ namespace DSA_Problem_Solving.Data_Structures
                     }
                 }
                 return stack.Count < 1;
+            }
+
+            public static List<int> PrevSmallerOpt(List<int> A)
+            {
+                List<int> pse = new(A.Count);
+                Stack<int> st = new();
+                for (int i = 0; i < A.Count; i++)
+                {
+                    int num = A[i];
+                    while (st.Count != 0 && st.Peek() >= num)
+                    {
+                        st.Pop();
+                    }
+                    pse.Add(st.Count == 0 ? -1 : st.Peek());
+                    st.Push(num);
+                }
+                return pse;
             }
         }
 
@@ -352,6 +369,68 @@ namespace DSA_Problem_Solving.Data_Structures
              * int param_4 = obj.GetMin();
              */
 
+            public static int[] NextGreaterElementsIIBF(int[] nums)
+            {
+                int n = nums.Length;
+                int[] ans = new int[n];
+                for (int i = 0; i < n; i++)
+                {
+                    int num = nums[i];
+                    ans[i] = -1;
+                    for (global::System.Int32 j = i + 1; j < i + n - 1; j++)
+                    {
+                        int indx = j % n;
+                        if (nums[indx] > num)
+                        {
+                            ans[i] = nums[indx];
+                            break;
+                        }
+                    }
+                }
+                return ans;
+            }
+
+            public static int[] NextGreaterElementsIIOpt(int[] nums)
+            {
+                int n = nums.Length;
+                int[] ans = new int[n];
+                Stack<int> st = new Stack<int>();
+
+                for (int i = 2 * n - 1; i >= 0; i--)
+                {
+                    int indx = i % n;
+                    int num = nums[indx];
+
+                    while (st.Count != 0 && st.Peek() <= num)
+                        st.Pop();
+
+                    ans[i] = st.Count == 0 ? -1 : st.Peek();
+                    st.Push(num);
+                }
+                return ans;
+            }
+
+
+            public int SumSubarrayMinsBF(int[] arr)
+            {
+                int n = arr.Length;
+                int sum = 0;
+                for (int i = 0; i < n; i++)
+                {
+                    int min = arr[i];
+                    sum += min;
+                    for (global::System.Int32 j = i; j < n; j++)
+                    {
+                        min = Math.Min(min, arr[j]);
+                        sum += min;
+                    }
+                }
+                return (int)(sum % (Math.Pow(10.0, 9.0) + 7));
+            }
+
+
         }
     }
 }
+}
+
