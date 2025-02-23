@@ -1171,4 +1171,111 @@ public static class ArrayMedium
         }
         return -1;
     }
+
+
+    public static int SubarraySum(int[] nums, int k)
+    {
+        int ans = 0;
+        int n = nums.Length;
+        for (int i = 0; i < n; i++)
+        {
+            int sum = nums[i];
+            if (sum == k)
+            {
+                ans++;
+            }
+            //if (sum < k)
+            for (int j = i + 1; j < n; j++)
+            {
+                sum += nums[j];
+                if (sum == k)
+                {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+
+
+      /*
+Create an integer arrayrightMaxof lengthn.
+
+Set rightMax[n - 1] to nums[n - 1], set suffixSum to nums[n - 1].
+
+Iterate over i from n - 2 to 0
+
+Increase suffixSum by nums[i]
+Update rightMax[i] to max(rightMax[i + 1], suffixSum)
+Set maxSum and prefixSum to nums[0].
+
+Iterate over i from 0 to n - 2
+
+Increase prefixSum by nums[i]
+Update specialSum to max(specialSum, prefixSum + rightMax[i + 1]).
+Calculate the normalsum, maxSum using Kadane's algorithm.
+
+Return max(maxSum, specialSum)
+Time complexity:O(N).
+Space complexity:O(N).
+*/
+    public static int MaxSubarraySumCircular(int[] nums)
+    {
+        int n = nums.Length;
+        int[] rightMax = new int[n];
+        rightMax[n - 1] = nums[n - 1];
+        int suffixSum = nums[n - 1];
+
+        for (int i = n - 2; i >= 0; --i)
+        {
+            suffixSum += nums[i];
+            rightMax[i] = Math.Max(rightMax[i + 1], suffixSum);
+        }
+
+        int maxSum = nums[0];
+        int specialSum = nums[0];
+        int curMax = 0;
+        for (int i = 0, prefixSum = 0; i < n; ++i)
+        {
+            // This is Kadane's algorithm.
+            curMax = Math.Max(curMax, 0) + nums[i];
+            maxSum = Math.Max(maxSum, curMax);
+
+            prefixSum += nums[i];
+            if (i + 1 < n)
+            {
+                specialSum = Math.Max(specialSum, prefixSum + rightMax[i + 1]);
+            }
+        }
+        return Math.Max(maxSum, specialSum);
+    }
+
+    public static int MaxSubarraySumCircularOpt(int[] nums)
+    {
+        int curMax = 0;
+        int curMin = 0;
+        int maxSum = nums[0];
+        int minSum = nums[0];
+        int totalSum = 0;
+        int ans = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            int num = nums[i];
+            // Normal Kadane's
+            curMax = Math.Max(curMax, 0) + num;
+            maxSum = Math.Max(curMax, maxSum);
+
+            // Kadane's but with min to find minimum subarray
+            curMin = Math.Min(curMin, 0) + num;
+            minSum = Math.Min(curMin, minSum);
+
+            totalSum += num;
+        }
+        if (totalSum == minSum)
+            return maxSum;
+        ans = Math.Max(maxSum, totalSum - minSum);
+        return ans;
+    }
 }
+
+

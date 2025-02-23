@@ -238,6 +238,25 @@ public class StringProblems
             return lps;
         }
 
+        public static bool HasSameDigits(string s)
+        {
+            string temp = NewString(s);
+            return (temp[0].ToString() == temp[1].ToString());
+        }
+
+        private static string NewString(string s)
+        {
+            if (s.Length == 2) return s;
+            string temp = "";
+            for (int i = 0; i < s.Length - 1; i++)
+            {
+                int n1 = Convert.ToInt32(s[i].ToString());
+                int n2 = Convert.ToInt32(s[i + 1].ToString());
+                int n = (n1 + n2) % 10;
+                temp += n;
+            }
+            return NewString(temp);
+        }
     }
 
     public static class Medium
