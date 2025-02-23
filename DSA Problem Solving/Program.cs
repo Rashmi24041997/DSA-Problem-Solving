@@ -2,6 +2,7 @@
 
 using DSA_Problem_Solving.Approaches;
 using DSA_Problem_Solving.Data_Structures;
+using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
 
 public class Solution
@@ -139,7 +140,11 @@ public class Solution
         //int res = Sliding_Window_and_Two_pointers.Medium.LongestOnes(new int[] { 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 }, 0);
         //int res = Sliding_Window_and_Two_pointers.Hard.SubarraysWithKDistinct(new int[] { 1, 2, 1, 3, 4 }, 3);
         //int[] res = StackProblems.Medium.NextGreaterElement(new int[] { 4, 1, 2 }, new int[] { 1, 3, 4, 2 });
-
+        //int res = ArrayMedium.SubarraySum(new int[] { 1, -1, 0 }, 0);
+        //int res = ArrayMedium.MaxSubarraySumCircular(new int[] { 5, -3, 5 });
+        //int res = ArrayMedium.MaxSubarraySumCircularOpt(new int[] { 5, -3, 5 });
+        //int res = ArrayMedium.SumSubarrayMins(new int[] { 3, 1, 2, 4 });
+        var res = StringProblems.Easy.HasSameDigits("3902");
 
     }
 }

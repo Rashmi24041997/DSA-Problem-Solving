@@ -410,7 +410,6 @@ namespace DSA_Problem_Solving.Data_Structures
                 return ans;
             }
 
-
             public int SumSubarrayMinsBF(int[] arr)
             {
                 int n = arr.Length;
@@ -428,9 +427,55 @@ namespace DSA_Problem_Solving.Data_Structures
                 return (int)(sum % (Math.Pow(10.0, 9.0) + 7));
             }
 
+            public static int SumSubarrayMins(int[] arr)
+            {
+                int MOD = 1_000_000_007;
+                int n = arr.Length;
+                long sum = 0;
 
+                // Arrays to store Previous Less Element (PLE) and Next Less Element (NLE)
+                int[] ple = new int[n];
+                int[] nle = new int[n];
+                Array.Fill(nle, n); // Default value is 'n' (out of bounds)
+
+                Stack<int> stack = new Stack<int>();
+
+                // Finding Previous Less Element (PLE)
+                for (int i = 0; i < n; i++)
+                {
+                    while (stack.Count > 0 && arr[stack.Peek()] > arr[i])
+                    {
+                        stack.Pop();
+                    }
+                    ple[i] = stack.Count == 0 ? -1 : stack.Peek();
+                    stack.Push(i);
+                }
+
+                // Clear stack for next computation
+                stack.Clear();
+
+                // Finding Next Less Element (NLE)
+                for (int i = n - 1; i >= 0; i--)
+                {
+                    while (stack.Count > 0 && arr[stack.Peek()] >= arr[i])
+                    {
+                        stack.Pop();
+                    }
+                    nle[i] = stack.Count == 0 ? n : stack.Peek();
+                    stack.Push(i);
+                }
+
+                // Compute the sum of contributions
+                for (int i = 0; i < n; i++)
+                {
+                    long left = i - ple[i];
+                    long right = nle[i] - i;
+                    sum = (sum + (arr[i] * left * right) % MOD) % MOD;
+                }
+
+                return (int)sum;
+            }
         }
     }
-}
 }
 

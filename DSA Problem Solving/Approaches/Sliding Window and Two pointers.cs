@@ -110,7 +110,7 @@ namespace DSA_Problem_Solving.Approaches
             private static int Helper(int[] nums, int k)
             {
                 int left = 0, right = 0, count = 0;
-                Dictionary<int, int> map = new Dictionary<int, int>();
+                Dictionary<int, int> map = new();
 
                 while (right < nums.Length)
                 {

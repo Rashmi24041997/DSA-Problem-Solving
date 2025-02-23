@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DSA_Problem_Solving.Data_Structures.Arrays.Easy
 {
-    public static class ArrayEasy
+    public class ArrayEasy
     {
         public static int MaxProfit(int[] prices)
         {
@@ -43,6 +43,17 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays.Easy
                     cnt = 0;
             }
             return res;
+        }
+
+        public static bool Check(int[] nums)
+        {
+            bool sorted = true;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i - 1] > nums[i])
+                    return false;
+            }
+            return true;
         }
 
     }
