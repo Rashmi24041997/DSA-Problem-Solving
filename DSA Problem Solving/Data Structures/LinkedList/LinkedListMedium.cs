@@ -20,20 +20,20 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             temp = hd;
             while (n1 != null && n2 != null)
             {
-                if (n1.val <= n2.val)
+                if (n1.Val <= n2.Val)
                 {
-                    temp.next = n1;
-                    n1 = n1.next;
+                    temp.Next = n1;
+                    n1 = n1.Next;
                 }
                 else
                 {
-                    temp.next = n2;
-                    n2 = n2.next;
+                    temp.Next = n2;
+                    n2 = n2.Next;
                 }
-                temp = temp.next;
+                temp = temp.Next;
             }
-            temp.next = n1 ?? n2; // Append the remaining nodes
-            return hd.next; // Return the merged list, skipping the dummy node
+            temp.Next = n1 ?? n2; // Append the remaining nodes
+            return hd.Next; // Return the merged list, skipping the dummy node
         }
 
         // Removes the Nth node from the end of the list
@@ -52,13 +52,13 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             while (temp != null)
             {
                 cnt++;
-                temp = temp.next;
+                temp = temp.Next;
             }
 
             // If N equals the total number of nodes, delete the head
             if (cnt == N)
             {
-                ListNode newhead = head.next;
+                ListNode newhead = head.Next;
                 head = null;
                 return newhead;
             }
@@ -74,13 +74,13 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                 {
                     break;
                 }
-                temp = temp.next;
+                temp = temp.Next;
                 res--;
             }
 
             // Delete the Nth node from the end
-            ListNode delNode = temp.next;
-            temp.next = temp.next.next;
+            ListNode delNode = temp.Next;
+            temp.Next = temp.Next.Next;
             delNode = null;
             return head;
         }
@@ -95,22 +95,22 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
 
             // Move the fastp pointer N nodes ahead
             for (int i = 0; i < N; i++)
-                fastp = fastp.next;
+                fastp = fastp.Next;
 
             // If fastp becomes null, the Nth node from the end is the head
             if (fastp == null)
-                return head.next;
+                return head.Next;
 
             // Move both pointers until fastp reaches the end
-            while (fastp.next != null)
+            while (fastp.Next != null)
             {
-                fastp = fastp.next;
-                slowp = slowp.next;
+                fastp = fastp.Next;
+                slowp = slowp.Next;
             }
 
             // Delete the Nth node from the end
-            ListNode delNode = slowp.next;
-            slowp.next = slowp.next.next;
+            ListNode delNode = slowp.Next;
+            slowp.Next = slowp.Next.Next;
             delNode = null;
             return head;
         }
@@ -121,15 +121,15 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
         public static void DeleteNode(ListNode given)
         {
             if (given is null) return;
-            if (given.next is null)
+            if (given.Next is null)
                 given = null;
 
             ListNode nxt1, nxt2;
-            nxt1 = given.next;
-            nxt2 = nxt1.next;
+            nxt1 = given.Next;
+            nxt2 = nxt1.Next;
 
-            given.val = nxt1.val; // Copy the value of the next node to the current node
-            given.next = nxt2; // Bypass the next node
+            given.Val = nxt1.Val; // Copy the value of the next node to the current node
+            given.Next = nxt2; // Bypass the next node
             nxt1 = null; // Delete the next node
         }
 
@@ -139,16 +139,16 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
         public static ListNode GetIntersectionNodeBruteForce(ListNode headA, ListNode headB)
         {
             ListNode l1 = headA; ListNode l2 = headB;
-            while (l1.next != null)
+            while (l1.Next != null)
             {
-                while (l2.next != null)
+                while (l2.Next != null)
                 {
-                    if (l2.next == l1)
+                    if (l2.Next == l1)
                     {
                         return l1;
                     }
                 }
-                l1 = l1.next;
+                l1 = l1.Next;
             }
             return null;
         }
@@ -161,8 +161,8 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             ListNode l1 = headA; ListNode l2 = headB;
             while (l1 != l2)
             {
-                l1 = l1 is null ? headB : l1.next;
-                l2 = l2 is null ? headA : l2.next;
+                l1 = l1 is null ? headB : l1.Next;
+                l2 = l2 is null ? headA : l2.Next;
             }
             return l1;
         }
@@ -177,7 +177,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             ListNode res = null, temp = null;
             while (n1 != null || n2 != null)
             {
-                sum = (n1?.val ?? 0) + (n2?.val ?? 0) + carry;
+                sum = (n1?.Val ?? 0) + (n2?.Val ?? 0) + carry;
                 if (res == null)
                 {
                     res = new ListNode(sum % 10);
@@ -185,15 +185,15 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                 }
                 else
                 {
-                    res.next = new ListNode(sum % 10);
-                    res = res.next;
+                    res.Next = new ListNode(sum % 10);
+                    res = res.Next;
                 }
                 carry = sum / 10;
-                n1 = n1?.next; n2 = n2?.next;
+                n1 = n1?.Next; n2 = n2?.Next;
             }
             if (carry > 0)
             {
-                res.next = new ListNode(carry);
+                res.Next = new ListNode(carry);
             }
             return temp;
         }
@@ -208,7 +208,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             {
                 if (nodes.Contains(head)) return true;
                 nodes.Add(head);
-                head = head.next;
+                head = head.Next;
             }
             return false;
         }
@@ -219,12 +219,12 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
         public static bool HasCycleOpt(ListNode head)
         {
             ListNode slow = head, fast = head;
-            while (fast != null && fast.next != null)
+            while (fast != null && fast.Next != null)
             {
                 if (slow != fast)
                 {
-                    slow = slow.next;
-                    fast = fast.next.next;
+                    slow = slow.Next;
+                    fast = fast.Next.Next;
                 }
                 else
                     return true;
@@ -237,7 +237,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
         // Space Complexity: O(n), for the list of values
         public static bool IsPalindrome(ListNode head)
         {
-            if (head is null || head.next is null) return true;
+            if (head is null || head.Next is null) return true;
 
             bool isTru = true;
             ListNode copy = head;
@@ -245,8 +245,8 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             int cnt = 0;
             while (copy is not null)
             {
-                num.Add(copy.val);
-                copy = copy.next;
+                num.Add(copy.Val);
+                copy = copy.Next;
             }
             for (int i = 0; i < num.Count / 2; i++)
             {
@@ -264,15 +264,15 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
         // Space Complexity: O(n), for the recursion stack
         public static ListNode reverseLinkedList(ListNode head)
         {
-            if (head == null || head.next == null)
+            if (head == null || head.Next == null)
             {
                 return head;
             }
 
-            ListNode newHead = reverseLinkedList(head.next);
-            ListNode front = head.next;
-            front.next = head;
-            head.next = null;
+            ListNode newHead = reverseLinkedList(head.Next);
+            ListNode front = head.Next;
+            front.Next = head;
+            head.Next = null;
             return newHead;
         }
 
@@ -281,7 +281,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
         // Space Complexity: O(1)
         public static bool isPalindrome(ListNode head)
         {
-            if (head == null || head.next == null)
+            if (head == null || head.Next == null)
             {
                 return true;
             }
@@ -289,24 +289,24 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             ListNode slow = head;
             ListNode fast = head;
 
-            while (fast.next != null && fast.next.next != null)
+            while (fast.Next != null && fast.Next.Next != null)
             {
-                slow = slow.next;
-                fast = fast.next.next;
+                slow = slow.Next;
+                fast = fast.Next.Next;
             }
 
-            ListNode newHead = reverseLinkedList(slow.next);
+            ListNode newHead = reverseLinkedList(slow.Next);
             ListNode first = head;
             ListNode second = newHead;
             while (second != null)
             {
-                if (first.val != second.val)
+                if (first.Val != second.Val)
                 {
                     reverseLinkedList(newHead);
                     return false;
                 }
-                first = first.next;
-                second = second.next;
+                first = first.Next;
+                second = second.Next;
             }
 
             reverseLinkedList(newHead);
@@ -322,19 +322,19 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
 
             ListNode temp = head;
             int length = 1;
-            while (temp.next != null)
+            while (temp.Next != null)
             {
                 ++length;
-                temp = temp.next;
+                temp = temp.Next;
             }
 
-            temp.next = head;
+            temp.Next = head;
             k = k % length;
             int end = length - k;
-            while (end-- != 0) temp = temp.next;
+            while (end-- != 0) temp = temp.Next;
 
-            head = temp.next;
-            temp.next = null;
+            head = temp.Next;
+            temp.Next = null;
 
             return head;
         }
@@ -348,9 +348,9 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
 
             int len = 1, lstNodIndx = 0;
             ListNode last = head, lstNod = head, newHead = null;
-            while (last.next != null)
+            while (last.Next != null)
             {
-                last = last.next;
+                last = last.Next;
                 len++;
             }
 
@@ -360,12 +360,12 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
 
             while (lstNodIndx-- > 0)
             {
-                lstNod = lstNod.next;
+                lstNod = lstNod.Next;
             }
 
-            last.next = head;
-            newHead = lstNod.next;
-            lstNod.next = null;
+            last.Next = head;
+            newHead = lstNod.Next;
+            lstNod.Next = null;
             return newHead;
         }
 
@@ -377,13 +377,13 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             ListNode fast = head;
 
             // Phase 1: Detect the loop
-            while (fast != null && fast.next != null)
+            while (fast != null && fast.Next != null)
             {
                 // Move slow one step
-                slow = slow.next;
+                slow = slow.Next;
 
                 // Move fast two steps
-                fast = fast.next.next;
+                fast = fast.Next.Next;
 
                 // If slow and fast meet,
                 // a loop is detected
@@ -398,8 +398,8 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                     {
                         // Move slow and fast one step
                         // at a time
-                        slow = slow.next;
-                        fast = fast.next;
+                        slow = slow.Next;
+                        fast = fast.Next;
 
                         // When slow and fast meet again,
                         // it's the first node of the loop

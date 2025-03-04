@@ -14,7 +14,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
         // Space Complexity: O(1)
         public static ListNode ReverseKGroup(ListNode head, int k)
         {
-            if (head is null || head.next is null || k == 0)
+            if (head is null || head.Next is null || k == 0)
             {
                 return head;
             }
@@ -26,15 +26,15 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                 tCnt++;
                 if (tCnt % k != 0)
                 {
-                    thd = thd.next;
+                    thd = thd.Next;
                 }
                 else
                 {
                     tEnd = thd;
-                    tNxt = thd.next;
+                    tNxt = thd.Next;
                     ReversList(head);
                     //head.next = tNxt;
-                    thd.next = null;
+                    thd.Next = null;
                     thd = tNxt;
                     head = tNxt;
                     if ((tCnt / k) == 1) result = head;
@@ -48,14 +48,14 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
         // Space Complexity: O(n) due to recursion stack
         private static ListNode ReversList(ListNode head)
         {
-            if (head == null || head.next == null)
+            if (head == null || head.Next == null)
             {
                 return head;
             }
-            ListNode newHead = ReversList(head.next);
-            ListNode front = head.next;
-            front.next = head;
-            head.next = null;
+            ListNode newHead = ReversList(head.Next);
+            ListNode front = head.Next;
+            front.Next = head;
+            head.Next = null;
             return newHead;
         }
 
@@ -68,8 +68,8 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             ListNode prev = null;
             while (temp != null)
             {
-                ListNode front = temp.next;
-                temp.next = prev;
+                ListNode front = temp.Next;
+                temp.Next = prev;
                 prev = temp;
                 temp = front;
             }
@@ -85,7 +85,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
             while (temp != null && k > 0)
             {
                 k--;
-                temp = temp.next;
+                temp = temp.Next;
             }
             return temp;
         }
@@ -104,12 +104,12 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                 {
                     if (prevLast != null)
                     {
-                        prevLast.next = temp;
+                        prevLast.Next = temp;
                     }
                     break;
                 }
-                ListNode nextNode = kThNode.next;
-                kThNode.next = null;
+                ListNode nextNode = kThNode.Next;
+                kThNode.Next = null;
                 reverseLinkedList(temp);
                 if (temp == head)
                 {
@@ -117,7 +117,7 @@ namespace DSA_Problem_Solving.Data_Structures.LinkedList
                 }
                 else
                 {
-                    prevLast.next = kThNode;
+                    prevLast.Next = kThNode;
                 }
                 prevLast = temp;
                 temp = nextNode;

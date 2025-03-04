@@ -1198,7 +1198,7 @@ public static class ArrayMedium
     }
 
 
-      /*
+    /*
 Create an integer arrayrightMaxof lengthn.
 
 Set rightMax[n - 1] to nums[n - 1], set suffixSum to nums[n - 1].
@@ -1276,6 +1276,136 @@ Space complexity:O(N).
         ans = Math.Max(maxSum, totalSum - minSum);
         return ans;
     }
+
+
+    public static int CountArrays(int[] original, int[][] bounds)
+    {
+        int cnt = 0;
+        int n = original.Length;
+        List<List<int>> temp = new(n);
+        for (int i = 1; i < n; i++)
+        {
+            int diff = original[i] - original[i - 1];
+            List<int> lst = new();
+            int lB = bounds[i - 1][0];
+            int uB = bounds[i][1];
+            int strt = lB + diff;
+            if (diff > bounds[i][1])
+                return 0;
+            for (int j = Math.Max(strt, lB), k = 0; j <= uB; j++, k++)
+            {
+                if (i == 1)
+                    lst = new();
+                else if (temp.Count - 1 >= k)
+                    lst = temp[k];
+                else
+                    continue;
+
+                if (lst.Count > i - 1)
+                {
+                    int p = lst[i - 1];
+                    if (p + diff == j)
+                        lst.Add(j);
+                }
+                else
+                {
+                    int p = j - diff;
+                    if (p > bounds[i - 1][1]) break;
+                    if (p >= bounds[i - 1][0])
+                    {
+                        lst.Add(p);
+                        lst.Add(j);
+                    }
+                }
+                if (i == 1 && lst.Count > 1)
+                    temp.Add(lst);
+                if (lst.Count == n)
+                    cnt++;
+            }
+            if (temp.Count == 0) return 0;
+        }
+        return cnt;
+    }
+
+
+    public static int LargestInteger(int[] nums, int k)
+    {
+        Dictionary<int, int> set = new();
+        int ans = -1;
+        for (int i = 0; i <= nums.Length - k; i++)
+        {
+            for (global::System.Int32 j = i; j < i + k; j++)
+            {
+                int num = nums[j];
+                if (!set.ContainsKey(num))
+                    set.Add(num, 1);
+                else if (i > 0)
+                    set[num]++;
+            }
+        }
+        foreach (KeyValuePair<int, int> item in set)
+        {
+            if (item.Value == 1)
+            {
+                ans = Math.Max(ans, item.Key);
+            }
+        }
+        return ans;
+    }
+
+
+    public static int CountArraysCopy(int[] original, int[][] bounds)
+    {
+        int n = original.Length;
+        int ans = int.MaxValue;
+        List<List<int>> temp = new(n);
+        for (int i = 1; i < n; i++)
+        {
+            int diff = original[i] - original[i - 1];
+            List<int> lst = new();
+            int cnt = 0;
+            int strt = bounds[i - 1][0] + diff;
+            if (diff > bounds[i][1])
+                return 0;
+            for (int j = Math.Max(strt, bounds[i][0]), k = 0; j <= bounds[i][1]; j++, k++)
+            {
+                //if (i == 1)
+                //    lst = new();
+                //else if (temp.Count - 1 >= k)
+                //    lst = temp[k];
+                //else
+                //    continue;
+
+                if (lst.Count > i - 1)
+                {
+                    int p = lst[i - 1];
+                    if (p + diff == j)
+                    {
+                        lst.Add(j);
+                        cnt++;
+                    }
+                }
+                else
+                {
+                    int p = j - diff;
+                    if (p >= bounds[i - 1][0] && p <= bounds[i - 1][1])
+                    {
+                        lst.Add(p);
+                        lst.Add(j);
+                        cnt++;
+                    }
+                }
+                if (i == 1 && lst.Count > 1)
+                    temp.Add(lst);
+                //if (lst.Count == n)
+                //    cnt++;
+            }
+            ans = Math.Min(ans, cnt);
+            if (temp.Count == 0) return 0;
+        }
+        return ans;
+    }
+
 }
 
 
