@@ -80,6 +80,29 @@ namespace DSA_Problem_Solving.Data_Structures
                     }
                 }
             }
+
+            public static List<int> DfsOfGraph(List<int>[] adj)
+            {
+                List<int> ans = new List<int>(adj.Length);
+                ans.Add(0);
+                DfsOfGraphHelper(adj, ans, 0);
+                return ans;
+            }
+
+            private static void DfsOfGraphHelper(List<int>[] adj, List<int> ans, int indx)
+            {
+                if (ans.Count == ans.Capacity)
+                    return;
+                for (int i = indx; i < adj.Length; i++)
+                {
+                    int num = adj[i][0];
+                    if (!ans.Contains(num))
+                    {
+                        ans.Add(num);
+                        DfsOfGraphHelper(adj, ans, num);
+                    }
+                }
+            }
         }
     }
 }

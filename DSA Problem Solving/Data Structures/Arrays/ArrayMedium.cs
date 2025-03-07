@@ -1358,54 +1358,69 @@ Space complexity:O(N).
     {
         int n = original.Length;
         int ans = int.MaxValue;
-        List<List<int>> temp = new(n);
+        int preMin = bounds[0][0], preMax = bounds[0][1], currLB, currUB;
         for (int i = 1; i < n; i++)
         {
             int diff = original[i] - original[i - 1];
-            List<int> lst = new();
-            int cnt = 0;
-            int strt = bounds[i - 1][0] + diff;
             if (diff > bounds[i][1])
                 return 0;
-            for (int j = Math.Max(strt, bounds[i][0]), k = 0; j <= bounds[i][1]; j++, k++)
-            {
-                //if (i == 1)
-                //    lst = new();
-                //else if (temp.Count - 1 >= k)
-                //    lst = temp[k];
-                //else
-                //    continue;
-
-                if (lst.Count > i - 1)
-                {
-                    int p = lst[i - 1];
-                    if (p + diff == j)
-                    {
-                        lst.Add(j);
-                        cnt++;
-                    }
-                }
-                else
-                {
-                    int p = j - diff;
-                    if (p >= bounds[i - 1][0] && p <= bounds[i - 1][1])
-                    {
-                        lst.Add(p);
-                        lst.Add(j);
-                        cnt++;
-                    }
-                }
-                if (i == 1 && lst.Count > 1)
-                    temp.Add(lst);
-                //if (lst.Count == n)
-                //    cnt++;
-            }
-            ans = Math.Min(ans, cnt);
-            if (temp.Count == 0) return 0;
+            int strt = preMin + diff;
+            int end = preMax + diff;
+            currUB = Math.Min(bounds[i][1], end);
+            currLB = Math.Max(strt, bounds[i][0]);
+            if (currLB > currUB) return 0;
+            ans = Math.Min(currUB - currLB + 1, ans);
+            preMin = currLB;
+            preMax = currUB;
         }
         return ans;
     }
 
+    public static int CountArraysCopyVks(int[] original, int[][] bounds)
+    {
+        List<int> meriList = new List<int>();
+        for (int j = bounds[0][0]; j <= bounds[0][1]; j++)
+        {
+            int newValue = j + (original[1] - original[0]);
+            if (newValue >= bounds[1][0] && newValue <= bounds[1][1])
+            {
+                meriList.Add(newValue);
+            }
+        }
+
+        for (int i = 2; i < original.Length; i++)
+        {
+            List<int> answer = new List<int>();
+            foreach (int j in meriList)
+            {
+                int newValue = j + (original[i] - original[i - 1]);
+                if (newValue >= bounds[i][0] && newValue <= bounds[i][1])
+                {
+                    answer.Add(newValue);
+                }
+            }
+            meriList = answer;
+        }
+        return meriList.Count;
+    }
+
+    public static int MaxLen(List<int> arr)
+    {
+        int maxLen = 0;
+        for (int i = 0; i < arr.Count; i++)
+        {
+            int subArrSum = 0;
+            int subArrLen = 0;
+            for (int j = i; j < arr.Count; j++)
+            {
+                subArrSum += arr[j];
+                subArrLen++;
+                if (subArrSum == 0)
+                    maxLen = Math.Max(maxLen, subArrLen);
+            }
+        }
+        return maxLen;
+    }
 }
 
 

@@ -197,28 +197,44 @@ public class Solution
         //    );
         //var res = BinaryTreeProblems.Easy.LevelOrder(null);
         //var res = BinaryTreeProblems.Medium.TopView(new TreeNode(1, new TreeNode(2), new TreeNode(3)));
-        //var res = BinaryTreeProblems.Medium.WidthOfBinaryTree(
-        //    new TreeNode(1,
-        //        new TreeNode(3,
-        //            new TreeNode(5,
-        //                new TreeNode(6)
-        //            )
-        //        ),
-        //        new TreeNode(2,
-        //            null,
-        //            new TreeNode(9,
+        //var res = BinaryTreeProblems.Hard.MaxPathSum(
+        //    new TreeNode(10,
+        //        new TreeNode(9),
+        //            new TreeNode(-20,
+        //                new TreeNode(45),
         //                new TreeNode(7)
-        //            )
         //        )
         //    )
         //);
+        var res = BinaryTreeProblems.Medium.IsSameTree(
+            new TreeNode(1,
+                new TreeNode(2),
+                    new TreeNode(3)
+                    ),
+            new TreeNode(1,
+                new TreeNode(2),
+                    new TreeNode(3)
+                    )
+        );
+        //ArrayMedium.CountArraysCopy(
+        //    new int[] { 57, 55, 75 },
+        //    new int[][] { new int[] { 60, 106 }, new int[] { 43, 60 }, new int[] { 18, 67 }/*, new int[] { 4, 5 }*/ }
+        //    );
+        ArrayMedium.MaxLen(new List<int>() { 15, -2, 2, -8, 1, 7, 10, 23 });
+        //GraphProblems.Easy.BfsOfGraph(new List<int>[] {
+        //    new(){2,3,1},
+        //    new (){0},
+        //    new (){0,4},
+        //    new (){0},
+        //    new (){2}
+        //    });
 
-        GraphProblems.Easy.BfsOfGraph(new List<int>[] {
-            new(){2,3,1},
-            new (){0},
-            new (){0,4},
-            new (){0},
-            new (){2}
-            });
+        //GraphProblems.Easy.DfsOfGraph(new List<int>[] {
+        //    new (){0, 4},
+        //    new (){0, 5},
+        //    new (){1, 2},
+        //    new (){2, 5},
+        //    new (){3, 4}
+        //    });
     }
 }
