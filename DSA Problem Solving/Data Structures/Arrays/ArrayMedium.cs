@@ -1421,6 +1421,47 @@ Space complexity:O(N).
         }
         return maxLen;
     }
+
+
+    public static int NumOfUnplacedFruits(int[] fruits, int[] baskets)
+    {
+        int ans = baskets.Length;
+        bool[] taken = new bool[baskets.Length];
+        for (int i = 0; i < fruits.Length; i++)
+        {
+            int fruit = fruits[i];
+            for (global::System.Int32 j = 0; j < baskets.Length; j++)
+            {
+                if (!taken[j])
+                    if (baskets[j] >= fruit)
+                    {
+                        taken[j] = true;
+                        ans--;
+                        break;
+                    }
+            }
+        }
+        return ans;
+    }
+
+    public long[] FindMaxSum(int[] nums1, int[] nums2, int k)
+    {
+        int min = 0;
+        int max = 0;
+        for (int i = 0; i < nums1.Length; i++)
+        {
+            if (nums1[i] > nums1[i + 1])
+            {
+                min = Math.Min(min, i);
+                max = Math.Max(max, i);
+                continue;
+            }
+            for (global::System.Int32 j = min; j <= max; j++)
+            {
+
+            }
+        }
+    }
 }
 
 

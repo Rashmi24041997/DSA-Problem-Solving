@@ -226,10 +226,38 @@ public class BinaryTreeProblems
             return Math.Max(leftMax, rightMax) + 1;
         }
 
+        public static bool IsSameTree(TreeNode p, TreeNode q)
+        {
+            bool isSame = true;
+            IsSameTreeHelper(p, q, ref isSame);
+            return isSame;
+        }
 
-        // Function to build a binary tree
+        private static void IsSameTreeHelper(TreeNode p, TreeNode q, ref bool isSame)
+        {
+            if (!isSame) return;
+            if (p is null && q is null)
+                return;
+            if (p is null ^ q is null)
+            {
+                isSame = false;
+                return;
+            }
+            if (p.val != q.val)
+            {
+                isSame = false;
+                return;
+            }
+            IsSameTreeHelper(p.left, q.left, ref isSame);
+            IsSameTreeHelper(p.right, q.right, ref isSame);
+        }
+
+
+    }
+    public class Medium
+    {  // Function to build a binary tree
         // from preorder and inorder traversals
-        public static TreeNode BuildTree(int[] preorder, int[] inorder)
+        public static TreeNode BuildTreePreIn(int[] preorder, int[] inorder)
         {
 
             // Create a map to store indices
@@ -277,36 +305,6 @@ public class BinaryTreeProblems
             return root;
         }
 
-        public static bool IsSameTree(TreeNode p, TreeNode q)
-        {
-            bool isSame = true;
-            IsSameTreeHelper(p, q, ref isSame);
-            return isSame;
-        }
-
-        private static void IsSameTreeHelper(TreeNode p, TreeNode q, ref bool isSame)
-        {
-            if (!isSame) return;
-            if (p is null && q is null)
-                return;
-            if (p is null ^ q is null)
-            {
-                isSame = false;
-                return;
-            }
-            if (p.val != q.val)
-            {
-                isSame = false;
-                return;
-            }
-            IsSameTreeHelper(p.left, q.left, ref isSame);
-            IsSameTreeHelper(p.right, q.right, ref isSame);
-        }
-
-
-    }
-    public class Medium
-    {
         public static bool IsBalanced(TreeNode root)
         {
             // Check if the tree's height difference
@@ -317,7 +315,7 @@ public class BinaryTreeProblems
 
         // Recursive function to calculate
         // the height of the tree
-        public static int DfsHeight(TreeNode root)
+        private static int DfsHeight(TreeNode root)
         {
             // Base case: if the current node is NULL,
             // return 0 (height of an empty tree)
@@ -459,6 +457,7 @@ public class BinaryTreeProblems
             }
             return ans + 1;
         }
+
         /*662. Maximum Width of Binary Tree
         Given the root of a binary tree, return the maximum width of the given tree.
 
@@ -478,10 +477,94 @@ public class BinaryTreeProblems
             DFS(root, 0, 0);
             return MaxWidth;
         }
+
+        public static IList<IList<int>> ZigzagLevelOrder(TreeNode root)
+        {
+            IList<IList<int>> result = new List<IList<int>>();
+
+            // Check if the root is null, return an empty result
+            if (root == null)
+            {
+                return result;
+            }
+
+            // Queue to perform level order traversal
+            Queue<TreeNode> nodesQueue = new Queue<TreeNode>();
+            nodesQueue.Enqueue(root);
+
+            // Flag to determine the direction of traversal (left to right or right to left)
+            bool leftToRight = true;
+
+            // Continue traversal until the queue is empty
+            while (nodesQueue.Count > 0)
+            {
+                // Get the number of nodes at the current level
+                int size = nodesQueue.Count;
+
+                // List to store the values of nodes at the current level
+                List<int> row = new List<int>(new int[size]);
+
+                // Traverse nodes at the current level
+                for (int i = 0; i < size; i++)
+                {
+                    // Get the front node from the queue
+                    TreeNode node = nodesQueue.Dequeue();
+
+                    // Determine the index to insert the node's value based on the traversal direction
+                    int index = leftToRight ? i : (size - 1 - i);
+
+                    // Insert the node's value at the determined index
+                    row[index] = node.val;
+
+                    // Enqueue the left and right children if they exist
+                    if (node.left != null)
+                    {
+                        nodesQueue.Enqueue(node.left);
+                    }
+                    if (node.right != null)
+                    {
+                        nodesQueue.Enqueue(node.right);
+                    }
+                }
+
+                // Switch the traversal direction for the next level
+                leftToRight = !leftToRight;
+
+                // Add the current level's values to the result list
+                result.Add(row);
+            }
+
+            // Return the final result of zigzag level order traversal
+            return result;
+        }
     }
 
     public static class Hard
     {
+        public static TreeNode BuildTreeInNPost(int[] inorder, int[] postorder)
+        {
+            Dictionary<int, int> inMap = new();
+            for (int i = 0; i < inorder.Length; i++)
+            {
+                inMap.Add(inorder[i], i);
+            }
+
+            return BuildTreeInNPost(inorder, postorder, 0, inorder.Length - 1, 0, postorder.Length - 1, inMap);
+        }
+
+        private static TreeNode BuildTreeInNPost(int[] inOrder, int[] postOrder, int inStrt, int inEnd, int posStrt, int posEnd, Dictionary<int, int> inMap)
+        {
+            if (inStrt > inEnd || posStrt > posEnd)
+                return null;
+            int val = postOrder[posEnd];
+            TreeNode root = new(val);
+            int indx = inMap[val];
+            int leftCount = indx - inStrt;
+            root.left = BuildTreeInNPost(inOrder, postOrder, inStrt, indx - 1, posStrt, posStrt + leftCount - 1, inMap);
+            root.right = BuildTreeInNPost(inOrder, postOrder, indx + 1, inEnd, posStrt + leftCount, posStrt - 1, inMap);
+            return root;
+        }
+
         public static IList<IList<int>> VerticalTraversal(TreeNode root)
         {
             Queue<(TreeNode, int, int)> que = new Queue<(TreeNode, int, int)>();

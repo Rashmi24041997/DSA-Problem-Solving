@@ -206,21 +206,24 @@ public class Solution
         //        )
         //    )
         //);
-        var res = BinaryTreeProblems.Medium.IsSameTree(
-            new TreeNode(1,
-                new TreeNode(2),
-                    new TreeNode(3)
-                    ),
-            new TreeNode(1,
-                new TreeNode(2),
-                    new TreeNode(3)
-                    )
-        );
+        //var res = BinaryTreeProblems.Medium.ZigzagLevelOrder(
+        //    new TreeNode(1,
+        //        new TreeNode(2,
+        //            new TreeNode(4),
+        //            new TreeNode(5)
+        //        ),
+        //        new TreeNode(3,
+        //            new TreeNode(6),
+        //            new TreeNode(7)
+        //        )
+        //    )
+        //);
+        //var res = BinaryTreeProblems.Hard.BuildTreeInNPost(new int[] { 9, 3, 15, 20, 7 }, new int[] { 9, 15, 7, 20, 3 });
         //ArrayMedium.CountArraysCopy(
         //    new int[] { 57, 55, 75 },
         //    new int[][] { new int[] { 60, 106 }, new int[] { 43, 60 }, new int[] { 18, 67 }/*, new int[] { 4, 5 }*/ }
         //    );
-        ArrayMedium.MaxLen(new List<int>() { 15, -2, 2, -8, 1, 7, 10, 23 });
+        //ArrayMedium.MaxLen(new List<int>() { 15, -2, 2, -8, 1, 7, 10, 23 });
         //GraphProblems.Easy.BfsOfGraph(new List<int>[] {
         //    new(){2,3,1},
         //    new (){0},
@@ -236,5 +239,6 @@ public class Solution
         //    new (){2, 5},
         //    new (){3, 4}
         //    });
+        ArrayMedium.NumOfUnplacedFruits(new int[] { 4, 2, 5 }, new int[] { 3, 5, 4 });
     }
 }
