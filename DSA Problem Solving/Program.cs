@@ -1,9 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using DSA_Problem_Solving.Algorithms;
 using DSA_Problem_Solving.Approaches;
 using DSA_Problem_Solving.Data_Structures;
 using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
+using System.Collections.Generic;
 
 public class Solution
 {
@@ -144,7 +146,104 @@ public class Solution
         //int res = ArrayMedium.MaxSubarraySumCircular(new int[] { 5, -3, 5 });
         //int res = ArrayMedium.MaxSubarraySumCircularOpt(new int[] { 5, -3, 5 });
         //int res = ArrayMedium.SumSubarrayMins(new int[] { 3, 1, 2, 4 });
-        var res = StringProblems.Easy.HasSameDigits("3902");
+        //var res = StringProblems.Easy.HasSameDigits("3902");
+        //var res = RecursionMedium.Subsets(new int[] {1,2,3});
 
+        //RecursionMedium.reverse(new Stack<int>(new List<int>() { 1, 2, 3 }));
+
+        //RecursionMedium.CombinationSum(new int[] { 2, 3, 6, 7 }, 7);
+
+        //RecursionMedium.CombinationSumOpt(new int[] { 8, 7, 4, 3 }, 11);
+
+        //RecursionMedium.CombinationSum2(new int[] { 2, 5, 2, 1, 2 }, 5);
+
+        //RecursionMedium.CombinationSum3(3, 9);
+
+        //RecursionMedium.Permute(new int[] { 1, 2, 3 });
+
+        //RecursionMedium.PermuteOpt(new int[] { 1, 2, 3 });
+
+        //RecursionMedium.PartitionBF("aabb");
+
+        //MyQueueUsing2stackOpt que = new();
+        //que.Push(1);
+        //que.Push(2);
+        //que.Push(3);
+        //que.Push(4);
+        //int i1 = que.Pop();
+        //que.Push(5);
+        //int i2 = que.Peek();
+        //int i3 = que.Pop();
+        //int i4 = que.Pop();
+        //int i5 = que.Pop();
+        //int i6 = que.Pop();
+        //var res = ArrayMedium.CountArrays(new int[] { 15, 78, 39 },
+        //    new int[][]
+        //    {
+        //        new int[]{8,19},
+        //        new int[]{ 68, 110 },
+        //        new int[]{ 19, 92 }
+        //    }
+        // );
+        //var res = ArrayMedium.LargestInteger(new int[] { 0, 0 }, 2);
+        //var res = BinaryTreeProblems.Easy.LevelOrder(
+        //    new TreeNode(3,
+        //        new TreeNode(9),
+        //        new TreeNode(20,
+        //            new TreeNode(15),
+        //            new TreeNode(7)
+        //            )
+        //        )
+        //    );
+        //var res = BinaryTreeProblems.Easy.LevelOrder(null);
+        //var res = BinaryTreeProblems.Medium.TopView(new TreeNode(1, new TreeNode(2), new TreeNode(3)));
+        //var res = BinaryTreeProblems.Hard.MaxPathSum(
+        //    new TreeNode(10,
+        //        new TreeNode(9),
+        //            new TreeNode(-20,
+        //                new TreeNode(45),
+        //                new TreeNode(7)
+        //        )
+        //    )
+        //);
+        //var res = BinaryTreeProblems.Medium.ZigzagLevelOrder(
+        //    new TreeNode(1,
+        //        new TreeNode(2,
+        //            new TreeNode(4),
+        //            new TreeNode(5)
+        //        ),
+        //        new TreeNode(3,
+        //            new TreeNode(6),
+        //            new TreeNode(7)
+        //        )
+        //    )
+        //);
+        //var res = BinaryTreeProblems.Hard.BuildTreeInNPost(new int[] { 9, 3, 15, 20, 7 }, new int[] { 9, 15, 7, 20, 3 });
+        //ArrayMedium.CountArraysCopy(
+        //    new int[] { 57, 55, 75 },
+        //    new int[][] { new int[] { 60, 106 }, new int[] { 43, 60 }, new int[] { 18, 67 }/*, new int[] { 4, 5 }*/ }
+        //    );
+        //ArrayMedium.MaxLen(new List<int>() { 15, -2, 2, -8, 1, 7, 10, 23 });
+        //GraphProblems.Easy.BfsOfGraph(new List<int>[] {
+        //    new(){2,3,1},
+        //    new (){0},
+        //    new (){0,4},
+        //    new (){0},
+        //    new (){2}
+        //    });
+
+        //GraphProblems.Easy.DfsOfGraph(new List<int>[] {
+        //    new (){0, 4},
+        //    new (){0, 5},
+        //    new (){1, 2},
+        //    new (){2, 5},
+        //    new (){3, 4}
+        //    });
+        //ArrayMedium.NumOfUnplacedFruits(new int[] { 4, 2, 5 }, new int[] { 3, 5, 4 });
+
+        //TreeNode nod = BinaryTreeProblems.Hard.deserialize("1,2,3,null,null,4,5");
+        //string ans = BinaryTreeProblems.Hard.serialize(nod);
+
+        TreeNode nod = BSTProblems.Easy.SearchBST(BinaryTreeProblems.Hard.deserialize("4,2,7,1,3"), 2);
     }
 }

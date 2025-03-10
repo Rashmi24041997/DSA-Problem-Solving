@@ -48,6 +48,17 @@ namespace DSA_Problem_Solving.Data_Structures
             return top + 1;
         }
     }
+    public class StackNode
+    {
+        int data;
+        StackNode? next;
+        public StackNode(int a)
+        {
+            data = a;
+            next = null;
+        }
+    }
+
 
     public class StackProblems
     {
@@ -207,6 +218,141 @@ namespace DSA_Problem_Solving.Data_Structures
                 }
                 return pse;
             }
+
+            /*
+             Implement a last-in-first-out (LIFO) stack using only two queues. The implemented stack should support all the functions of a normal stack (push, top, pop, and empty).
+             */
+            public class MyStackUsingQueBF
+            {
+                Queue<int> Que1, Que2;
+                int top;
+
+                public MyStackUsingQueBF()
+                {
+                    Que1 = new();
+                    Que2 = new();
+                }
+
+                public void Push(int x)
+                {
+                    Que2.Enqueue(x);
+                    while (Que1.Count > 0)
+                    {
+                        Que2.Enqueue(Que1.Dequeue());
+                    }
+                    Queue<int> que3 = Que2;
+                    Que2 = Que1;
+                    Que1 = que3;
+                }
+
+                public int Pop()
+                {
+                    return Que1.Dequeue();
+                }
+
+                public int Top()
+                {
+                    return Que1.Peek();
+                }
+
+                public bool Empty()
+                {
+                    return Que1.Count > 0;
+                }
+            }
+
+            public class MyStackUsingQueOpt
+            {
+                Queue<int> que;
+                public MyStackUsingQueOpt()
+                {
+                    que = new();
+                }
+
+                public void Push(int x)
+                {
+                    que.Enqueue(x);
+                    for (int i = 0; i < que.Count - 1; i++)
+                    {
+                        que.Enqueue(que.Dequeue());
+                    }
+                }
+
+                public int Pop()
+                {
+                    return que.Dequeue();
+                }
+
+                public int Top()
+                {
+                    return que.Peek();
+                }
+
+                public bool Empty()
+                {
+                    return que.Count == 0;
+                }
+            }
+
+            public class MyStackUsgLL
+            {
+                ListNode top;
+                int count = 0;
+                // Function to push an integer into the stack.
+
+                public void Push(int a)
+                {
+                    ListNode nu = new(a);
+                    nu.Next = top;
+                    top = nu;
+                    count++;
+                }
+
+                // Function to remove an item from top of the stack.
+                public int pop()
+                {
+                    if (count == 0) return -1;
+                    int res = top.Val;
+                    top = top.Next;
+                    count--;
+                    return res;
+                }
+            }
+
+            public static Stack<int> Reverse(Stack<int> st)
+            {
+                if (st.Count == 0)
+                {
+                    return st;
+                }
+
+                // Step 1: Pop the top element
+                int top = st.Pop();
+
+                // Step 2: Recursively reverse the remaining stack
+                Reverse(st);
+
+                // Step 3: Insert the popped element at the bottom
+                insertAtBottom(st, top);
+                return st;
+            }
+
+            private static void insertAtBottom(Stack<int> st, int value)
+            {
+                if (st.Count == 0)
+                {
+                    st.Push(value);
+                    return;
+                }
+
+                // Pop the top element and insert the value at the bottom
+                int top = st.Pop();
+                insertAtBottom(st, value);
+
+                // Push the popped element back
+                st.Push(top);
+            }
+
         }
 
         public class Medium
