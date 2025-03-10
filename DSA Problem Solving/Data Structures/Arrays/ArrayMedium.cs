@@ -1444,24 +1444,6 @@ Space complexity:O(N).
         return ans;
     }
 
-    public long[] FindMaxSum(int[] nums1, int[] nums2, int k)
-    {
-        int min = 0;
-        int max = 0;
-        for (int i = 0; i < nums1.Length; i++)
-        {
-            if (nums1[i] > nums1[i + 1])
-            {
-                min = Math.Min(min, i);
-                max = Math.Max(max, i);
-                continue;
-            }
-            for (global::System.Int32 j = min; j <= max; j++)
-            {
-
-            }
-        }
-    }
 }
 
 

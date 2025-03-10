@@ -239,6 +239,11 @@ public class Solution
         //    new (){2, 5},
         //    new (){3, 4}
         //    });
-        ArrayMedium.NumOfUnplacedFruits(new int[] { 4, 2, 5 }, new int[] { 3, 5, 4 });
+        //ArrayMedium.NumOfUnplacedFruits(new int[] { 4, 2, 5 }, new int[] { 3, 5, 4 });
+
+        //TreeNode nod = BinaryTreeProblems.Hard.deserialize("1,2,3,null,null,4,5");
+        //string ans = BinaryTreeProblems.Hard.serialize(nod);
+
+        TreeNode nod = BSTProblems.Easy.SearchBST(BinaryTreeProblems.Hard.deserialize("4,2,7,1,3"), 2);
     }
 }

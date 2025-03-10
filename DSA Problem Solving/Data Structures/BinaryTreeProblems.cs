@@ -631,6 +631,60 @@ public class BinaryTreeProblems
             return Math.Max(leftSum, rightSum) + root.val;
         }
 
+
+        // Encodes a tree to a single string.
+        public static string serialize(TreeNode root)
+        {
+            if (root == null) return "";
+
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            queue.Enqueue(root);
+            List<string> result = new List<string>();
+
+            while (queue.Count > 0)
+            {
+                TreeNode node = queue.Dequeue();
+                if (node == null)
+                {
+                    result.Add("null");
+                }
+                else
+                {
+                    result.Add(node.val.ToString());
+                    queue.Enqueue(node.left);
+                    queue.Enqueue(node.right);
+                }
+            }
+
+            return string.Join(",", result);
+        }
+
+        // Decodes your encoded data to tree.
+        public static TreeNode deserialize(string data)
+        {
+            if (string.IsNullOrWhiteSpace(data))
+                return null;
+
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            string[] vals = data.Split(",");
+            TreeNode root = new(Convert.ToInt32(vals[0]));
+            queue.Enqueue(root);
+            for (int i = 1; i < vals.Length; i++)
+            {
+                TreeNode parent = queue.Dequeue();
+                if (vals[i] != "null")
+                {
+                    parent.left = new TreeNode(Convert.ToInt32(vals[i]));
+                    queue.Enqueue(parent.left);
+                }
+                if (vals[++i] != "null")
+                {
+                    parent.right = new TreeNode(Convert.ToInt32(vals[i]));
+                    queue.Enqueue(parent.right);
+                }
+            }
+            return root;
+        }
     }
 }
 
