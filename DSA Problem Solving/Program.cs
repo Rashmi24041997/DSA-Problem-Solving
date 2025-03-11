@@ -244,6 +244,12 @@ public class Solution
         //TreeNode nod = BinaryTreeProblems.Hard.deserialize("1,2,3,null,null,4,5");
         //string ans = BinaryTreeProblems.Hard.serialize(nod);
 
-        TreeNode nod = BSTProblems.Easy.SearchBST(BinaryTreeProblems.Hard.deserialize("4,2,7,1,3"), 2);
+        //TreeNode nod = BSTProblems.Easy.SearchBST(BinaryTreeProblems.Hard.deserialize("4,2,7,1,3"), 2);
+
+        //TreeNode nod = BSTProblems.Medium.BstFromPreorderBtr(new int[] { 8, 5, 1, 7, 10, 12 });
+        TreeNode nod = BSTProblems.Medium.BstFromPreorderOpt(new int[] { 8, 5, 1, 7, 10, 12 });
+        //bool nod = BSTProblems.Medium.IsValidBST(BinaryTreeProblems.Hard.deserialize("2,2,2"));
+
+        //bool ans = ArrayEasy.CheckPractice(new int[] { 2, 1, 3, 4 });
     }
 }
