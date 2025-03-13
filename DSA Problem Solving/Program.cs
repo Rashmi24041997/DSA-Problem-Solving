@@ -5,6 +5,7 @@ using DSA_Problem_Solving.Approaches;
 using DSA_Problem_Solving.Data_Structures;
 using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
+using System.Collections;
 using System.Collections.Generic;
 
 public class Solution
@@ -247,9 +248,19 @@ public class Solution
         //TreeNode nod = BSTProblems.Easy.SearchBST(BinaryTreeProblems.Hard.deserialize("4,2,7,1,3"), 2);
 
         //TreeNode nod = BSTProblems.Medium.BstFromPreorderBtr(new int[] { 8, 5, 1, 7, 10, 12 });
-        TreeNode nod = BSTProblems.Medium.BstFromPreorderOpt(new int[] { 8, 5, 1, 7, 10, 12 });
+        //TreeNode nod = BSTProblems.Medium.BstFromPreorderOpt(new int[] { 8, 5, 1, 7, 10, 12 });
         //bool nod = BSTProblems.Medium.IsValidBST(BinaryTreeProblems.Hard.deserialize("2,2,2"));
 
         //bool ans = ArrayEasy.CheckPractice(new int[] { 2, 1, 3, 4 });
+
+        //bool ans = RecursionMedium.Exist(
+        //    new char[][] {
+        //        new char[] { 'A', 'B', 'C', 'E' },
+        //        new char[] { 'S', 'F', 'C', 'S' },
+        //        new char[] { 'A', 'D', 'E', 'E' }
+        //    },
+        //    "ABCB");
+
+        RecursionHard.SolveNQueens(6);
     }
 }

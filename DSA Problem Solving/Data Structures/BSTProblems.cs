@@ -10,6 +10,54 @@ public static class BSTProblems
 {
     public static class Easy
     {
+        public static int KthGreatest(TreeNode? root, int k)
+        {
+            int temp = k, ans = -1;
+            KthGreatestHelper(root, ref temp, ref ans);
+            return ans;
+        }
+
+        private static void KthGreatestHelper(TreeNode? root, ref int temp, ref int ans)
+        {
+            if (root is null || temp == 0)
+                return;
+            KthGreatestHelper(root.right, ref temp, ref ans);
+            temp--;
+            if (temp == 0)
+            {
+                ans = root.val;
+                return;
+            }
+            KthGreatestHelper(root.left, ref temp, ref ans);
+        }
+
+
+        public static bool FindTargetBF(TreeNode root, int k)
+        {
+            if (root is null)
+                return false;
+            List<int> inOrder = new();
+            InOrder(root, inOrder);
+            int i = 0, j = inOrder.Count - 1;
+            while (i <= j)
+            {
+                int sum = inOrder[i] + inOrder[j];
+                if (sum == k)
+                    return true;
+                if (sum > k) j--;
+                else i++;
+            }
+            return false;
+        }
+
+        private static void InOrder(TreeNode? root, List<int> inOrder)
+        {
+            if (root is null)
+                return;
+            InOrder(root.left, inOrder);
+            inOrder.Add(root.val);
+            InOrder(root.right, inOrder);
+        }
         public static TreeNode SearchBST(TreeNode root, int val)
         {
             if (root is null) return null;
@@ -46,7 +94,7 @@ public static class BSTProblems
             return ans;
         }
 
-        private static void KthSmallestHelper(TreeNode root, ref int temp, ref int ans)
+        private static void KthSmallestHelper(TreeNode? root, ref int temp, ref int ans)
         {
             if (root == null || ans > -1)
                 return;
