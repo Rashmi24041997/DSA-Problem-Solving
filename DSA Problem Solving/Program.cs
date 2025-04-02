@@ -1,12 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using DSA_Problem_Solving.Algorithms;
-using DSA_Problem_Solving.Approaches;
+using DSA_Problem_Solving.Basic_Maths;
 using DSA_Problem_Solving.Data_Structures;
-using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
-using System.Collections;
-using System.Collections.Generic;
+using static DSA_Problem_Solving.Data_Structures.HeapProblems;
 
 public class Solution
 {
@@ -261,6 +258,15 @@ public class Solution
         //    },
         //    "ABCB");
 
-        RecursionHard.SolveNQueens(6);
+        //RecursionHard.SolveNQueens(6);
+        //BinaryTreeProblems.Medium.IsSymmetric(BinaryTreeProblems.Hard.deserialize("1,2,2,3,4,4,3,3,4,3,4,4,3,4,3"));
+        //ArrayEasy.TotalNumbers(new int[] { 0, 1, 2 });
+        //ArrayEasy.Rotate(new int[] { -1, -100, 3, 99 }, 2);
+        //ArrayHard.MaxSum(new int[] { 1, 2, -1, -2, 1, 0, -1 });
+        //EasyHP obj = new EasyHP();
+
+        //MathProblems.Easy.lcmAndGcd(1463, 1305);
+        MathProblems.Easy.sumOfDivisors(5);
+
     }
 }

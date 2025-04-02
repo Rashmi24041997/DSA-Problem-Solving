@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,6 +100,51 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays.Easy
             if (breaks > 1)
                 return false;
             return true;
+        }
+
+        public static int TotalNumbers(int[] digits)
+        {
+            HashSet<int> distinctNumbers = new HashSet<int>();
+
+            // Iterate through all combinations of three digits
+            for (int i = 0; i < digits.Length; i++)
+            {
+                for (int j = 0; j < digits.Length; j++)
+                {
+                    for (int k = 0; k < digits.Length; k++)
+                    {
+                        // Ensure no digit is used more than once
+                        if (i != j && j != k && i != k)
+                        {
+                            // Form the number
+                            int number = digits[i] * 100 + digits[j] * 10 + digits[k];
+
+                            // Check if it's a valid three-digit even number (no leading zero, and even)
+                            if (digits[i] != 0 && number % 2 == 0)
+                            {
+                                distinctNumbers.Add(number);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Return the count of distinct numbers
+            return distinctNumbers.Count;
+        }
+        public static void Rotate(int[] nums, int k)
+        {
+            int n = nums.Length;
+            int[] ans = new int[n];
+            for (int i = 0; i < n - k; i++)
+            {
+                ans[k + i] = nums[i];
+            }
+            for (int i = 0; i < k; i++)
+            {
+                ans[i] = nums[i + k + 1];
+            }
+            ans.CopyTo(nums, 0);
         }
     }
     public static class ArrayHard
@@ -387,6 +433,29 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays.Easy
                     low = mid1 + 1;
             }
             return 0.0;
+        }
+
+        public static int MaxSum(int[] nums)
+        {
+            Array.Sort(nums);
+            int n = nums.Length;
+            List<int> lst = new();
+
+            for (int i = 0; i < n; i++)
+            {
+                int num = nums[i];
+                if (!lst.Contains(num))
+                    lst.Add(num);
+            }
+            int curMax = 0, maxSum = lst[0], minSum = lst[0];
+            for (int i = 0; i < lst.Count; i++)
+            {
+                int num = lst[i];
+                // Normal Kadane's
+                curMax = Math.Max(curMax, 0) + num;
+                maxSum = Math.Max(curMax, maxSum);
+            }
+            return maxSum;
         }
     }
 

@@ -10,8 +10,59 @@ namespace DSA_Problem_Solving.Basic_Maths
     {
         public class Easy
         {
-        //Given an integer n, return the number of prime numbers that are strictly less than n.
-        //TC: O(n*Sqrt(n)) SC:O(1)
+            // Complete this function
+            public static long sumOfDivisors(long n)
+            {
+                long sum = 1;
+                for (long i = 2; i <= n; i++)
+                {
+                    long currSum = 1;
+
+                    for (long j = 2; j <= i; j++)
+                        if (i % j == 0)
+                            currSum += j;
+
+                    sum += currSum;
+                }
+                return sum;
+            }
+
+
+            public static int[] lcmAndGcd(int a, int b)
+            {
+                int cmn = 1;
+                int max = Math.Max(a, b);
+                int min = Math.Min(a, b);
+                if (max % min == 0) return new int[2] { max, min };
+
+                int[] ans = new int[2] { 1, 1 };
+                ans[0] = CalculateLCM(max, min);
+                ans[1] = CalculateHCF(max, min);
+                return ans;
+            }
+
+            private static int CalculateLCM(int max, int min)
+            {
+                for (int i = min * ((max / min) + 1); i <= max * min; i += min)
+                {
+                    if (i % max == 0)
+                        return i;
+                }
+                return 1;
+            }
+
+            private static int CalculateHCF(int max, int min)
+            {
+                for (int i = min / 2; i > 1; i++)
+                {
+                    if (max % i == 0 && min % i == 0)
+                        return i;
+                }
+                return 1;
+            }
+
+            //Given an integer n, return the number of prime numbers that are strictly less than n.
+            //TC: O(n*Sqrt(n)) SC:O(1)
             public static int CountPrimesBF(int n)
             {
                 if (n < 3) return 0;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DSA_Problem_Solving.Easy.Binary_Tree;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,26 @@ public static class BSTProblems
 {
     public static class Easy
     {
+
+        public static int FindCeil(TreeNode node, int x)
+        {
+            int ans = -1;
+            while (node != null)
+            {
+                if (node.val == x)
+                {
+                    return x;
+                }
+                if (node.val < x)
+                    node = node.right;
+                else
+                {
+                    ans = node.val;
+                    node = node.left;
+                }
+            }
+            return ans;
+        }
         public static int KthGreatest(TreeNode? root, int k)
         {
             int temp = k, ans = -1;
@@ -50,7 +71,7 @@ public static class BSTProblems
             return false;
         }
 
-        private static void InOrder(TreeNode? root, List<int> inOrder)
+        public static void InOrder(TreeNode? root, List<int> inOrder)
         {
             if (root is null)
                 return;
@@ -83,6 +104,7 @@ public static class BSTProblems
             return min;
         }
     }
+
     public static class Medium
     {
         public static int KthSmallest(TreeNode root, int k)
@@ -124,33 +146,60 @@ public static class BSTProblems
 
         private static TreeNode? BstFromPreorderBF(int[] preorder, int strt, int end, Dictionary<int, int> preMap)
         {
+            // Base case: if the start index is greater than the end index, return null (no tree to construct)
             if (strt > end)
                 return null;
+
+            // Get the current root value from the preorder array using the start index
             int num = preorder[strt];
+
+            // Create a new TreeNode with the current root value
             TreeNode root = new TreeNode(num);
+
+            // If the start index is equal to the end index, return the root (single node tree)
             if (strt == end)
                 return root;
+
+            // Initialize the left and right subtree start indices
             int leftStrt = preMap[num] - 1, rightStrt = preMap[num] + 1;
+
+            // Initialize a variable to track the left subtree root value
             int left = 0;
+
+            // Iterate through the preMap to find the correct indices for left and right subtrees
             foreach (KeyValuePair<int, int> item in preMap)
             {
+                // Check if the current item index is within the range of start and end indices
                 if (item.Value >= strt && item.Value <= end)
                 {
+                    // If left is not set and the current item key is less than the root value, set left and leftStrt
                     if (left == 0 && item.Key < num)
                     {
                         left = item.Key;
                         leftStrt = item.Value;
                     }
+                    // If rightStrt is not set and the current item key is greater than the root value, set rightStrt
                     if (rightStrt == 0 && item.Key > num)
                         rightStrt = item.Value;
                 }
+                // If both left and rightStrt are set, break the loop
                 if (left > 0 && rightStrt > 0)
                     break;
             }
+
+            // Calculate the end index for the left subtree
             int leftEnd = rightStrt - 1;
+
+            // The end index for the right subtree is the same as the original end index
             int rightEnd = end;
+
+            // Recursively construct the left subtree
             root.left = BstFromPreorderBF(preorder, leftStrt, leftEnd, preMap);
+
+            // Recursively construct the right subtree
             root.right = BstFromPreorderBF(preorder, rightStrt, rightEnd, preMap);
+
+            // Return the constructed root node
             return root;
         }
 
@@ -190,12 +239,23 @@ public static class BSTProblems
 
         public static TreeNode? BstFromPreorderOpt(int[] preorder, int len, long bound, ref int indx)
         {
+            // If the current index is equal to the length of the preorder array or the current value exceeds the bound, return null.
             if (indx == len || preorder[indx] > bound)
                 return null;
+
+            // Create a new TreeNode with the current value from the preorder array.
             TreeNode root = new(preorder[indx]);
+
+            // Increment the index to move to the next value in the preorder array.
             indx++;
+
+            // Recursively construct the left subtree with the current value as the new bound.
             root.left = BstFromPreorderOpt(preorder, len, root.val, ref indx);
+
+            // Recursively construct the right subtree with the original bound.
             root.right = BstFromPreorderOpt(preorder, len, bound, ref indx);
+
+            // Return the constructed root node.
             return root;
         }
 
@@ -207,6 +267,7 @@ public static class BSTProblems
             bool isBST = IsValidBST(root, long.MinValue, long.MaxValue);
             return isBST;
         }
+
         /// <summary>
         /// let's set the limits in which each nod value should be.
         /// if any nod exceeds either of the UB or LB, tree is not BST.
@@ -221,6 +282,96 @@ public static class BSTProblems
             bool right = IsValidBST(root.right, root.val + 1, max);
             return left && right;
         }
+
+
+        //173. Binary Search Tree Iterator
+        public class BSTIteratorBF
+        {
+            List<int> inOrder;
+            int currIndx = 0;
+            public BSTIteratorBF(TreeNode root)
+            {
+                InOrder(root, inOrder);
+            }
+
+            private static void InOrder(TreeNode? root, List<int> inOrder)
+            {
+                if (root is null)
+                    return;
+                InOrder(root.left, inOrder);
+                inOrder.Add(root.val);
+                InOrder(root.right, inOrder);
+            }
+            public int Next()
+            {
+                return inOrder[currIndx++];
+            }
+
+            public bool HasNext()
+            {
+                return currIndx > -1 && currIndx < inOrder.Count;
+            }
+        }
+
+        public class BSTIterator
+        {
+            Stack<TreeNode> InOrder;
+            bool Reverse;
+            public BSTIterator(TreeNode root)
+            {
+                InOrder = new();
+                PushNodes(root, InOrder, false);
+            }
+            public BSTIterator(TreeNode root, bool reverse)
+            {
+                Reverse = reverse;
+                InOrder = new();
+                PushNodes(root, InOrder, reverse);
+            }
+
+            private static void PushNodes(TreeNode? root, Stack<TreeNode> inOrder, bool reverse)
+            {
+                while (root is not null)
+                {
+                    inOrder.Push(root);
+                    root = reverse ? root.right : root.left;
+                }
+            }
+
+            public int Next()
+            {
+                TreeNode nod = InOrder.Pop();
+                PushNodes(Reverse ? nod.left : nod.right, InOrder, Reverse);
+                return nod.val;
+            }
+
+            public bool HasNext()
+            {
+                return InOrder.Count != 0;
+            }
+        }
+
+        public static bool FindTarget(TreeNode root, int k)
+        {
+            BSTIterator bstLeft = new(root);
+            BSTIterator bstRight = new(root, true);
+
+            int left = bstLeft.Next();
+            int right = bstRight.Next();
+            int sum = left + right;
+            while (left < right)
+            {
+                if (sum == k)
+                    return true;
+                if (sum < k)
+                    left = bstLeft.Next();
+                else
+                    right = bstRight.Next();
+                sum = left + right;
+            }
+            return false;
+        }
+
     }
 }
 

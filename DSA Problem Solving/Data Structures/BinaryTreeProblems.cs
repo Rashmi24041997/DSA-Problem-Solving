@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,27 +65,36 @@ public class BinaryTreeProblems
 
             PreorderTraversalHelper(root.right, lst);
         }
-
+        /*
+         94. Binary Tree Morris Inorder Traversal
+             Given the root of a binary tree, return the inorder traversal of its nodes' values.
+         */
         public static IList<int> MorrisInorderTraversal(TreeNode root)
         {
-
+            // Initialize the list to store the inorder traversal
             IList<int> lst = new List<int>();
+
+            // Start with the root node
             TreeNode cur = root;
+
+            // Continue until there are no more nodes to process
             while (cur != null)
             {
-                lst.Add(cur.val);
+                // If there is no left child, visit the current node and move to the right child
                 if (cur.left == null)
                 {
+                    lst.Add(cur.val);
                     cur = cur.right;
                 }
                 else
                 {
+                    // Find the inorder predecessor of the current node
                     TreeNode prev = cur.left;
-
                     while (prev.right != null && prev.right != cur)
                     {
                         prev = prev.right;
                     }
+                    // If the right child of the predecessor is null, establish a temporary link to the current node
                     if (prev.right == null)
                     {
                         prev.right = cur;
@@ -92,12 +102,14 @@ public class BinaryTreeProblems
                     }
                     else
                     {
+                        // If the right child of the predecessor is the current node, remove the temporary link and visit the current node
                         prev.right = null;
-                        //lst.Add(cur.val);
+                        lst.Add(cur.val);
                         cur = cur.right;
                     }
                 }
             }
+            // Return the inorder traversal list
             return lst;
         }
 
@@ -140,6 +152,7 @@ public class BinaryTreeProblems
             }
             return ans;
         }
+
         /*
          257. Binary Tree Paths
             Given the root of a binary tree, return all root-to-leaf paths in any order.
@@ -167,6 +180,7 @@ public class BinaryTreeProblems
             }
             list.RemoveAt(list.Count - 1);
         }
+
         /*
          104. Maximum Depth of Binary Tree
             Given the root of a binary tree, return its maximum depth.
@@ -272,15 +286,71 @@ public class BinaryTreeProblems
             IsSameTreeHelper(p.left, q.left, ref isSame);
             IsSameTreeHelper(p.right, q.right, ref isSame);
         }
-
-
     }
-    public class Medium
-    {  // Function to build a binary tree
+
+    public static class Medium
+    {
+        public static bool IsSymmetricBF(TreeNode root)
+        {
+            Queue<(TreeNode, int)> que = new();
+
+            que.Enqueue((root, 0));
+            while (que.Count > 0)
+            {
+                int cnt = que.Count;
+                List<(int, bool)> lstL = new(new (int, bool)[cnt]);
+                List<(int, bool)> lstR = new(new (int, bool)[cnt]);
+
+                for (int i = 0; i < cnt; i++)
+                {
+                    var pair = que.Dequeue();
+                    TreeNode nod = pair.Item1;
+                    int dir = pair.Item2;
+                    int val = nod.val;
+
+                    //if (dir == -1)
+                    //    lstL[i] = (val, true);
+                    //else if (dir == 1)
+                    //    lstR[cnt - i - 1] = (val, true);
+
+                    if (nod.left is not null)
+                        que.Enqueue((nod.left, -1));
+                    lstL[i] = (nod.left is null ? -101 : nod.left.val, true);
+
+                    if (nod.right is not null)
+                        que.Enqueue((nod.right, 1));
+                    lstR[cnt - i - 1] = (nod.right is null ? -101 : nod.right.val, true);
+
+                }
+                if (lstL.Count != lstR.Count)
+                    return false;
+
+                for (int i = 0; i < lstL.Count; i++)
+                {
+                    if (lstL[i] != lstR[i])
+                        return false;
+                }
+            }
+            return true;
+        }
+        public static bool IsSymmetric(TreeNode root)
+        {
+            if (root is null) return true;
+            return IsMirror(root.left, root.right);
+        }
+
+        private static bool IsMirror(TreeNode t1, TreeNode t2)
+        {
+            if (t1 is null && t2 is null) return true;
+            if (t1 is null || t2 is null || t1.val != t2.val) return false;
+
+            return IsMirror(t1.left, t2.right) && IsMirror(t1.right, t2.left);
+        }
+
+        // Function to build a binary tree
         // from preorder and inorder traversals
         public static TreeNode BuildTreePreIn(int[] preorder, int[] inorder)
         {
-
             // Create a map to store indices
             // of elements in the inorder traversal
             Dictionary<int, int> inMap = new();
@@ -500,6 +570,7 @@ public class BinaryTreeProblems
             GetTreeTraversal(root.right, pre, @in, post);
             post.Add(root.val);
         }
+
         /*
             Given the root of a binary tree, return the maximum width of the given tree.
 
@@ -735,6 +806,7 @@ public class BinaryTreeProblems
             // Return the final vertical order traversal
             return ans;
         }
+
         /*
          124. Binary Tree Maximum Path Sum
             A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.
@@ -817,7 +889,7 @@ public class BinaryTreeProblems
                     parent.left = new TreeNode(Convert.ToInt32(vals[i]));
                     queue.Enqueue(parent.left);
                 }
-                if (vals[++i] != "null")
+                if ((++i < vals.Length) && vals[i] != "null")
                 {
                     parent.right = new TreeNode(Convert.ToInt32(vals[i]));
                     queue.Enqueue(parent.right);
