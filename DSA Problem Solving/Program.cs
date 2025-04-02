@@ -1,11 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using DSA_Problem_Solving.Algorithms;
-using DSA_Problem_Solving.Approaches;
+using DSA_Problem_Solving.Basic_Maths;
 using DSA_Problem_Solving.Data_Structures;
-using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
-using System.Collections.Generic;
+using static DSA_Problem_Solving.Data_Structures.HeapProblems;
 
 public class Solution
 {
@@ -244,6 +242,31 @@ public class Solution
         //TreeNode nod = BinaryTreeProblems.Hard.deserialize("1,2,3,null,null,4,5");
         //string ans = BinaryTreeProblems.Hard.serialize(nod);
 
-        TreeNode nod = BSTProblems.Easy.SearchBST(BinaryTreeProblems.Hard.deserialize("4,2,7,1,3"), 2);
+        //TreeNode nod = BSTProblems.Easy.SearchBST(BinaryTreeProblems.Hard.deserialize("4,2,7,1,3"), 2);
+
+        //TreeNode nod = BSTProblems.Medium.BstFromPreorderBtr(new int[] { 8, 5, 1, 7, 10, 12 });
+        //TreeNode nod = BSTProblems.Medium.BstFromPreorderOpt(new int[] { 8, 5, 1, 7, 10, 12 });
+        //bool nod = BSTProblems.Medium.IsValidBST(BinaryTreeProblems.Hard.deserialize("2,2,2"));
+
+        //bool ans = ArrayEasy.CheckPractice(new int[] { 2, 1, 3, 4 });
+
+        //bool ans = RecursionMedium.Exist(
+        //    new char[][] {
+        //        new char[] { 'A', 'B', 'C', 'E' },
+        //        new char[] { 'S', 'F', 'C', 'S' },
+        //        new char[] { 'A', 'D', 'E', 'E' }
+        //    },
+        //    "ABCB");
+
+        //RecursionHard.SolveNQueens(6);
+        //BinaryTreeProblems.Medium.IsSymmetric(BinaryTreeProblems.Hard.deserialize("1,2,2,3,4,4,3,3,4,3,4,4,3,4,3"));
+        //ArrayEasy.TotalNumbers(new int[] { 0, 1, 2 });
+        //ArrayEasy.Rotate(new int[] { -1, -100, 3, 99 }, 2);
+        //ArrayHard.MaxSum(new int[] { 1, 2, -1, -2, 1, 0, -1 });
+        //EasyHP obj = new EasyHP();
+
+        //MathProblems.Easy.lcmAndGcd(1463, 1305);
+        MathProblems.Easy.sumOfDivisors(5);
+
     }
 }

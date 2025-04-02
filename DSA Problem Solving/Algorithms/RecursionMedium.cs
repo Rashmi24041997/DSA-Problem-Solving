@@ -41,26 +41,44 @@ namespace DSA_Problem_Solving.Algorithms
         // Space Complexity: O(2^n)
         public static IList<IList<int>> SubsetsWithDup(int[] nums)
         {
+            // If the input array is null, return null
             if (nums is null)
                 return null;
 
+            // If the input array is empty, return an empty list of lists
             if (nums.Length < 1)
                 return new List<IList<int>>();
 
+            // Sort the array to handle duplicates
             Array.Sort(nums);
 
+            // Initialize a pointer to track unique elements
             int i = 0;
+
+            // Iterate through the array starting from the second element
             for (int j = 1; j < nums.Length; j++)
             {
+                // If the current element is different from the last unique element
                 if (nums[i] != nums[j])
                 {
+                    // Move the pointer to the next position
                     i++;
+
+                    // Update the element at the pointer to the current element
                     nums[i] = nums[j];
                 }
             }
+
+            // Increment the pointer to get the count of unique elements
             i++;
+
+            // Initialize the list to store all unique subsets
             IList<IList<int>> ansList = new List<IList<int>>();
+
+            // Call the helper method to find all subsets starting from index 0
             FindSubsets(0, nums, i, new List<int>(), ansList);
+
+            // Return the list of unique subsets
             return ansList;
         }
 
@@ -82,7 +100,7 @@ namespace DSA_Problem_Solving.Algorithms
         // Method to find all unique subsets of an array with duplicates
         // Time Complexity: O(2^n)
         // Space Complexity: O(2^n)
-        public static void findSubsets(int ind, int[] nums, List<int> ds, IList<IList<int>> ansList)
+        private static void findSubsets(int ind, int[] nums, List<int> ds, IList<IList<int>> ansList)
         {
             ansList.Add(new List<int>(ds));
             for (int i = ind; i < nums.Length; i++)
@@ -108,7 +126,7 @@ namespace DSA_Problem_Solving.Algorithms
         // Helper method to recursively find subsets
         // Time Complexity: O(2^n)
         // Space Complexity: O(2^n)
-        public static void findSubsets(int ind, int[] nums, List<int> ds, List<IList<int>> ansList)
+        private static void findSubsets(int ind, int[] nums, List<int> ds, List<IList<int>> ansList)
         {
             ansList.Add(new List<int>(ds));
             for (int i = ind; i < nums.Length; i++)
@@ -310,10 +328,12 @@ namespace DSA_Problem_Solving.Algorithms
         */
 
         /// <summary>
-        /// Run a for loop starting from 0 to nums.size() - 1. Check if the frequency of i is unmarked, if it is unmarked then it means it has not been picked and then we pick. And make sure it is marked as picked.
-        ///Call the recursion with the parameters to pick the other elements when we come back from the recursion make sure you throw that element out. And unmark that element in the map.
-        ///Time Complexity:  N! x N
-        ///Space Complexity:  O(N)
+        /// Run a for loop starting from 0 to nums.size() - 1. Check if the frequency of i is unmarked,
+        /// if it is unmarked then it means it has not been picked and then we pick. And make sure it is marked as picked.
+        /// Call the recursion with the parameters to pick the other elements when we come back from the recursion 
+        /// make sure you throw that element out. And unmark that element in the map.
+        /// Time Complexity:  N! x N
+        /// Space Complexity:  O(N)
         /// </summary>
         public static IList<IList<int>> Permute(int[] nums)
         {
@@ -382,6 +402,10 @@ namespace DSA_Problem_Solving.Algorithms
             nums[v] = temp;
         }
 
+        /*
+         Given a string s, partition s such that every substring of the partition is a palindrome.
+          Return all possible palindrome partitioning of s.
+         */
         public static IList<IList<string>> PartitionBF(string s)
         {
             IList<IList<string>> ans = new List<IList<string>>(); // Stores the final list of partitions
@@ -432,6 +456,139 @@ namespace DSA_Problem_Solving.Algorithms
                     return false;
             }
             return true; // If all matched, it's a palindrome
+        }
+
+        /* 79.
+          Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+          The word can be constructed from letters of sequentially adjacent cells.
+         The same letter cell may not be used more than once.
+         */
+        public static bool Exist(char[][] board, string word)
+        {
+            int n = board.Length;
+            int m = board[0].Length;
+
+            for (int i = 0; i < n; i++)
+            {
+                for (global::System.Int32 j = 0; j < m; j++)
+                {
+                    if (board[i][j] == word[0])
+                        if (Exist(board, word, 1, i, j, n, m))
+                            return true;
+                }
+            }
+            return false;
+        }
+
+        private static bool Exist(char[][] board, string word, int indx, int i, int j, int n, int m)
+        {
+            // if index reaches at the end that means we have found the word
+
+            if (indx >= word.Length)
+                return true;
+
+            // Checking the boundaries if the character at which we are placed is not 
+            //the required character
+
+            if (i < 0 || i >= n || j < 0 || j >= m)
+                return false;
+
+            char chr = board[i][j];
+
+            if (chr == ' ' || chr != word[indx])
+                return false;
+
+            // this is to prevent reusing of the same character
+            board[i][j] = ' ';
+            indx++;
+
+            // right direction
+            bool right = Exist(board, word, indx, i, j + 1, n, m);
+
+            // left direction
+            bool left = Exist(board, word, indx, i, j - 1, n, m);
+
+            // top direction
+            bool top = Exist(board, word, indx, i - 1, j, n, m);
+
+            // bottom direction
+            bool bottom = Exist(board, word, indx, i + 1, j, n, m);
+
+            board[i][j] = chr; // undo change
+            return right || left || top || bottom;
+        }
+    }
+
+    public static class RecursionHard
+    {
+        public static IList<IList<string>> SolveNQueens(int n)
+        {
+            var results = new List<IList<string>>();
+            var result = new List<string>();
+            bool[,] ban = new bool[n, n];
+            bool[,] banCopy = new bool[n, n];
+            int indx = 0;
+            for (int i = 0; i < n; i++)
+            {
+                result = new List<string>();
+                //ban.CopyTo(banCopy, 0);
+                SolveNQueensHelper(n, 0, i, new bool[n, n], result);
+                if (result.Count == n)
+                    results.Add(result);
+            }
+            return results;
+        }
+        private static void SolveNQueensHelper(int n, int row, int col, bool[,] ban, List<string> result)
+        {
+            if (row >= n) return;
+            bool possible = row == 0;
+            if (!possible)
+                for (int j = 0; j < n; j++)
+                {
+                    if (!ban[row, j])
+                    {
+                        col = j;
+                        possible = true;
+                        break;
+                    }
+                }
+            if (!possible)
+                return;
+            string str = "";
+            for (int i = 0, j = 0; j < n || i < n; i++, j++)
+            {
+                str += j == col ? "Q" : ".";
+
+                if (i < n)
+                    ban[i, col] = true;
+                if (j < n)
+                    ban[row, j] = true;
+            }
+            for (int i = row + 1, j = col + 1; i < n && j < n; i++, j++)
+            {
+                ban[i, j] = true;
+            }
+            for (int i = row + 1, j = col - 1; i < n && j >= 0; i++, j--)
+            {
+                ban[i, j] = true;
+            }
+            for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
+            {
+                ban[i, j] = true;
+            }
+            for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++)
+            {
+                ban[i, j] = true;
+            }
+            //for (int i = row, j = col, k = row, l = col; (i < n && j < n) || (k >= 0 && l >= 0); i++, j++, k--, l--)
+            //{
+            //    if (i < n && j < n)
+            //        ban[i, j] = true;
+            //    if (k >= 0 && l >= 0)
+            //        ban[k, l] = true;
+            //}
+            result.Add(str);
+            SolveNQueensHelper(n, row + 1, -1, ban, result);
         }
     }
 }
