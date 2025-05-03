@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DSA_Problem_Solving.Data_Structures;
-
 public class StringProblems
 {
     public static class Easy
@@ -497,9 +498,161 @@ public class StringProblems
             return len;
         }
 
-        class Hard
+        public static string FrequencySortBF(string s)
         {
+            Dictionary<char, int> dict = new();
+            List<int> freqs = new();
+            int max = 0;
+            string ans = "";
+            for (int i = 0; i < s.Length; i++)
+            {
+                char c = s[i];
+                if (dict.ContainsKey(c))
+                    dict[c]++;
+                else
+                    dict.Add(c, 1);
+            }
+            freqs = dict.Values.ToList();
+            freqs.Sort();
+            for (int j = freqs.Count - 1; j >= 0; j--)
+            {
+                int fre = freqs[j];
+                char chr = dict.FirstOrDefault(x => x.Value == fre).Key;
+                if (fre >= max)
+                {
+                    //ans = ((string)chr * fre) + ans;
+                    for (global::System.Int32 i = 0; i < fre; i++)
+                    {
+                        ans = chr + ans;
+                    }
+                    max = fre;
+                }
+                else
+                {
+                    for (global::System.Int32 i = 0; i < fre; i++)
+                    {
+                        ans = ans + chr;
+                    }
+                }
+                dict.Remove(chr);
+
+            }
+            return ans;
+        }
+
+        public static string FrequencySort(string s)
+        {
+            // Step 1: Count the frequency of each character
+            Dictionary<char, int> freqMap = new Dictionary<char, int>();
+            foreach (char c in s)
+            {
+                if (freqMap.ContainsKey(c))
+                    freqMap[c]++;
+                else
+                    freqMap[c] = 1;
+            }
+
+            // Step 2: Sort the characters by frequency in descending order
+            // Create a list of characters ordered by their frequency
+            var sortedChars = freqMap.OrderByDescending(x => x.Value);
+
+            // Step 3: Build the result string
+            StringBuilder sb = new StringBuilder();
+            foreach (var pair in sortedChars)
+            {
+                // Append the character 'frequency' times
+                sb.Append(new string(pair.Key, pair.Value));
+            }
+
+            // Step 4: Return the result
+            return sb.ToString();
 
         }
+
+        public static int MyAtoiRev(string s)
+        {
+            s = s.Trim();
+            string validChrs = "1234567890-+";
+            string temp = "";
+            bool tkZs = false, tkSign = true, fstdigt = false;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                //string c = s[i].ToString();
+                char c = s[i];
+                if (!validChrs.Contains(c))
+                    break;
+                if (c == '-' || c == '+')
+                    if (tkSign)
+                    {
+                        temp += c == '-' ? c : "";
+                        tkSign = false;
+                    }
+                    else
+                        break;
+                else if (c == '0')
+                {
+                    tkSign = false;
+                    temp += tkZs ? '0' : "";
+                }
+                else
+                //if (c != '.')
+                {
+                    tkSign = false;
+                    //fstdigt = true;
+                    tkZs = true;
+                    temp += c;
+                }
+                //else
+                //{
+                //    tkSign = false;
+                //    temp += c;
+                //}
+            }
+            if (temp == "" || temp == "-")
+                return 0;
+            BigInteger l = BigInteger.Parse(temp);
+            if (l > int.MaxValue)
+                return int.MaxValue;
+            if (l < int.MinValue)
+                return int.MinValue;
+            return (int)l;
+        }
+
+        public static string CountAndSay(int n)
+        {
+            string ans = "1";
+            string prevAns = "1";
+            int t = 0;
+            while (t < n-1)
+            {
+                string crAns = "";
+                int left = 0, crnt = 1, cnt = 1;
+                while (left <= crnt && crnt < ans.Length)
+                {
+                    if (ans[left] == ans[crnt])
+                    {
+                        cnt++;
+                    }
+                    else
+                    {
+                        crAns = crAns + cnt + ans[left];
+                        left = crnt;
+                        cnt = 1;
+                    }
+                    crnt++;
+                }
+                crAns = crAns + cnt + ans[left];
+                ans = crAns;
+                t++;
+            }
+            return ans;
+        }
+
+    }
+
+    class Hard
+    {
+
     }
 }

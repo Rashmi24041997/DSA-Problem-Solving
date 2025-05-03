@@ -457,6 +457,18 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays.Easy
             }
             return maxSum;
         }
+
+
+        public static void Rotate(int[] nums, int k)
+        {
+            int n = nums.Length;
+            int[] ans = new int[nums.Length];
+            for (int i = 0; i < ans.Length; i++)
+            {
+                ans[i] = nums[(k + i + 1) % n];
+            }
+            ans.CopyTo(nums,0);
+        }
     }
 
 }

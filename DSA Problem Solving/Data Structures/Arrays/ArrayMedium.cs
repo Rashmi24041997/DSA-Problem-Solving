@@ -1444,6 +1444,34 @@ Space complexity:O(N).
         return ans;
     }
 
+    public static double FindMedianSortedArraysRev(int[] nums1, int[] nums2)
+    {
+        int m = nums1.Length, n = nums2.Length, indx = 0;
+        bool even = (m + n) % 2 == 0;
+        int m1 = (m + n) / 2;
+        int i = 0, j = 0;
+        while (indx < m1)
+        {
+            if (nums1[i] <= nums2[j])
+                i++;
+            else
+                j++;
+            indx += 2;
+        }
+        if (even)
+            return (nums2[j] + nums1[i]) / 2.0;
+        else
+        {
+            if (Math.Min(i, j) == i)
+                return nums1[i];
+            else
+                return nums2[j];
+        }
+
+
+        return -1;
+    }
+
 }
 
 

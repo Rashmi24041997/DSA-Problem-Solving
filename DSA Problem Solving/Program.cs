@@ -1,7 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using DSA_Problem_Solving.Algorithms;
 using DSA_Problem_Solving.Basic_Maths;
 using DSA_Problem_Solving.Data_Structures;
+using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
 using static DSA_Problem_Solving.Data_Structures.HeapProblems;
 
@@ -265,8 +267,16 @@ public class Solution
         //ArrayHard.MaxSum(new int[] { 1, 2, -1, -2, 1, 0, -1 });
         //EasyHP obj = new EasyHP();
 
-        //MathProblems.Easy.lcmAndGcd(1463, 1305);
-        MathProblems.Easy.sumOfDivisors(5);
+        ////MathProblems.Easy.lcmAndGcd(1463, 1305);
+        //MathProblems.Easy.sumOfDivisors(5);
+        //StringProblems.Medium.FrequencySort("abaccadeeefaafcc");
 
+        //BinarySearch.Medium.FindMin(new int[] { 5, 6, 0, 3, 4 });
+        //BinarySearch.Medium.SingleNonDuplicateRev(new int[] { 1, 2, 2 });
+        //BinarySearch.Medium.SearchMatrix(new int[][] { new int[] { -5} }, -5);
+        //ArrayMedium.FindMedianSortedArraysRev(new int[] { 2, 4, 6 }, new int[] { 8, 10, 12, 14});
+        //BinarySearch.Medium.MinEatingSpeed(new int[] { 3, 6, 7, 11 }, 9);
+        //StringProblems.Medium.MyAtoiRev("0-1");
+        StringProblems.Medium.CountAndSay(4);
     }
 }

@@ -231,6 +231,23 @@ namespace DSA_Problem_Solving.Algorithms
                 // Return the total number of content children
                 return cnt;
             }
+            public static int FindContentChildrenRev(int[] g, int[] s)
+            {
+                Array.Sort(g);
+                Array.Sort(s);
+                int ans = 0;
+                int p1 = 0, p2 = 0;
+                while (p1 < g.Length && p2 < s.Length)
+                {
+                    if (g[p1] <= s[p2])
+                    {
+                        ans++;
+                        p1++;
+                    }
+                    p2++;
+                }
+                return ans;
+            }
         }
 
         public static class Medium
