@@ -1,10 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using DSA_Problem_Solving;
 using DSA_Problem_Solving.Algorithms;
 using DSA_Problem_Solving.Basic_Maths;
 using DSA_Problem_Solving.Data_Structures;
 using DSA_Problem_Solving.Data_Structures.Arrays;
 using DSA_Problem_Solving.Data_Structures.Arrays.Easy;
+using DSA_Problem_Solving.Data_Structures.LinkedList;
 using static DSA_Problem_Solving.Data_Structures.HeapProblems;
 
 public class Solution
@@ -66,15 +68,12 @@ public class Solution
         ////Console.WriteLine(cnt);
 
         //ArrayMedium.SearchMatrix(new int[][] { new int[] { 1, 3, 5, 7 }, new int[] { 10, 11, 16, 20 }, new int[] { 23, 30, 34, 60 } }, 3);
-        ////IList<IList<int>> SubsetsWithDup =RecursionMedium.SubsetsWithDup(new int[] { 1, 2, 2 });
+        ////IList<IList<int>> SubsetsWithDup =RecursionMedium.SubsetsWithDup(new int[] { 1, 2, 2 } );
         //IList<IList<int>> SubsetsWithDup2 =RecursionMedium.SubsetsWithDup2(new int[] { 1, 2, 2 });
-        //ListNode l1 = new(0) { next = new(1) { next = new(2) { next = new(3) { next = new(4) { next = new(9) } } } } };
+        ListNode l1 = new(0) { next = new(1) { next = new(2) { next = new(3) { next = new(4) { next = new(9) } } } } };
         //ListNode l2 = new(0) /*{ next = new(9) { next = new(9) { next = new(9) { next = new(5) { next = new(6) } } }  }}*/;
 
-        //listNode = LinkedListEasy.ReverseList(new ListNode(1)
-        //{
-        //    next = new(2)
-        //});
+        //ListNode listNode = LinkedListEasy.ReverseListRev(new ListNode(2) { next = new ListNode(1) });
         //listNode = LinkedListEasy.ReverseListUsingStack(listNode);
         //l1 = LinkedListEasy.FindMiddle(l1);
         //l1 = LinkedListEasy.MergeTwoLists(l1,l2);
@@ -277,6 +276,25 @@ public class Solution
         //ArrayMedium.FindMedianSortedArraysRev(new int[] { 2, 4, 6 }, new int[] { 8, 10, 12, 14});
         //BinarySearch.Medium.MinEatingSpeed(new int[] { 3, 6, 7, 11 }, 9);
         //StringProblems.Medium.MyAtoiRev("0-1");
-        StringProblems.Medium.CountAndSay(4);
+        //StringProblems.Medium.CountAndSay(4);
+        //StringProblems.Medium.BeautySum("qoqrexqdlercxoxjvoftclywlhupkjceyprbuzwbnippbsuljgrmviapfxnkwpkxpjpqaumztnxyeqznspsyx");
+        //ArrayMedium.SortArray(new int[] { 100,99,18});
+        //        ArrayMedium.SpiralOrder(
+        //            new int[][] {
+        //            new []{0 ,   11  ,21  ,31  ,41  ,51
+        //},
+        //            new []{1 ,   12  ,22  ,32  ,42  ,52
+        //},
+        //            new []{2 ,   13  ,23  ,33  ,43  ,53
+        //},
+        //            new []{3 ,   14  ,24  ,34  ,44  ,54
+        //},
+        //            new []{4 ,   15  ,25  ,35  ,45  ,55
+        //},
+        //            new []{5 ,   16 , 26 , 36 , 46 , 56
+
+        //}
+        //           });
+        RecursionMedium.myPowRev(2.0, -2);
     }
 }

@@ -624,7 +624,7 @@ public class StringProblems
             string ans = "1";
             string prevAns = "1";
             int t = 0;
-            while (t < n-1)
+            while (t < n - 1)
             {
                 string crAns = "";
                 int left = 0, crnt = 1, cnt = 1;
@@ -649,6 +649,35 @@ public class StringProblems
             return ans;
         }
 
+        public static int BeautySum(string s)
+        {
+            int ans = 0;
+            int n = s.Length;
+
+            for (int i = 0; i < n; i++)
+            {
+                int[] freq = new int[26]; // fixed-size array instead of Dictionary
+                for (int j = i; j < n; j++)
+                {
+                    freq[s[j] - 'a']++;
+
+                    int max = 0;
+                    int min = int.MaxValue;
+
+                    for (int k = 0; k < 26; k++)
+                    {
+                        if (freq[k] > 0)
+                        {
+                            max = Math.Max(max, freq[k]);
+                            min = Math.Min(min, freq[k]);
+                        }
+                    }
+
+                    ans += (max - min);
+                }
+            }
+            return ans;
+        }
     }
 
     class Hard

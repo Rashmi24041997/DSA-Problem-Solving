@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -1470,6 +1471,165 @@ Space complexity:O(N).
 
 
         return -1;
+    }
+
+
+    public static int[] SortArray(int[] nums)
+    {
+        int low = 0, high = nums.Length - 1;
+
+        QuickSort(nums, low, high);
+
+        return nums;
+    }
+
+    private static void QuickSort(int[] nums, int low, int high)
+    {
+        if (low < high)
+        {
+            int pIndx = Partition(nums, low, high);
+            QuickSort(nums, low, pIndx - 1);
+            QuickSort(nums, pIndx + 1, high);
+        }
+    }
+
+    private static int Partition(int[] nums, int low, int high)
+    {
+        int i = low, j = high, pivot = nums[low];
+        while (i < j)
+        {
+            while (nums[i] <= pivot && i < high)
+            {
+                i++;
+            }
+            while (nums[j] > pivot && j > low)
+            {
+                j--;
+            }
+            if (i < j)
+            {
+                (nums[i], nums[j]) = (nums[j], nums[i]);
+            }
+        }
+        (nums[low], nums[j]) = (nums[j], nums[low]);
+
+        return j;
+    }
+
+
+    public static int SingleNumber(int[] nums)
+    {
+        int n = nums.Length;
+        int num = 0;
+        for (int i = 0; i < n; i++)
+        {
+            num = num ^ nums[i];
+        }
+        return num;
+    }
+    /*
+     2149. Rearrange Array Elements by Sign
+     */
+    public static int[] RearrangeArrayBF(int[] nums)
+    {
+        int p = 0, n = 0, len = nums.Length;
+        int[] ans = new int[len];
+        for (int i = 0, e = 0, j = 1; i < len; i++)
+        {
+            int num = nums[i];
+            if (num > 0 && e < len)
+            {
+                ans[e] = num;
+                e += 2;
+            }
+            else if (num < 0 && j < len)
+            {
+                ans[j] = num;
+                j += 2;
+            }
+        }
+        return ans;
+    }
+
+    public static IList<int> SpiralOrder(int[][] matrix)
+    {
+        int m = matrix.Length, n = matrix[0].Length;
+        int[] ans = new int[m * n];
+        int row = m, col = n, j = 0;
+        int i = 0;
+        while (i < m * n)
+        {
+            int c = j;
+            int r = j;
+            while (c < col && i < m * n)
+            {
+                ans[i++] = matrix[r][c++];
+            }
+            if (i >= m * n)
+                break;
+            c--; r++;
+            while (r < row && i < m * n)
+            {
+                ans[i++] = matrix[r++][c];
+            }
+            if (i >= m * n)
+                break;
+
+            r--; c--;
+            while (c < col && c >= j && i < m * n)
+            {
+                ans[i++] = matrix[r][c--];
+            }
+            if (i >= m * n)
+                break;
+
+            row--; col--; r--; c++;
+            int k = row - j - 1;
+            while (k > 0 && i < m * n)
+            {
+                ans[i++] = matrix[r--][c];
+                k--;
+            }
+            if (i >= m * n)
+                break;
+
+            j++;
+        }
+        return ans;
+    }
+
+    /*80. Remove Duplicates from Sorted Array II - Leetcode*/
+
+    public static int RemoveDuplicatesIIBF(int[] nums)
+    {
+        int left = 0, right = 1, cnt = 0;
+
+        while (right < nums.Length)
+        {
+            if (nums[left] != nums[right])
+                left = right;
+            if (nums[left] == nums[right] && right - left > 1)
+            {
+                nums[left] = int.MaxValue;
+                cnt++;
+            }
+            right++;
+        }
+        Array.Sort(nums);
+        return cnt;
+    }
+    public static int RemoveDuplicatesII(int[] nums)
+    {
+        int insertPos = 2;
+        for (int i = 2; i < nums.Length; i++)
+        {
+            if (nums[i] != nums[insertPos-2])
+            {
+                nums[insertPos ] = nums[i];
+                insertPos++;
+            }
+        }
+        return insertPos;
     }
 
 }

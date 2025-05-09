@@ -303,7 +303,7 @@ namespace DSA_Problem_Solving.Data_Structures
                 public void Push(int a)
                 {
                     ListNode nu = new(a);
-                    nu.Next = top;
+                    nu.next = top;
                     top = nu;
                     count++;
                 }
@@ -312,8 +312,8 @@ namespace DSA_Problem_Solving.Data_Structures
                 public int pop()
                 {
                     if (count == 0) return -1;
-                    int res = top.Val;
-                    top = top.Next;
+                    int res = top.val;
+                    top = top.next;
                     count--;
                     return res;
                 }

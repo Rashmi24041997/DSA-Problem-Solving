@@ -517,6 +517,31 @@ namespace DSA_Problem_Solving.Algorithms
             board[i][j] = chr; // undo change
             return right || left || top || bottom;
         }
+
+        public static double myPowRev(double x, int n)
+        {
+            if (x == 0.0 || x == 1 || n == 1) return x;
+            double ans = 1.0;
+            if (n < 0)
+            {
+                x = 1 / x;
+                n = -n;
+            }
+            while (n > 0)
+                if (n % 2 == 0)
+                {
+                    x = x * x;
+                    n = n / 2;
+                }
+                else
+                {
+                    ans = ans * x;
+                    n--;
+                }
+            var s = double.ma
+            return ans;
+           
+        }
     }
 
     public static class RecursionHard

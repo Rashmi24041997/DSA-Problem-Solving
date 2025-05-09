@@ -15,29 +15,29 @@ public class LinkedListEasy
     public static ListNode? ReverseList(ListNode head)
     {
         if (head == null) return head; // If the list is empty, return null
-        ListNode? l1 = head, l2 = l1.Next, l3 = l2?.Next;
+        ListNode? l1 = head, l2 = l1.next, l3 = l2?.next;
         if (l2 == null)
         {
-            l1.Next = null; // If there's only one node, return it as the reversed list
+            l1.next = null; // If there's only one node, return it as the reversed list
             return l1;
         }
         if (l3 == null)
         {
-            l2.Next = l1; // If there are only two nodes, reverse them
-            l1.Next = null;
+            l2.next = l1; // If there are only two nodes, reverse them
+            l1.next = null;
             return l2;
         }
-        while (l3.Next != null)
+        while (l3.next != null)
         {
-            l2.Next = l1; // Reverse the link
+            l2.next = l1; // Reverse the link
             l1 = l2; // Move to the next node
             l2 = l3;
-            l3 = l3.Next;
+            l3 = l3.next;
         }
-        l3.Next = head; // Reverse the last link
-        l2.Next = l1;
-        l3.Next = l2;
-        head.Next = null;
+        l3.next = head; // Reverse the last link
+        l2.next = l1;
+        l3.next = l2;
+        head.next = null;
         return l3;
     }
 
@@ -46,16 +46,16 @@ public class LinkedListEasy
     // Space complexity: O(n) due to the recursion stack
     public static ListNode ReverseListUsingStack(ListNode head)
     {
-        if (head == null || head.Next == null)
+        if (head == null || head.next == null)
         {
             return head; // Base case: if the list is empty or has one node, return it
         }
 
-        ListNode newHead = ReverseListUsingStack(head.Next); // Recursive step: reverse the rest of the list
+        ListNode newHead = ReverseListUsingStack(head.next); // Recursive step: reverse the rest of the list
 
-        ListNode front = head.Next; // Save the next node
-        front.Next = head; // Reverse the link
-        head.Next = null; // Break the original link
+        ListNode front = head.next; // Save the next node
+        front.next = head; // Reverse the link
+        head.next = null; // Break the original link
 
         return newHead; // Return the new head of the reversed list
     }
@@ -66,16 +66,45 @@ public class LinkedListEasy
     public static ListNode FindMiddle(ListNode head)
     {
         if (head == null) return head; // If the list is empty, return null
-        if (head.Next == null) return head; // If there's only one node, return it
+        if (head.next == null) return head; // If there's only one node, return it
 
         ListNode slow = head;
-        ListNode fast = head.Next;
+        ListNode fast = head.next;
 
-        while (fast.Next != null && fast.Next.Next != null)
+        while (fast.next != null && fast.next.next != null)
         {
-            slow = slow.Next; // Move slow pointer one step
-            fast = fast.Next.Next; // Move fast pointer two steps
+            slow = slow.next; // Move slow pointer one step
+            fast = fast.next.next; // Move fast pointer two steps
         }
-        return slow.Next; // Return the middle node
+        return slow.next; // Return the middle node
     }
+
+    public static ListNode? ReverseListRev(ListNode head)
+    {
+        if (head is null || head.next is null)
+            return head;
+        ListNode cur = head;
+        ListNode nxt = cur.next;
+        ListNode pre = null;
+
+        while (cur != null)
+        {
+            cur.next = pre;
+            pre = cur;
+            cur = nxt;
+            nxt = nxt?.next;
+        }
+        return pre;
+    }
+    public void DeleteNodeRev(ListNode node)
+    {
+        ListNode nxt1 = node.next;
+        ListNode nxt2 = node.next.next;
+        int temp = nxt1.val;
+        nxt1.val = node.val;
+        node.val = temp;
+        node.next = nxt2;
+        
+    }
+
 };

@@ -23,12 +23,35 @@ public class TreeNode
         this.left = left;
         this.right = right;
     }
+    public TreeNode(TreeNode node)
+    {
+       val = node.val;
+       left = node.left;
+       right = node.right;
+    }
 }
 
 public class BinaryTreeProblems
 {
     public class Easy
     {
+
+        public TreeNode InvertTree(TreeNode root)
+        {
+            TreeNode nod = new TreeNode(root.val);
+            InorderTraversal(root,nod);
+            return nod;
+        }
+
+        private void InorderTraversal(TreeNode root, TreeNode nod)
+        {
+            if (root == null) return;
+            nod.left = new TreeNode(root.right.val);
+            InorderTraversal(root.right, nod.left);
+            nod.right = new TreeNode(root.left.val);
+            InorderTraversal(root.left, nod.right);
+        }
+
         public static IList<int> InorderTraversal(TreeNode root)
         {
             IList<int> lst = new List<int>();
