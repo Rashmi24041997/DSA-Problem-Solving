@@ -252,7 +252,25 @@ namespace DSA_Problem_Solving.Algorithms
 
         public static class Medium
         {
+            //45. Jump Game II
 
+            public static int JumpII(int[] nums)
+            {
+                int lIndx = nums.Length - 1;
+                if (nums.Length == 0) { return 0; }
+                int target = 0, jump = 0;
+                while (lIndx != 0)
+                {
+                    while (lIndx - target > nums[target])
+                    {
+                        target++;
+                    }
+                    jump++;
+                    lIndx = target;
+                    target = 0;
+                }
+                return jump;
+            }
         }
         public static class Hard
         {

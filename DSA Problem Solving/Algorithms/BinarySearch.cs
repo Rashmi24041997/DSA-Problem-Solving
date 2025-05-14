@@ -161,6 +161,22 @@ namespace DSA_Problem_Solving.Algorithms
 
         public static class Medium
         {
+            //162. Find Peak Element
+
+            public static int FindPeakElement(int[] nums)
+            {
+                int left = 0, right = nums.Length - 1;
+
+                while (left <= right)
+                {
+                    int mid = left + (right - left) / 2;
+                    if (nums[mid] < nums[mid + 1])
+                        right = mid;
+                    else
+                        left = mid + 1;
+                }
+                return left;
+            }
             public static int FindMin(int[] nums)
             {
                 int n = nums.Length - 1;

@@ -1623,13 +1623,61 @@ Space complexity:O(N).
         int insertPos = 2;
         for (int i = 2; i < nums.Length; i++)
         {
-            if (nums[i] != nums[insertPos-2])
+            if (nums[i] != nums[insertPos - 2])
             {
-                nums[insertPos ] = nums[i];
+                nums[insertPos] = nums[i];
                 insertPos++;
             }
         }
         return insertPos;
+    }
+
+    public static int[] TwoSumII(int[] numbers, int target)
+    {
+        int left = 0, right = numbers.Length - 1;
+        while (left <= right)
+        {
+            int num1 = numbers[left];
+            int num2 = numbers[right];
+            int sum = num1 + num2;
+            if (sum == target)
+                return new int[] { left, right };
+            if (sum < target)
+                left++;
+            else
+                right--;
+        }
+        return new int[] { -1, -1 };
+    }
+
+    public static int MaxProfitII(int[] prices)
+    {
+        int maxPro = 0;
+        int currMin = prices[0];
+
+        for (int i = 1; i < prices.Length; i++)
+        {
+            int num = prices[i];
+            if (num > currMin)
+                maxPro += num - currMin;
+        }
+        return maxPro;
+    }
+    //55. Jump Game
+
+    public static bool CanJump(int[] nums)
+    {
+        int jump = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if(jump <0)
+                return false;
+            if(nums[i] < jump)
+                jump = nums[i];
+            jump--;
+        }
+        return true;
+
     }
 
 }

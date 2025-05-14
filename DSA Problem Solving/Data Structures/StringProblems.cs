@@ -258,6 +258,25 @@ public class StringProblems
             }
             return NewString(temp);
         }
+
+        //125. Valid Palindrome
+        public static bool IsPalindrome(string s)
+        {
+            int left = 0, right = s.Length - 1;
+            s = s.ToLower();
+            while (left < right)
+            {
+                while (left < right && !char.IsLetterOrDigit(s[left]))
+                    left++;
+                while (left < right && !char.IsLetterOrDigit(s[right]))
+                    right--;
+                if (s[left] != s[right])
+                    return false;
+                left++;
+                right--;
+            }
+            return true;
+        }
     }
 
     public static class Medium

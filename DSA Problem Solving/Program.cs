@@ -70,9 +70,10 @@ public class Solution
         //ArrayMedium.SearchMatrix(new int[][] { new int[] { 1, 3, 5, 7 }, new int[] { 10, 11, 16, 20 }, new int[] { 23, 30, 34, 60 } }, 3);
         ////IList<IList<int>> SubsetsWithDup =RecursionMedium.SubsetsWithDup(new int[] { 1, 2, 2 } );
         //IList<IList<int>> SubsetsWithDup2 =RecursionMedium.SubsetsWithDup2(new int[] { 1, 2, 2 });
-        ListNode l1 = new(0) { next = new(1) { next = new(2) { next = new(3) { next = new(4) { next = new(9) } } } } };
-        //ListNode l2 = new(0) /*{ next = new(9) { next = new(9) { next = new(9) { next = new(5) { next = new(6) } } }  }}*/;
-
+        ListNode l1 = new(1) { next = new(1) { next = new(1) { next = new(1) { next = new(1) { next = new(2) } } } } };
+        RecursionEasy.RemoveElements(l1, 1);
+        ////ListNode l2 = new(0) /*{ next = new(9) { next = new(9) { next = new(9) { next = new(5) { next = new(6) } } }  }}*/;
+        //LinkedListMedium.ReverseBetween(new ListNode(1) { next = new ListNode(2) }, 1, 2);
         //ListNode listNode = LinkedListEasy.ReverseListRev(new ListNode(2) { next = new ListNode(1) });
         //listNode = LinkedListEasy.ReverseListUsingStack(listNode);
         //l1 = LinkedListEasy.FindMiddle(l1);
@@ -295,6 +296,11 @@ public class Solution
 
         //}
         //           });
-        RecursionMedium.myPowRev(2.0, -2);
+        //RecursionMedium.myPowRev(2.0, -2);
+        //ArrayMedium.TwoSumII(new int[] { 2, 3, 4 }, 6);
+        //RecursionMedium.CountGoodNumbers(50);
+        //StringProblems.Easy.IsPalindrome("Marge, let's \"[went].\" I await {news} telegram."
+
+//);
     }
 }
