@@ -52,6 +52,8 @@ public static class RecursionEasy
         st1.Push(item);
     }
 
+    //203. Remove Linked List Elements
+
     public static ListNode RemoveElements(ListNode head, int val)
     {
         ListNode dummy = new ListNode(0);
@@ -77,11 +79,39 @@ public static class RecursionEasy
             pre.next = crnt.next;
         else
             pre = crnt;
-        RemoveElementsHelper(pre, crnt,val);
+        RemoveElementsHelper(pre, crnt, val);
     }
 }
 public class RecursionMedium
 {
+    public static IList<IList<int>> CombinationSum2(int[] candidates, int target)
+    {
+        Array.Sort(candidates);
+        IList<IList<int>> subsets = new List<IList<int>>();
+        CombinationSum2(candidates, target, 0, candidates.Length, 0, subsets, new List<int>());
+        return subsets;
+    }
+
+    private static void CombinationSum2(int[] candidates, int target, int indx, int length, int sum, IList<IList<int>> subsets, List<int> subset)
+    {
+        if (sum == target)
+            subsets.Add(new List<int>(subset));
+
+        if (indx == length)
+            return;
+
+        for (int i = indx; i < length; i++)
+        {
+            if (i > indx && candidates[i] == candidates[i - 1])
+                continue;
+            subset.Add(candidates[i]);
+            CombinationSum2(candidates, target, indx+1, length, sum + candidates[i], subsets, subset);
+
+            subset.RemoveAt(subset.Count - 1);
+            //CombinationSum2(candidates, target, indx+1, length, sum + candidates[i], subsets, subset);
+        }
+    }
+
     // Method to calculate all subset sums of an array
     // Time Complexity: O(2^n)
     // Space Complexity: O(2^n)
@@ -112,48 +142,48 @@ public class RecursionMedium
     // Method to find all unique subsets of an array with duplicates
     // Time Complexity: O(2^n)
     // Space Complexity: O(2^n)
-    public static IList<IList<int>> SubsetsWithDup(int[] nums)
-    {
-        // If the input array is null, return null
-        if (nums is null)
-            return null;
+    //public static IList<IList<int>> SubsetsWithDup(int[] nums)
+    //{
+    //    // If the input array is null, return null
+    //    if (nums is null)
+    //        return null;
 
-        // If the input array is empty, return an empty list of lists
-        if (nums.Length < 1)
-            return new List<IList<int>>();
+    //    // If the input array is empty, return an empty list of lists
+    //    if (nums.Length < 1)
+    //        return new List<IList<int>>();
 
-        // Sort the array to handle duplicates
-        Array.Sort(nums);
+    //    // Sort the array to handle duplicates
+    //    Array.Sort(nums);
 
-        // Initialize a pointer to track unique elements
-        int i = 0;
+    //    // Initialize a pointer to track unique elements
+    //    int i = 0;
 
-        // Iterate through the array starting from the second element
-        for (int j = 1; j < nums.Length; j++)
-        {
-            // If the current element is different from the last unique element
-            if (nums[i] != nums[j])
-            {
-                // Move the pointer to the next position
-                i++;
+    //    // Iterate through the array starting from the second element
+    //    for (int j = 1; j < nums.Length; j++)
+    //    {
+    //        // If the current element is different from the last unique element
+    //        if (nums[i] != nums[j])
+    //        {
+    //            // Move the pointer to the next position
+    //            i++;
 
-                // Update the element at the pointer to the current element
-                nums[i] = nums[j];
-            }
-        }
+    //            // Update the element at the pointer to the current element
+    //            nums[i] = nums[j];
+    //        }
+    //    }
 
-        // Increment the pointer to get the count of unique elements
-        i++;
+    //    // Increment the pointer to get the count of unique elements
+    //    i++;
 
-        // Initialize the list to store all unique subsets
-        IList<IList<int>> ansList = new List<IList<int>>();
+    //    // Initialize the list to store all unique subsets
+    //    IList<IList<int>> ansList = new List<IList<int>>();
 
-        // Call the helper method to find all subsets starting from index 0
-        FindSubsets(0, nums, i, new List<int>(), ansList);
+    //    // Call the helper method to find all subsets starting from index 0
+    //    FindSubsets(0, nums, i, new List<int>(), ansList);
 
-        // Return the list of unique subsets
-        return ansList;
-    }
+    //    // Return the list of unique subsets
+    //    return ansList;
+    //}
 
     // Helper method to recursively find subsets
     // Time Complexity: O(2^n)
@@ -244,6 +274,53 @@ public class RecursionMedium
         SubsetHelper(nums, i + 1, subset, result);
     }
 
+    public static int NumSubseq(int[] nums, int target)
+    {
+        Array.Sort(nums);
+        int left = 0, right = nums.Length - 1, mod = 1_000_000_007, cnt = 0;
+        int[] pow = new int[right];
+        pow[0] = 1;
+        for (int i = 1; i <= right; i++)
+        {
+            pow[i] = (pow[i - 1] * 2) % mod;
+        }
+        while (left < right)
+        {
+            int sum = nums[left] + nums[right];
+            if (sum <= target)
+            {
+                cnt = (cnt + pow[right - left]) % mod;
+                left++;
+            }
+            else
+                right--;
+        }
+        return cnt;
+    }
+    public static int countSubsequenceWithTargetSum(int[] nums, int target)
+    {
+        int cnt = 0;
+        countSubsequenceWithTargetSum(nums, 0, nums.Length, target, 0, ref cnt);
+        return cnt;
+    }
+
+    private static void countSubsequenceWithTargetSum(int[] nums, int indx, int length, int target, int sum, ref int cnt)
+    {
+
+        if (indx == length)
+        {
+            return;
+        }
+        if (sum <= target)
+        {
+            cnt++;
+        }
+        countSubsequenceWithTargetSum(nums, indx + 1, length, target, sum + nums[indx], ref cnt);
+
+
+        countSubsequenceWithTargetSum(nums, indx + 1, length, target, sum, ref cnt);
+    }
+
     public static void Reverse(Stack<int> s)
     {
         List<int> lst = new List<int>();
@@ -263,33 +340,60 @@ public class RecursionMedium
         lst.Add(val);
     }
 
-    public static IList<IList<int>> CombinationSum(int[] candidates, int target)
+    //public static IList<IList<int>> CombinationSum(int[] candidates, int target)
+    //{
+    //    IList<IList<int>> ans = new List<IList<int>>();
+    //    Array.Sort(candidates);
+    //    findCombinations(0, candidates, target, ans, new List<int>());
+    //    return ans;
+    //}
+
+    //private static void findCombinations(int ind, int[] arr, int target, IList<IList<int>> ans, List<int> ds)
+    //{
+    //    if (target == 0)
+    //    {
+    //        ans.Add(new List<int>(ds));
+    //        return;
+    //    }
+    //    if (ind == arr.Length || target < 0)
+    //    {
+    //        return;
+    //    }
+    //    for (int i = ind; i < arr.Length; i++)
+    //    {
+    //        int num = arr[i];
+    //        if (num > target) break;
+    //        ds.Add(num);
+    //        findCombinations(i, arr, target - num, ans, ds);
+    //        ds.Remove(num);
+    //    }
+    //}
+
+
+    public IList<IList<int>> CombinationSum(int[] candidates, int target)
     {
-        IList<IList<int>> ans = new List<IList<int>>();
         Array.Sort(candidates);
-        findCombinations(0, candidates, target, ans, new List<int>());
-        return ans;
+        IList<IList<int>> subsets = new List<IList<int>>();
+        findCombinations(candidates, 0, candidates.Length, 0, target, subsets, new List<int>());
+        return subsets;
     }
 
-    private static void findCombinations(int ind, int[] arr, int target, IList<IList<int>> ans, List<int> ds)
+    private void findCombinations(int[] candidates, int ind, int length, int sum, int target, IList<IList<int>> subsets, List<int> subset)
     {
-        if (target == 0)
+        if (sum == target)
         {
-            ans.Add(new List<int>(ds));
+            subsets.Add(new List<int>(subset));
             return;
         }
-        if (ind == arr.Length || target < 0)
+        if (ind == length)
         {
             return;
         }
-        for (int i = ind; i < arr.Length; i++)
-        {
-            int num = arr[i];
-            if (num > target) break;
-            ds.Add(num);
-            findCombinations(i, arr, target - num, ans, ds);
-            ds.Remove(num);
-        }
+        subset.Add(candidates[ind]);
+        findCombinations(candidates, ind, length, sum + candidates[ind], target, subsets, subset);
+
+        subset.RemoveAt(subset.Count - 1);
+        findCombinations(candidates, ind, length, sum, target, subsets, subset);
     }
 
     public static IList<IList<int>> CombinationSumOpt(int[] candidates, int target)
@@ -328,35 +432,35 @@ public class RecursionMedium
         findCombinationsOpt(ind + 1, arr, target, ans, ds);
     }
 
-    public static IList<IList<int>> CombinationSum2(int[] candidates, int target)
-    {
-        IList<IList<int>> ans = new List<IList<int>>();
-        Array.Sort(candidates);
-        findCombinations2(0, candidates, target, ans, new List<int>());
-        return ans;
-    }
+    //public static IList<IList<int>> CombinationSum2(int[] candidates, int target)
+    //{
+    //    IList<IList<int>> ans = new List<IList<int>>();
+    //    Array.Sort(candidates);
+    //    findCombinations2(0, candidates, target, ans, new List<int>());
+    //    return ans;
+    //}
 
-    private static void findCombinations2(int ind, int[] arr, int target, IList<IList<int>> ans, List<int> ds)
-    {
-        if (target == 0)
-        {
-            ans.Add(new List<int>(ds));
-            return;
-        }
-        if (ind == arr.Length || target < 0)
-        {
-            return;
-        }
-        for (int i = ind; i < arr.Length; i++)
-        {
-            int num = arr[i];
-            if (i > ind && num == arr[i - 1]) continue;
-            if (num > target) break;
-            ds.Add(num);
-            findCombinations2(i + 1, arr, target - num, ans, ds);
-            ds.Remove(num);
-        }
-    }
+    //private static void findCombinations2(int ind, int[] arr, int target, IList<IList<int>> ans, List<int> ds)
+    //{
+    //    if (target == 0)
+    //    {
+    //        ans.Add(new List<int>(ds));
+    //        return;
+    //    }
+    //    if (ind == arr.Length || target < 0)
+    //    {
+    //        return;
+    //    }
+    //    for (int i = ind; i < arr.Length; i++)
+    //    {
+    //        int num = arr[i];
+    //        if (i > ind && num == arr[i - 1]) continue;
+    //        if (num > target) break;
+    //        ds.Add(num);
+    //        findCombinations2(i + 1, arr, target - num, ans, ds);
+    //        ds.Remove(num);
+    //    }
+    //}
 
     public static IList<IList<int>> CombinationSum3(int k, int n)
     {
@@ -642,6 +746,51 @@ public class RecursionMedium
 
         var prod = (evens * primes) % (mod);
         return (int)prod;
+    }
+
+    // 78. Subsets
+    public static IList<IList<int>> Subsets(int[] nums, int n = 0)
+    {
+        IList<IList<int>> subsets = new List<IList<int>>();
+        SubsetsHelper(nums, 0, nums.Length, subsets, new List<int>());
+        return subsets;
+    }
+
+    private static void SubsetsHelper(int[] nums, int indx, int length, IList<IList<int>> subsets, List<int> subset)
+    {
+        if (indx == length)
+        {
+            subsets.Add(new List<int>(subset));
+            return;
+        }
+        subset.Add(nums[indx]);
+        SubsetsHelper(nums, indx + 1, length, subsets, subset);
+
+        subset.RemoveAt(subset.Count - 1);
+        SubsetsHelper(nums, indx + 1, length, subsets, subset);
+    }
+
+
+    public static IList<IList<int>> SubsetsWithDup(int[] nums)
+    {
+        Array.Sort(nums);
+        IList<IList<int>> subsets = new List<IList<int>>();
+
+        SubsetsWithDupHelper(nums, 0, nums.Length, subsets, new List<int>());
+        return subsets;
+    }
+
+    private static void SubsetsWithDupHelper(int[] nums, int indx, int length, IList<IList<int>> subsets, List<int> subset)
+    {
+        subsets.Add(subset);
+        for (int i = indx; i < length; i++)
+        {
+            if (i != indx && nums[i] == nums[indx - 1])
+                continue;
+            subset.Add(nums[i]);
+            SubsetsWithDupHelper(nums, i + 1, length, subsets, subset);
+            subset.RemoveAt(subset.Count - 1);
+        }
     }
 }
 

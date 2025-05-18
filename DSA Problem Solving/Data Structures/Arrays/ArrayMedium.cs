@@ -11,6 +11,12 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays;
 
 public static class ArrayMedium
 {
+
+    public static int FindKthLargest(int[] nums, int k)
+    {
+        Array.Sort(nums);
+        return nums[nums.Length - k];
+    }
     // Brute force approach to set matrix zeroes
     // Time Complexity: O(m*n)
     // Space Complexity: O(m+n)
