@@ -28,7 +28,7 @@ namespace DSA_Problem_Solving.Data_Structures
         public bool Contains(int value) => heap.Contains(value);
 
         public int[] ToArray() => heap.ToArray();
-        
+
         public void Insert(int value)
         {
             heap.Add(value);
@@ -155,16 +155,47 @@ namespace DSA_Problem_Solving.Data_Structures
     }
     public static class HeapProblems
     {
-        public static class EasyHP
+        public static class Easy
         {
-            public static void Method()
-            { }
-        }
-        public static class Medium
-        {
-        }
-        public static class Hard
-        {
+
+            // Complete this function
+            // Function to check if the given array is a max heap.
+            public static bool isMaxHeap(int[] arr, int n)
+            {
+                // Your code here
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    int left = 2 * i + 1;
+                    int right = 2 * i + 2;
+                    if (left < n && arr[left] > arr[i])
+                        return false;
+                    if (right < n && arr[right] > arr[i])
+                        return false;
+                }
+                return true;
+            }
+
+            public static void convertMinToMaxHeap(List<int> arr, int N)
+            {
+                // Your code here
+                int left = 0;
+                int right = arr.Count - 1;
+
+                while (left < right)
+                {
+                    int temp = arr[left];
+                    arr[left] = arr[right]; 
+                    arr[right] = temp;
+                }
+
+            }
         }
     }
+    public static class Medium
+    {
+    }
+    public static class Hard
+    {
+    }
 }
+

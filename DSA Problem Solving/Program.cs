@@ -302,6 +302,13 @@ public class Solution
         //StringProblems.Easy.IsPalindrome("Marge, let's \"[went].\" I await {news} telegram."
 
         //);
-        RecursionMedium.NumSubseq(new int[] { 3, 5, 6, 7 }, 9);
+        //RecursionMedium.NumSubseq(new int[] { 3, 5, 6, 7 }, 9);
+        RecursionMedium.ExistRev(
+                        new char[][] {
+                        new []{ 'A', 'B', 'C', 'E' },
+                        new []{ 'S', 'F', 'C', 'S'},
+                        new []{ 'A', 'D', 'E', 'E' }
+                       }, "SEE"
+            );
     }
 }

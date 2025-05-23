@@ -105,7 +105,7 @@ public class RecursionMedium
             if (i > indx && candidates[i] == candidates[i - 1])
                 continue;
             subset.Add(candidates[i]);
-            CombinationSum2(candidates, target, indx+1, length, sum + candidates[i], subsets, subset);
+            CombinationSum2(candidates, target, indx + 1, length, sum + candidates[i], subsets, subset);
 
             subset.RemoveAt(subset.Count - 1);
             //CombinationSum2(candidates, target, indx+1, length, sum + candidates[i], subsets, subset);
@@ -792,6 +792,86 @@ public class RecursionMedium
             subset.RemoveAt(subset.Count - 1);
         }
     }
+    //17. Letter Combinations of a Phone Number
+
+    public static IList<string> LetterCombinations(string digits)
+    {
+        int n = digits.Length;
+        Dictionary<char, string> set = new()
+        {
+            { '2', "abc" },
+            { '3', "def" },
+            { '4', "ghi" },
+            { '5', "jkl" },
+            { '6', "mno" },
+            { '7', "pqrs" },
+            { '8', "tuv" },
+            { '9', "wxyz" }
+        };
+        List<string> result = new();
+        BackTrack(digits, set, 0, "", result);
+        return result;
+    }
+
+    private static void BackTrack(string digits, Dictionary<char, string> set, int indx, string comb, List<string> result)
+    {
+        if (digits.Length == indx)
+        {
+            result.Add(digits);
+            return;
+        }
+        string possibleLetters = set[digits[indx]];
+        foreach (char c in possibleLetters)
+        {
+            BackTrack(digits, set, indx + 1, comb + c, result);
+        }
+    }
+    //79. Word Search
+
+    public static bool ExistRev(char[][] board, string word)
+    {
+        int rows = board.Length, cols = board[0].Length;
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                if (ExistRev(board, word, 0, i, j, rows, cols))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    private static bool ExistRev(char[][] board, string word, int indx, int i, int j, int rows, int cols)
+    {
+        // if index reaches at the end that means we have found the word
+
+        if (indx >= word.Length)
+            return true;
+
+        // Checking the boundaries if the character at which we are placed is not 
+        //the required character
+
+        if (i < 0 || i >= rows || j < 0 || j >= cols)
+            return false;
+
+        char chr = board[i][j];
+
+        if (chr == ' ' || chr != word[indx])
+            return false;
+
+        board[i][j] = ' ';
+
+        bool left = ExistRev(board, word, indx + 1, i, j - 1, rows, cols);
+        bool right = ExistRev(board, word, indx + 1, i, j + 1, rows, cols);
+        bool up = ExistRev(board, word, indx + 1, i - 1, j, rows, cols);
+        bool bottom = ExistRev(board, word, indx + 1, i + 1, j, rows, cols);
+
+        board[i][j] = chr;
+
+        return left || right || up || bottom;
+    }
 }
 
 public static class RecursionHard
@@ -865,6 +945,5 @@ public static class RecursionHard
         result.Add(str);
         SolveNQueensHelper(n, row + 1, -1, ban, result);
     }
-
 }
 
