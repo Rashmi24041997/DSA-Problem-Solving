@@ -193,6 +193,26 @@ namespace DSA_Problem_Solving.Data_Structures
     }
     public static class Medium
     {
+        public static int FindKthLargest(int[] arr, int k)
+        {
+            PriorityQueue<int, int> pq = new(Comparer<int>.Create((a, b) => b.CompareTo(a)));
+
+            int n = arr.Length;
+
+            // Add all elements to the priority queue
+            for (int i = 0; i < n; i++)
+            {
+                pq.Enqueue(arr[i], arr[i]);
+            }
+
+            // Remove (k-1) largest elements
+            for (int i = 0; i < k - 1; i++)
+            {
+                pq.Dequeue();
+            }
+
+            return pq.Peek();
+        }
     }
     public static class Hard
     {

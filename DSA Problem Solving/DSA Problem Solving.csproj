@@ -14,4 +14,8 @@
     <None Remove="Data Structures\Arrays\Easy\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Approaches\Dynamic Programming\" />
+  </ItemGroup>
+
 </Project>

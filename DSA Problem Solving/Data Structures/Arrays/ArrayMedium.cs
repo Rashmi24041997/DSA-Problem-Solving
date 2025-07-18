@@ -11,6 +11,146 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays;
 
 public static class ArrayMedium
 {
+    public static int MaxProduct(int[] nums)
+    {
+        int prefix = 1, suffix = 1;
+        int n = nums.Length;
+        int ans = int.MinValue;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (prefix == 0)
+                prefix = 1;
+            if (suffix == 0)
+                suffix = 1;
+
+            prefix *= nums[i];
+            suffix *= nums[n - i - 1];
+            ans = Math.Max(ans, Math.Max(prefix, suffix));
+        }
+        return ans;
+    }
+
+    public static bool IsIsomorphic(string s, string t)
+    {
+        Dictionary<char, int> tbl1 = new Dictionary<char, int>();
+        Dictionary<char, int> tbl2 = new Dictionary<char, int>();
+        foreach (char c in s)
+        {
+            if (!tbl1.ContainsKey(c))
+                tbl1.Add(c, 1);
+            tbl1[c]++;
+        }
+        foreach (char c in t)
+        {
+            if (!tbl1.ContainsKey(c))
+                tbl2.Add(c, 1);
+            tbl2[c]++;
+        }
+        List<int> lst1 = tbl1.Values.ToList();
+        lst1.Sort();
+        List<int> lst2 = tbl2.Values.ToList();
+        lst2.Sort();
+        return lst1.SequenceEqual(lst2);
+    }
+
+    public static int LongestConsecutiveRev(int[] nums)
+    {
+        int cnt = 0, longest = 0;
+        HashSet<int> set = nums.ToHashSet();
+        //for (int i = 0; i < set.Count; i++)
+        foreach (int num in set)
+        {
+            //int num = set.ElementAt(i);
+            int n1 = num;
+            if (!set.Contains(n1 - 1))
+            {
+                while (set.Contains(n1))
+                {
+                    cnt++;
+                    set.Remove(n1);
+
+                    n1 = n1 + 1;
+                }
+                longest = Math.Max(longest, cnt);
+            }
+            cnt = 0;
+        }
+        return longest;
+    }
+
+    //15. 3Sum
+    public static IList<IList<int>> ThreeSumRev(int[] nums)
+    {
+        Array.Sort(nums);
+        int n = nums.Length;
+        IList<IList<int>> ans = new List<IList<int>>();
+
+        for (int i = 0; i < n; i++)
+        {
+            if (i != 0 && nums[i] == nums[i - 1])
+                continue;
+            int left = i + 1, right = n - 1;
+            while (left < right)
+            {
+                int sum = nums[left] + nums[right] + nums[i];
+                if (sum == 0)
+                {
+                    ans.Add(new List<int>() { nums[left], nums[right], nums[i] });
+                    left++;
+                    right--;
+                }
+                else if (sum > 0)
+                    right--;
+                else
+                    left++;
+                while (left < right && nums[left] == nums[left + 1])
+                    left++;
+                while (left < right && nums[right] == nums[right - 1])
+                    right--;
+            }
+        }
+        return ans;
+    }
+
+    //18. 4Sum
+    public static void FourSum(int[] nums, int k, int s)
+    {
+        Array.Sort(nums);
+        int n = nums.Length;
+        List<List<int>> ans = new List<List<int>>();
+
+        for (int i = 0; i < n - 3; i++)
+        {
+            if (i != 0 && nums[i] == nums[i - 1])
+                continue;
+            for (int j = i + 1; j < n - 2; j++)
+            {
+                if (j != i + 1 && nums[j] == nums[j - 1])
+                    continue;
+                int left = j + 1, right = n - 1;
+                while (left < right)
+                {
+                    long sum = nums[left] + nums[right] + nums[i] + nums[j];
+                    if (sum == k)
+                    {
+                        ans.Add(new List<int>() { nums[left], nums[right], nums[i], nums[j] });
+                        left++;
+                        right--;
+                        while (left < right && nums[left] == nums[left - 1])
+                            left++;
+                        while (left < right && nums[right] == nums[right + 1])
+                            right--;
+                    }
+                    else if (sum > k)
+                        right--;
+                    else
+                        left++;
+                }
+            }
+        }
+        //return ans;
+    }
 
     public static int FindKthLargest(int[] nums, int k)
     {
@@ -1676,9 +1816,9 @@ Space complexity:O(N).
         int jump = 0;
         for (int i = 0; i < nums.Length; i++)
         {
-            if(jump <0)
+            if (jump < 0)
                 return false;
-            if(nums[i] < jump)
+            if (nums[i] < jump)
                 jump = nums[i];
             jump--;
         }
@@ -1686,6 +1826,24 @@ Space complexity:O(N).
 
     }
 
+    public static int SubarraySumRev(int[] nums, int k)
+    {
+        int cnt = 0, preFixSum = 0;
+        Dictionary<int, int> map = new()
+        {
+            { 0, 1 }
+        };
+        for (int i = 0; i < nums.Length; i++)
+        {
+            preFixSum += nums[i];
+            int rem = k - nums[i];
+            cnt += map.ContainsKey(rem) ? map[rem] : 0;
+            if (!map.ContainsKey(preFixSum))
+                map.Add(preFixSum, 0);
+            map[preFixSum] += 1;
+        }
+        return cnt;
+    }
 }
 
 

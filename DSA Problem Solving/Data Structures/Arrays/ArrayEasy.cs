@@ -10,6 +10,42 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays.Easy
 {
     public class ArrayEasy
     {
+        //27. Remove Element
+
+        public static int RemoveElement(int[] nums, int val)
+        {
+
+            // Two pointers:
+            // left → current index scanning from the start
+            // right → current index scanning from the end
+            int left = 0;
+            int right = nums.Length - 1;
+
+            // Continue while left pointer does not cross right
+            while (left <= right)
+            {
+                if (nums[left] == val)
+                {
+                    // If current number is the value to remove,
+                    // replace it with the number at the end (right side)
+                    nums[left] = nums[right];
+                    // Decrease right pointer (we've used it)
+                    right--;
+                    // Do not increase left yet — the swapped value might still be `val`
+                }
+                else
+                {
+                    // If current number is not the target value,
+                    // move to next element
+                    left++;
+                }
+            }
+
+            // After the loop:
+            // All valid elements are now from index 0 to left - 1
+            return left;
+        }
+
         public static int MaxProfit(int[] prices)
         {
             if (!(prices?.Length > 0)) return 0;
@@ -146,7 +182,7 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays.Easy
             }
             ans.CopyTo(nums, 0);
         }
-        
+
     }
     public static class ArrayHard
     {
@@ -468,7 +504,7 @@ namespace DSA_Problem_Solving.Data_Structures.Arrays.Easy
             {
                 ans[i] = nums[(k + i + 1) % n];
             }
-            ans.CopyTo(nums,0);
+            ans.CopyTo(nums, 0);
         }
     }
 
